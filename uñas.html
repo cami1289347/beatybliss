@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cuidado del Cabello - Beauty Bliss</title>
+  <title>Uñas - Beauty Bliss</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -155,13 +155,6 @@
       color: #e91e63;
     }
 
-    .search-bar input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
     .nav-links {
       display: flex;
       gap: 15px;
@@ -180,12 +173,6 @@
       color: white;
     }
 
-    .galeria-imagenes {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-
     .carrito {
       position: fixed;
       right: 20px;
@@ -202,76 +189,206 @@
     .carrito.oculto {
       display: none;
     }
-    
-    .galeria-imagenes img {
-      width: 30%; /* Ajusta el tamaño según sea necesario */
-      height: auto; /* Mantiene la proporción de la imagen */
-      margin: 0 5px; /* Espaciado entre imágenes */
-      border-radius: 5px; /* Bordes redondeados */
-    }
-
-      .cabecera {
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
-  display: block; /* asegura que los bloques estén uno debajo del otro */
-}
-
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.logo {
-  height: 50px;
-}
-
-.buscador-header {
-  flex: 1;
-  margin: 0 2rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  font-size: 1rem;
-}
-
-.icons a {
-  color: #555;
-  font-size: 1.3rem;
-  margin-left: 15px;
-  transition: color 0.3s;
-}
-
-.icons a:hover {
-  color: #e91e63;
-}
-
-.main-nav {
-  display: flex;
-  justify-content: center;
-  background-color: #f9f9f9;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 0.5rem 0;
-}
-
-.nav-links a {
-  color: #333;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  background-color: #e91e63;
-  color: white;
-}
   </style>
 </head>
+<body>
+
+<header class="cabecera">
+  <!-- Parte superior: logo, buscador, íconos -->
+  <div class="header-top">
+    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
+    <div class="icons">
+      <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
+      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+      <a href="#" title="Carrito" id="abrir-carrito"><i class="fas fa-shopping-cart"></i></a>
+      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+    </div>
+  </div>
+
+  <!-- Barra de navegación debajo -->
+  <nav class="main-nav">
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="cuidado de la piel.html">Cuidado Facial</a>
+      <a href="cabello.html">Cabello</a>
+      <a href="labios.html">Labios</a>
+      <a href="uñas.html" class="active">Uñas</a>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor-productos">
+    <aside class="filtros">
+      <h3>Filtros</h3>
+      <label>
+        <input type="checkbox" name="marca" value="Sally Hansen"> Sally Hansen
+      </label>
+      <label>
+        <input type="checkbox" name="marca" value="Essie"> Essie
+      </label>
+      <label>
+        <input type="checkbox" name="marca" value="OPI"> OPI
+      </label>
+      <h4>Precio</h4>
+      <label>
+        <input type="checkbox" name="precio" value="menor-20"> Menos de S/ 20
+      </label>
+      <label>
+        <input type="checkbox" name="precio" value="mayor-20"> Más de S/ 20
+      </label>
+    </aside>
+
+<section class="productos">
+  <h1>Uñas</h1>
+  <div class="grid-productos">
+    <div class="producto" data-marca="Sally Hansen" data-precio="9">
+      <img src="uñas/PRO7312.jpg" alt="Esmalte Rojo Brillante">
+      <h4>Esmalte Rojo Brillante - Sally Hansen</h4>
+      <p><span class="precio-descuento">S/ 9.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Esmalte Rojo Brillante - Sally Hansen" data-precio="9.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Essie" data-precio="9.5">
+      <img src="uñas/PRO8420.jpg" alt="Esmalte Azul Cielo">
+      <h4>Esmalte Azul Cielo - Essie</h4>
+      <p><span class="precio-descuento">S/ 9.50</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Esmalte Azul Cielo - Essie" data-precio="9.50">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="OPI" data-precio="10">
+      <img src="uñas/PRO1937.jpg" alt="Esmalte Rosa Pastel">
+      <h4>Esmalte Rosa Pastel - OPI</h4>
+      <p><span class="precio-descuento">S/ 10.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Esmalte Rosa Pastel - OPI" data-precio="10.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Essie" data-precio="10">
+      <img src="uñas/PRO2654.jpg" alt="Esmalte Nude Mate">
+      <h4>Esmalte Nude Mate - Essie</h4>
+      <p><span class="precio-descuento">S/ 10.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Esmalte Nude Mate - Essie" data-precio="10.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Cutex" data-precio="5">
+      <img src="uñas/PRO5901.jpg" alt="Acetona">
+      <h4>Acetona - Cutex</h4>
+      <p><span class="precio-descuento">S/ 5.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Acetona - Cutex" data-precio="5.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Johnson" data-precio="6">
+      <img src="uñas/PRO4783.jpg" alt="Algodones Desmaquillantes">
+      <h4>Algodones Desmaquillantes - Johnson</h4>
+      <p><span class="precio-descuento">S/ 6.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Algodones Desmaquillantes - Johnson" data-precio="6.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="carrito" class="carrito oculto">
+  <h3>Tu carrito</h3>
+  <ul id="carrito-lista"></ul>
+  <p id="total">Total: $0.00</p>
+  <button onclick="window.location.href='checkout.html'">Finalizar Compra</button>
+  <button id="cerrar-carrito">Cerrar</button>
+</div>
+
+<div id="favoritos" class="carrito oculto">
+  <h3>Favoritos</h3>
+  <ul id="favoritos-lista"></ul>
+  <button id="cerrar-favoritos">Cerrar</button>
+</div>
+
+<footer>
+    <div class="footer-col">
+      <h4>Sobre Beauty Bliss</h4>
+      <a href="Sobre-nosotros.html">Quienes somos</a>
+      <a href="compromiso.html">Nuestro compromiso</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="eliminacion_datos.html">Políticas de cookies</a>
+      <a href="politicas.html">Políticas de privacidad</a>
+    </div>
+    <div class="footer-col">
+      <h4>Soporte</h4>
+      <a href="contacto.html">Ayuda y contacto</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+    <div class="copyright">
+      © 2025 Beauty Bliss. Todos los derechos reservados.
+    </div>
+</footer>
+
+<script>
+  // Variables para el carrito
+  let carrito = [];
+  let total = 0;
+
+  // Función para agregar productos al carrito
+  function agregarAlCarrito(nombre, precio) {
+    carrito.push({ nombre, precio });
+    total += parseFloat(precio);
+    actualizarCarrito();
+  }
+
+  // Función para actualizar el carrito en la interfaz
+  function actualizarCarrito() {
+    const carritoLista = document.getElementById('carrito-lista');
+    carritoLista.innerHTML = ''; // Limpiar la lista
+    carrito.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `${item.nombre} - S/ ${item.precio}`;
+      carritoLista.appendChild(li);
+    });
+    document.getElementById('total').textContent = `Total: S/ ${total.toFixed(2)}`;
+  }
+
+  // Manejar el clic en los botones "Agregar al carrito"
+  document.querySelectorAll('.agregar-carrito').forEach(button => {
+    button.addEventListener('click', () => {
+      const nombre = button.getAttribute('data-nombre');
+      const precio = button.getAttribute('data-precio');
+      agregarAlCarrito(nombre, precio);
+    });
+  });
+
+  // Mostrar y ocultar el carrito
+  document.getElementById('abrir-carrito').addEventListener('click', () => {
+    const carritoDiv = document.getElementById('carrito');
+    carritoDiv.classList.toggle('oculto');
+  });
+
+  document.getElementById('cerrar-carrito').addEventListener('click', () => {
+    document.getElementById('carrito').classList.add('oculto');
+  });
+
+  // Mostrar y ocultar la lista de favoritos
+  document.getElementById('cerrar-favoritos').addEventListener('click', () => {
+    document.getElementById('favoritos').classList.add('oculto');
+  });
+</script>
+</body>
+</html>
