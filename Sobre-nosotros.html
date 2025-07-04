@@ -34,24 +34,42 @@
       line-height: 1.6;
       color: #333;
     }
+        header.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo img {
+      height: 50px;
+    }
+
+      .nav-links a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
   </style>
 </head>
 <body>
 
-<header class="navbar">
-  <div class="logo">
-    <img src="logo.png" alt="Beauty Bliss Logo">
-  </div>
-  <nav class="nav-links">
-    <a href="index.html">Inicio</a>
-    <a href="Sobre-nosotros.html">Sobre nosotros</a>
-    <a href="maquillaje.html">Maquillaje</a>
-  <a href="cuidado de la piel.html">Cuidado de la piel</a>
-  <a href="fragancias.html">Fragancias</a>
-  <a href="ofertas.html">Ofertas</a>
-  <a href="contacto.html">Contacto</a>
-</nav>
-</header>
+ <header class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Beauty Bliss Logo">
+    </div>
+    <nav class="nav-links">
+     <a href="index.html">Inicio</a>
+     <a href="cuidado de la piel.html">Cuidado de la piel</a>
+     <a href="maquillaje.html">Rostro</a>
+     <a href="cabello.html">Cabello</a>
+     <a href="labios.html"> Labios</a>
+     <a href="uñas.html">Uñas</a>
+    </nav>
+  </header>
 
 <main>
   <section class="section">
@@ -80,26 +98,28 @@
   </section>
 </main>
 
-<footer class="footer">
-  <div class="footer-section">
-    <h4>Sobre Beauty Bliss</h4>
-    <p>Salud y Cuidado</p>
-    <p>Sustentabilidad</p>
-    <p>Nuestro Compromiso</p>
-  </div>
-  <div class="footer-section">
-    <h4>AYUDA</h4>
-    <p>Encuentra Beauty Bliss</p>
-    <p>Ayuda y Contacto</p>
-    <p>Libro de Reclamaciones</p>
-  </div>
-  <div class="footer-section">
-    <h4>SOPORTE</h4>
-    <p>Términos y Condiciones</p>
-    <p>Políticas de Cookies</p>
-    <p>Políticas de Privacidad</p>
-  </div>
-</footer>
+<footer>
+    <div class="footer-col">
+      <h4>Sobre Beauty Bliss</h4>
+      <a href="Sobre-nosotros.html">Quienes somos</a>
+      <a href="compromiso.html">Nuestro compromiso</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="eliminacion_datos.html">Políticas de cookies</a>
+      <a href="politicas.html">Políticas de privacidad</a>
+    </div>
+    <div class="footer-col">
+      <h4>Soporte</h4>
+      <a href="contacto.html">Ayuda y contacto</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+    <div class="copyright">
+      © 2025 Beauty Bliss. Todos los derechos reservados.
+    </div>
+  </footer>
+
 
 </body>
 </html>
