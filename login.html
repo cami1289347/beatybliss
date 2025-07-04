@@ -24,9 +24,9 @@
     }
 
     .login-container img {
-      width: 80px; /* Ajusta el tamaño según sea necesario */
-      height: auto; /* Mantiene la proporción de la imagen */
-      margin-bottom: 0.2rem; /* Espacio entre la imagen y el título */
+      width: 80px;
+      height: auto;
+      margin-bottom: 0.2rem;
     }
 
     .login-container input {
@@ -115,7 +115,35 @@
     </div>
   </div>
 
-  <script src="script.js" defer></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Obtener usuarios registrados
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+      
+      // Verificar credenciales
+      const usuarioValido = usuarios.find(u => u.correo === email && u.contrasena === password);
+      
+      if(usuarioValido) {
+        // Guardar sesión
+        localStorage.setItem('usuarioActual', JSON.stringify({
+          correo: email,
+          loggedIn: true,
+          nombre: usuarioValido.nombre
+        }));
+        
+        // Redirigir a index
+        window.location.href = 'index.html';
+      } else {
+        alert('Credenciales incorrectas');
+      }
+    });
+  </script>
 
 </body>
 </html>
+
