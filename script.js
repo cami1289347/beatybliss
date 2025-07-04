@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         configurarMenuUsuario(); // Llama a la función de configuración del menú de usuario
     }
 
-    function configurarMenuUsuario() {
+function configurarMenuUsuario() {
     const userIcon = document.getElementById('user-icon');
     const dropdown = document.getElementById('user-dropdown');
     const logoutBtn = document.getElementById('logout-btn');
@@ -42,6 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'registro.html'; // Redirigir a registro si no hay sesión
         }
     });
+// Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(e) {
+        const isClickInside = userIcon.contains(e.target) || dropdown.contains(e.target);
+        if (!isClickInside) {
+        dropdown.style.display = 'none';
+    }
+});
 
     if (currentUser  && currentUser .loggedIn) {
         logoutBtn.addEventListener('click', function(e) {
@@ -124,37 +131,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function toggleFavorito(e) {
-        const btn = e.currentTarget;
-        const producto = btn.closest(".producto");
-        
-        const nombre = btn.dataset.nombre || 
-                      producto.dataset.nombre || 
-                      producto.querySelector("h4, p")?.textContent?.split("-")[0]?.trim();
-        
-        const precioText = btn.dataset.precio || 
-                         producto.dataset.precio || 
-                         producto.querySelector("p")?.textContent?.match(/\d+\.?\d*/);
-        
-        const precio = parseFloat(precioText);
+    const btn = e.currentTarget;
+    const producto = btn.closest(".producto");
+    
+    const nombre = btn.dataset.nombre || 
+                  producto.dataset.nombre || 
+                  producto.querySelector("h4, p")?.textContent?.split("-")[0]?.trim();
+    
+    const precioText = btn.dataset.precio || 
+                     producto.dataset.precio || 
+                     producto.querySelector("p")?.textContent?.match(/\d+\.?\d*/);
+    
+    const precio = parseFloat(precioText);
 
-        if (!nombre || isNaN(precio)) {
-            console.error("Datos incompletos para favorito:", {nombre, precio});
-            return;
-        }
-
-        const existente = favoritos.find(p => p.nombre === nombre);
-        if (existente) {
-            favoritos = favoritos.filter(p => p.nombre !== nombre);
-            btn.classList.remove("favorito");
-        } else {
-            favoritos.push({ nombre, precio });
-            btn.classList.add("favorito");
-            mostrarNotificacion('fav-notification'); // Mostrar notificación de favorito
-        }
-
-        guardarFavoritos();
-        actualizarFavoritos();
+    if (!nombre || isNaN(precio)) {
+        console.error("Datos incompletos para favorito:", {nombre, precio});
+        return;
     }
+
+    const existente = favoritos.find(p => p.nombre === nombre);
+    if (existente) {
+        favoritos = favoritos.filter(p => p.nombre !== nombre);
+        btn.classList.remove("favorito");
+    } else {
+        favoritos.push({ nombre, precio });
+        btn.classList.add("favorito");
+        mostrarNotificacion('fav-notification');
+
+        // 🟢 Abre favoritos automáticamente
+        if (favoritosContenedor) favoritosContenedor.classList.remove("oculto");
+    }
+
+    guardarFavoritos();
+    actualizarFavoritos();
+}
+
 
     function marcarFavoritosEnProductos() {
         document.querySelectorAll(".agregar-favorito").forEach(btn => {
@@ -223,6 +234,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+    document.addEventListener('click', function(e) {
+        const isClickInsideCarrito = carrito.contains(e.target) || botonCarrito.contains(e.target);
+        if (!isClickInsideCarrito) {
+            carrito.classList.add("oculto");
+        }
+    });
+}
 
     function aplicarFiltros() {
         const marcasSeleccionadas = [...document.querySelectorAll('input[name="marca"]:checked')].map(el => el.value);
@@ -428,4 +446,22 @@ function configurarLogin() {
     window.eliminarItem = eliminarItem;
     window.agregarFavoritoAlCarrito = agregarFavoritoAlCarrito;
     window.eliminarFavorito = eliminarFavorito;
+
+    document.addEventListener("click", function(event) {
+    const isClickInsideFav = favoritosContenedor?.contains(event.target) || 
+                             botonFavoritos?.contains(event.target);
+
+    if (!isClickInsideFav && favoritosContenedor && !favoritosContenedor.classList.contains("oculto")) {
+        favoritosContenedor.classList.add("oculto");
+    }
+});
+document.addEventListener("click", function(event) {
+    const isClickInsideCarrito = carrito?.contains(event.target) || 
+                                 botonCarrito?.contains(event.target);
+
+    if (!isClickInsideCarrito && carrito && !carrito.classList.contains("oculto")) {
+        carrito.classList.add("oculto");
+    }
+});
+
 });
