@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cuidado de la Piel - Beauty Bliss</title>
+  <title>Cuidado del Cabello - Beauty Bliss</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .contenedor-productos {
       display: flex;
@@ -35,8 +36,10 @@
 
     .grid-productos {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .producto {
@@ -46,6 +49,11 @@
       text-align: center;
       background-color: #fff;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .producto:hover {
+      transform: scale(1.05);
     }
 
     .producto img {
@@ -79,167 +87,400 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
     .producto button:hover {
       background-color: #c2185b;
     }
+
+    .header-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header-top {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .header-icons a {
+      color: #333;
+      font-size: 1.2rem;
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .main-nav a {
+      padding: 0.5rem 1rem;
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: #e91e63;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links a {
+      text-decoration: none; /* Eliminar subrayado */
+      color: black; /* Color del texto */
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    .galeria-imagenes {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .carrito {
+      position: fixed;
+      right: 20px;
+      top: 80px;
+      width: 300px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 15px;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .carrito.oculto {
+      display: none;
+    }
+    
+    .galeria-imagenes img {
+      width: 30%; /* Ajusta el tamaño según sea necesario */
+      height: auto; /* Mantiene la proporción de la imagen */
+      margin: 0 5px; /* Espaciado entre imágenes */
+      border-radius: 5px; /* Bordes redondeados */
+    }
+
+.cabecera {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 0; /* Elimina el margen */
+  padding: 0; /* Asegúrate de que no haya padding si no lo deseas */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  display: block; /* Asegura que los bloques estén uno debajo del otro */
+}
+  
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.logo {
+  height: 50px;
+}
+
+.buscador-header {
+  flex: 1;
+  margin: 0 2rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+.icons a {
+  color: #555;
+  font-size: 1.3rem;
+  margin-left: 15px;
+  transition: color 0.3s;
+}
+
+.icons a:hover {
+  color: #e91e63;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #e91e63;
+  color: white;
+}
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="navbar">
-    <div class="logo">
-      <img src="logo.png" alt="Beauty Bliss Logo">
-    </div>
-    <nav class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="Sobre-nosotros.html">Sobre nosotros</a>
-      <a href="maquillaje.html">Maquillaje</a>
-      <a href="cuidado de la piel.html">Cuidado de la piel</a>
-      <a href="fragancias.html">Fragancias</a>
-      <a href="ofertas.html">Ofertas</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
-  </header>
 
-  <!-- Contenido principal -->
-  <main class="contenedor-productos">
+<header class="cabecera">
+  <!-- Parte superior: logo, buscador, íconos -->
+  <div class="header-top">
+    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
+    <div class="icons">
+      <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
+      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+      <a href="#" title="Carrito" id="abrir-carrito"><i class="fas fa-shopping-cart"></i></a>
+      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+    </div>
+  </div>
+
+  <!-- Barra de navegación debajo -->
+  <nav class="main-nav">
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="cuidado de la piel.html">Cuidado de la Piel</a>
+      <a href="maquillaje.html">Rostro</a>
+      <a href="cabello.html" class="active">Cabello</a>
+      <a href="labios.html">Labios</a>
+      <a href="uñas.html">Uñas</a>
+    </div>
+  </nav>
+</header>
+
+
+
+<main class="contenedor-productos">
     <aside class="filtros">
       <h3>Filtros</h3>
+      <label>
+        <input type="checkbox" name="marca" value="TRESemme"> Neutrogena
+      </label>
+      <label>
+        <input type="checkbox" name="marca" value="Pantene"> Laneige
+      </label>
       <label>
         <input type="checkbox" name="marca" value="Loreal"> Loreal
       </label>
       <label>
-        <input type="checkbox" name="marca" value="Neutrogena"> Neutrogena
+        <input type="checkbox" name="marca" value="Herbal Essences"> Garnier
+      </label>
+      <h4>Precio</h4>
+      <label>
+        <input type="checkbox" name="precio" value="menor-20"> Menos de S/ 20
       </label>
       <label>
-        <input type="checkbox" name="tipo" value="Crema"> Cremas
-      </label>
-      <label>
-        <input type="checkbox" name="tipo" value="Serum"> Serums
-      </label>
-      <label>
-        <input type="checkbox" name="descuento" value="si"> Con descuento
+        <input type="checkbox" name="precio" value="mayor-20"> Más de S/ 20
       </label>
     </aside>
-
-    <section class="productos">
-      <h1>Cuidado de la Piel</h1>
-      <div class="grid-productos">
-       
-<div class="producto">
-  <img src="crema-dia.png" alt="Crema Hidratante Día L'Oréal">
-  <h4>Crema Facial Hidratante Día - L'Oréal</h4>
-  <p><span class="precio-original">S/ 35.00</span> <span class="precio-descuento">S/ 28.00</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="serum-hialuronico.png" alt="Serum Revitalift">
-  <h4>Serum Revitalift Ácido Hialurónico - L'Oréal</h4>
-  <p><span class="precio-original">S/ 49.90</span> <span class="precio-descuento">S/ 39.90</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="agua-micelar.png" alt="Agua Micelar Garnier">
-  <h4>Agua Micelar 7 en 1 - Garnier</h4>
-  <p><span class="precio-original">S/ 22.50</span> <span class="precio-descuento">S/ 18.00</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="gel-limpiador.png" alt="Gel Limpiador Garnier">
-  <h4>Gel Limpiador Facial Pure Active - Garnier</h4>
-  <p><span class="precio-original">S/ 28.90</span> <span class="precio-descuento">S/ 24.00</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="protector-solar.png" alt="Protector Solar Neutrogena">
-  <h4>Protector Solar FPS 50 - Neutrogena</h4>
-  <p><span class="precio-original">S/ 44.00</span> <span class="precio-descuento">S/ 35.00</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="crema-noche.png" alt="Crema Noche Neutrogena">
-  <h4>Crema Hidratante Noche - Neutrogena</h4>
-  <p><span class="precio-original">S/ 36.00</span> <span class="precio-descuento">S/ 29.50</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="serum-vitamina-c.png" alt="Serum Vitamina C">
-  <h4>Serum Vitamina C - Garnier</h4>
-  <p><span class="precio-original">S/ 46.00</span> <span class="precio-descuento">S/ 38.00</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="mascarilla-hidratante.png" alt="Mascarilla Hidratante Garnier">
-  <h4>Mascarilla Hidratante en Tela - Garnier</h4>
-  <p><span class="precio-original">S/ 12.90</span> <span class="precio-descuento">S/ 9.90</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="limpiador-espuma.png" alt="Limpiador en Espuma">
-  <h4>Limpiador Facial en Espuma - La Roche-Posay</h4>
-  <p><span class="precio-original">S/ 55.00</span> <span class="precio-descuento">S/ 44.00</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="tonico.png" alt="Tónico Facial Vichy">
-  <h4>Tónico Refrescante - Vichy</h4>
-  <p><span class="precio-original">S/ 42.00</span> <span class="precio-descuento">S/ 33.50</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="contorno-ojos.png" alt="Contorno de Ojos Nivea">
-  <h4>Contorno de Ojos Antiarrugas - Nivea</h4>
-  <p><span class="precio-original">S/ 29.00</span> <span class="precio-descuento">S/ 24.90</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-<div class="producto">
-  <img src="crema-sensitive.png" alt="Crema Piel Sensible Cetaphil">
-  <h4>Crema Hidratante Piel Sensible - Cetaphil</h4>
-  <p><span class="precio-original">S/ 39.00</span> <span class="precio-descuento">S/ 31.50</span></p>
-  <button>Agregar al carrito</button>
-</div>
-
-
-
-
-
+  
+   <section class="productos">
+  <h1>Cuidado del Cabello</h1>
+  <div class="grid-productos">
+    <div class="producto" data-marca="L'Oreal" data-precio="20">
+      <img src="PRO7260.jpg" alt="Desmaquillante Bifasico">
+      <h4>Desmaquillante Bifasico - L'Oreal</h4>
+      <p><span class="precio-original">S/ 45.00</span> <span class="precio-descuento">S/ 20.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Desmaquillante Bifasico - L'Oreal" data-precio="21.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
       </div>
-    </section>
-  </main>
+    </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-section">
+    <div class="producto" data-marca="L'Oreal" data-precio="21.90">
+      <img src="PRO2668.jpeg" alt="Crema Hidratante Día">
+      <h4>Crema Hidratante Día - L'Oreal</h4>
+      <p><span class="precio-original">S/ 28.90</span> <span class="precio-descuento">S/ 13.90</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Crema Hidratante Día - L'Oreal" data-precio="21.90">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="L'Oreal" data-precio="20">
+      <img src="PRO3615.jpg" alt="Protector Solar Facial">
+      <h4>Protector Solar Facial - L'Oreal</h4>
+      <p><span class="precio-descuento">S/ 10.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Protector Solar Facial - L'Oreal" data-precio="20.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="L'Oreal" data-precio="22.90">
+      <img src="PRO8147.jpg" alt="Crema Hidratante Noche">
+      <h4>Crema Hidratante Noche - L'Oreal</h4>
+      <p><span class="precio-original">S/ 25.00</span> <span class="precio-descuento">S/ 22.90</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Crema Hidratante Noche - L'Oreal" data-precio="22.90">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="L'Oreal" data-precio="24.50">
+      <img src="PRO2668.jpeg" alt="Sérum Vitamina C">
+      <h4>Sérum Vitamina C - L'Oreal</h4>
+      <p><span class="precio-original">S/ 27.00</span> <span class="precio-descuento">S/ 24.50</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Sérum Vitamina C - L'Oreal" data-precio="24.50">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="L'Oreal" data-precio="26.90">
+      <img src="PRO7854.jpg" alt="Sérum Ácido Hialurónico">
+      <h4>Sérum Ácido Hialurónico - L'Oreal</h4>
+      <p><span class="precio-original">S/ 29.90</span> <span class="precio-descuento">S/ 26.90</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Sérum Ácido Hialurónico - L'Oreal" data-precio="26.90">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Neutrogena" data-precio="34.00">
+      <img src="PRO2103 (1).jpg" alt="Protector Solar Facial">
+      <h4>Protector Solar Facial - Neutrogena</h4>
+      <p><span class="precio-descuento">S/ 34.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Protector Solar Facial - Neutrogena" data-precio="34.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Laneige" data-precio="18.00">
+      <img src="PRO7960.jpg" alt="Mascarilla de Labios">
+      <h4>Mascarilla de Labios - Laneige</h4>
+      <p><span class="precio-original">S/ 22.00</span> <span class="precio-descuento">S/ 18.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Mascarilla de Labios - Laneige" data-precio="18.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Garnier" data-precio="20.50">
+      <img src="PRO4634.jpg" alt="Mascarilla Facial">
+      <h4>Mascarilla Facial - Garnier</h4>
+      <p><span class="precio-descuento">S/ 20.50</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Mascarilla Facial - Garnier" data-precio="20.50">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Garnier" data-precio="19.90">
+      <img src="PRO3615.jpg" alt="Mascarilla de Ojeras">
+      <h4>Mascarilla de Ojeras - Garnier</h4>
+      <p><span class="precio-descuento">S/ 19.90</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Mascarilla de Ojeras - Garnier" data-precio="19.90">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+ 
+</section>
+
+  </main>
+  
+  <div id="carrito" class="carrito oculto">
+    <h3>Tu carrito</h3>
+    <ul id="carrito-lista"></ul>
+    <p id="total">Total: $0.00</p>
+    <button onclick="window.location.href='checkout.html'">Finalizar Compra</button>
+    <button id="cerrar-carrito">Cerrar</button>
+  </div>
+
+  <div id="favoritos" class="carrito oculto">
+  <h3>Favoritos</h3>
+  <ul id="favoritos-lista"></ul>
+  <button id="cerrar-favoritos">Cerrar</button>
+</div>
+
+<footer>
+    <div class="footer-col">
       <h4>Sobre Beauty Bliss</h4>
-      <p>Salud y Cuidado</p>
-      <p>Sustentabilidad</p>
-      <p>Nuestro Compromiso</p>
+      <a href="Sobre-nosotros.html">Quienes somos</a>
+      <a href="compromiso.html">Nuestro compromiso</a>
     </div>
-    <div class="footer-section">
-      <h4>AYUDA</h4>
-      <p>Encuentra Beauty Bliss</p>
-      <p>Ayuda y Contacto</p>
-      <p>Libro de Reclamaciones</p>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="eliminacion_datos.html">Políticas de cookies</a>
+      <a href="politicas.html">Políticas de privacidad</a>
     </div>
-    <div class="footer-section">
-      <h4>SOPORTE</h4>
-      <p>Términos y Condiciones</p>
-      <p>Políticas de Cookies</p>
-      <p>Políticas de Privacidad</p>
+    <div class="footer-col">
+      <h4>Soporte</h4>
+      <a href="contacto.html">Ayuda y contacto</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+    <div class="copyright">
+      © 2025 Beauty Bliss. Todos los derechos reservados.
     </div>
   </footer>
+<script src="script.js"></script>
 </body>
 </html>
