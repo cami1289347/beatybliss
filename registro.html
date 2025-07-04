@@ -31,11 +31,12 @@
     }
 
     .registro-container input {
-      width: 100%;
+      width: calc(100% - 16px); /* Ajuste para el padding */
       padding: 0.75rem;
       margin-bottom: 1rem;
       border: 1px solid #ccc;
       border-radius: 10px;
+      box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
     }
 
     .registro-container button {
@@ -99,7 +100,7 @@
 </head>
 <body>
   <div class="registro-container">
-    <img src="registro-icono.jpg" alt="Icono de registro" class="registro-icon">
+    <img src="registro.jpg" alt="Icono de registro" class="registro-icon">
     <h2>Crear una cuenta</h2>
     <form id="registro-form">
       <input type="text" id="nombre" placeholder="Nombre completo (mín. 3 caracteres)" 
