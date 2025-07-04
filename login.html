@@ -123,27 +123,30 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       
-      // Obtener usuarios registrados
-      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-      
-      // Verificar credenciales
-      const usuarioValido = usuarios.find(u => u.correo === email && u.contrasena === password);
-      
-      if (usuarioValido) {
-        // Guardar sesión
-        localStorage.setItem('usuarioActual', JSON.stringify({
-          correo: email,
-          loggedIn: true,
-          nombre: usuarioValido.nombre
-        }));
-        
-        // Redirigir a index
-        window.location.href = 'index.html';
-      } else if (email === "luciamoranaragon13@gmail.com" && password === "Camila1311BB") {
+      // Verificar si el usuario es el administrador
+      if (email === "luciamoranaragon13@gmail.com" && password === "Camila1311BB") {
         // Si es el administrador, mostrar el contenedor del PIN
         document.getElementById('pin-container').style.display = 'block';
       } else {
-        alert('Credenciales incorrectas');
+        // Obtener usuarios registrados
+        const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+        
+        // Verificar credenciales
+        const usuarioValido = usuarios.find(u => u.correo === email && u.contrasena === password);
+        
+        if (usuarioValido) {
+          // Guardar sesión
+          localStorage.setItem('usuarioActual', JSON.stringify({
+            correo: email,
+            loggedIn: true,
+            nombre: usuarioValido.nombre
+          }));
+          
+          // Redirigir a index
+          window.location.href = 'index.html';
+        } else {
+          alert('Credenciales incorrectas');
+        }
       }
     });
 
