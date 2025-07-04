@@ -148,10 +148,12 @@
         if (usuarioValido) {
           // Guardar sesión
           localStorage.setItem('usuarioActual', JSON.stringify({
-            correo: email,
-            loggedIn: true,
-            nombre: usuarioValido.nombre
+          nombre: usuarioValido.nombre,
+          correo: usuarioValido.correo,
+          fechaNacimiento: usuarioValido.fechaNacimiento,
+          loggedIn: true
           }));
+
           
           // Redirigir a index
           window.location.href = 'index.html';
