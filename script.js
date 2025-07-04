@@ -348,8 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function configurarLogin() {
-        function configurarLogin() {
+function configurarLogin() {
     const loginForm = document.getElementById("login-form");
     if (loginForm) {
         loginForm.addEventListener("submit", function(e) {
@@ -365,26 +364,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Verificar credenciales de administrador
             if (email === "luciamoranaragon@gmail.com" && password === "Camila1311BB") {
-                if (pinContainer.style.display === "none") {
-                    pinContainer.style.display = "block"; // Muestra el campo del PIN
-                    alert("Por favor, ingrese el PIN de administrador");
-                    return;
-                }
-
-                // Verificar el PIN
-                if (pin === "1234") {
-                    window.location.href = "admin.html"; // Redirige a la página del administrador
-                    return;
-                } else {
-                    alert("PIN incorrecto");
-                    return;
-                }
+                // Mostrar el contenedor del PIN
+                pinContainer.style.display = "block"; 
+                alert("Por favor, ingrese el PIN de administrador");
+                return;
             }
 
-            // Lógica para el inicio de sesión de usuario regular
-            alert("Inicio de sesión exitoso como usuario regular");
-            localStorage.setItem("isLoggedIn", "true"); // Guardar estado de autenticación
-            window.location.href = "index.html"; // Redirige a la página principal
+            // Verificar si el usuario está registrado
+            const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+            const usuario = usuarios.find(user => user.email === email && user.password === password);
+
+            if (usuario) {
+                // Lógica para el inicio de sesión de usuario regular
+                alert("Inicio de sesión exitoso como usuario regular");
+                localStorage.setItem("isLoggedIn", "true"); // Guardar estado de autenticación
+                window.location.href = "index.html"; // Redirige a la página principal
+            } else {
+                alert("Correo o contraseña incorrectos");
+            }
+
+            // Verificar el PIN
+            if (pin === "1234") {
+                window.location.href = "admin.html"; // Redirige a la página del administrador
+            } else {
+                alert("PIN incorrecto");
+            }
         });
     }
 }
