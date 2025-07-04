@@ -24,6 +24,30 @@ document.addEventListener('DOMContentLoaded', function() {
         configurarEventosProductos();
         configurarEventListenersGlobales();
         configurarLogin(); // Llama a la función de configuración de inicio de sesión
+        configurarMenuUsuario(); // Llama a la función de configuración del menú de usuario
+    }
+
+    function configurarMenuUsuario() {
+        const userIcon = document.getElementById('user-icon');
+        const dropdown = document.getElementById('user-dropdown');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        const currentUser  = JSON.parse(localStorage.getItem('usuarioActual'));
+
+        if (currentUser  && currentUser .loggedIn) {
+            userIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('usuarioActual');
+                window.location.href = 'index.html'; // Redirigir a la página principal
+            });
+        } else {
+            userIcon.href = 'registro.html'; // Redirigir a registro si no hay sesión
+        }
     }
 
     function cargarDatos() {
