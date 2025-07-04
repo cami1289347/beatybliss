@@ -348,42 +348,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Función de inicio de sesión
     function configurarLogin() {
-        const loginForm = document.getElementById("login-form");
-        if (loginForm) {
-            loginForm.addEventListener("submit", function(e) {
-                e.preventDefault(); // Evita el envío del formulario
+    const loginForm = document.getElementById("login-form");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function(e) {
+            e.preventDefault(); // Evita el envío del formulario
 
-                const email = document.getElementById("email").value;
-                const password = document.getElementById("password").value;
-                const pinContainer = document.getElementById("pin-container");
-                const pin = document.getElementById("admin-pin").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const pinContainer = document.getElementById("pin-container");
+            const pin = document.getElementById("admin-pin").value;
 
-                // Verificar credenciales de administrador
-                if (email === "luciamoranaragon@gmail.com" && password === "Camila1311BB") {
-                    if (pinContainer.style.display === "none") {
-                        pinContainer.style.display = "block"; // Muestra el campo del PIN
-                        alert("Por favor, ingrese el PIN de administrador");
-                        return;
-                    }
-
-                    // Verificar el PIN
-                    if (pin === "1234") {
-                        window.location.href = "admin.html"; // Redirige a la página del administrador
-                        return;
-                    } else {
-                        alert("PIN incorrecto");
-                        return;
-                    }
+            // Verificar credenciales de administrador
+            if (email === "luciamoranaragon@gmail.com" && password === "Camila1311BB") {
+                if (pinContainer.style.display === "none") {
+                    pinContainer.style.display = "block"; // Muestra el campo del PIN
+                    alert("Por favor, ingrese el PIN de administrador");
+                    return;
                 }
 
-                // Lógica para el inicio de sesión de usuario regular
-                alert("Inicio de sesión exitoso como usuario regular");
-                window.location.href = "index.html"; // Redirige a la página principal
-            });
-        }
+                // Verificar el PIN
+                if (pin === "1234") {
+                    window.location.href = "admin.html"; // Redirige a la página del administrador
+                    return;
+                } else {
+                    alert("PIN incorrecto");
+                    return;
+                }
+            }
+
+            // Lógica para el inicio de sesión de usuario regular
+            alert("Inicio de sesión exitoso como usuario regular");
+            localStorage.setItem("isLoggedIn", "true"); // Guardar estado de autenticación
+            window.location.href = "index.html"; // Redirige a la página principal
+        });
     }
+}
+
 
     // Hacer funciones accesibles globalmente
     window.cambiarCantidad = cambiarCantidad;
