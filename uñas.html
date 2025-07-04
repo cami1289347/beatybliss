@@ -238,7 +238,7 @@
         <input type="checkbox" name="precio" value="mayor-20"> Más de S/ 20
       </label>
     </aside>
-
+  
 <section class="productos">
   <h1>Uñas</h1>
   <div class="grid-productos">
@@ -342,53 +342,6 @@
     </div>
 </footer>
 
-<script>
-  // Variables para el carrito
-  let carrito = [];
-  let total = 0;
-
-  // Función para agregar productos al carrito
-  function agregarAlCarrito(nombre, precio) {
-    carrito.push({ nombre, precio });
-    total += parseFloat(precio);
-    actualizarCarrito();
-  }
-
-  // Función para actualizar el carrito en la interfaz
-  function actualizarCarrito() {
-    const carritoLista = document.getElementById('carrito-lista');
-    carritoLista.innerHTML = ''; // Limpiar la lista
-    carrito.forEach(item => {
-      const li = document.createElement('li');
-      li.textContent = `${item.nombre} - S/ ${item.precio}`;
-      carritoLista.appendChild(li);
-    });
-    document.getElementById('total').textContent = `Total: S/ ${total.toFixed(2)}`;
-  }
-
-  // Manejar el clic en los botones "Agregar al carrito"
-  document.querySelectorAll('.agregar-carrito').forEach(button => {
-    button.addEventListener('click', () => {
-      const nombre = button.getAttribute('data-nombre');
-      const precio = button.getAttribute('data-precio');
-      agregarAlCarrito(nombre, precio);
-    });
-  });
-
-  // Mostrar y ocultar el carrito
-  document.getElementById('abrir-carrito').addEventListener('click', () => {
-    const carritoDiv = document.getElementById('carrito');
-    carritoDiv.classList.toggle('oculto');
-  });
-
-  document.getElementById('cerrar-carrito').addEventListener('click', () => {
-    document.getElementById('carrito').classList.add('oculto');
-  });
-
-  // Mostrar y ocultar la lista de favoritos
-  document.getElementById('cerrar-favoritos').addEventListener('click', () => {
-    document.getElementById('favoritos').classList.add('oculto');
-  });
-</script>
+<script src="script.js"></script>
 </body>
 </html>
