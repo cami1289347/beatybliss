@@ -84,7 +84,15 @@
     }
 
     #pin-container {
-      margin: 1rem 0;
+      margin: 1.5rem 0;
+    }
+    .pin-digit {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 1.2rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -96,11 +104,14 @@
     <form id="login-form">
       <input type="email" id="email" placeholder="Correo electrónico" required>
       <input type="password" id="password" placeholder="Contraseña" required>
-      <div id="pin-container" style="display:none;" class="pin-input-group">
+      <div id="pin-container" style="display:none;">
+        <p style="margin-bottom: 1rem; color: #c2185b; font-weight: 500;">Ingresar PIN de administrador</p>
+        <div class="pin-input-group" style="display: flex; gap: 10px; justify-content: center;">
         <input type="number" maxlength="1" class="pin-digit" data-index="1" oninput="moveToNextPin(this)">
         <input type="number" maxlength="1" class="pin-digit" data-index="2" oninput="moveToNextPin(this)">
         <input type="number" maxlength="1" class="pin-digit" data-index="3" oninput="moveToNextPin(this)">
         <input type="number" maxlength="1" class="pin-digit" data-index="4" oninput="moveToNextPin(this)">
+      </div>
       </div>
       <button type="submit">Ingresar</button>
     </form>
