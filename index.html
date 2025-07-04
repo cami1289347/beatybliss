@@ -6,6 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beauty Bliss</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentUser = JSON.parse(localStorage.getItem('usuarioActual'));
+      const userIcon = document.getElementById('user-icon');
+      
+      if (currentUser && currentUser.loggedIn) {
+        userIcon.addEventListener('click', function(e) {
+          e.preventDefault();
+          const dropdown = document.getElementById('user-dropdown');
+          dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+      } else {
+        userIcon.href = 'registro.html';
+      }
+    });
+  </script>
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,7 +30,14 @@
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
     <input type="text" id="buscador" placeholder="Buscar productos...">
     <div class="icons">
-      <a href="registro.html" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
+      <div class="user-menu-wrapper">
+        <a href="#" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
+        <div class="user-dropdown" id="user-dropdown" style="display: none;">
+          <a href="perfil.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
+          <a href="compras.html"><i class="fas fa-shopping-bag"></i> Mis Compras</a>
+          <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
+      </div>
       <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
       <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
       <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
@@ -49,7 +72,7 @@
       </a>
     </section>
 
-        <section class="destacados">
+    <section class="destacados">
       <h2>Productos Destacados</h2>
       <div class="grid-productos">
         <div class="producto" data-nombre="Lipstick" data-precio="18">
@@ -85,7 +108,6 @@
       </div>
     </section>
   </main>
-
 
   <div id="carrito" class="carrito oculto">
     <h3>Tu carrito</h3>
