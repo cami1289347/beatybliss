@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 
+
     function cargarDatos() {
         const datosGuardados = localStorage.getItem("carrito");
         if (datosGuardados) {
