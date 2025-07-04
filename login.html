@@ -95,9 +95,12 @@
     <form id="login-form">
       <input type="email" id="email" placeholder="Correo electrónico" required>
       <input type="password" id="password" placeholder="Contraseña" required>
-      <div id="pin-container" style="display:none;">
-        <input type="password" id="admin-pin" placeholder="PIN de administrador">
-      </div>
+    <div id="pin-container" style="display:none;" class="pin-input-group">
+    <input type="number" maxlength="1" class="pin-digit" data-index="1" oninput="moveToNextPin(this)">
+    <input type="number" maxlength="1" class="pin-digit" data-index="2" oninput="moveToNextPin(this)">
+    <input type="number" maxlength="1" class="pin-digit" data-index="3" oninput="moveToNextPin(this)">
+    <input type="number" maxlength="1" class="pin-digit" data-index="4" oninput="moveToNextPin(this)">
+    </div>
       <button type="submit">Ingresar</button>
     </form>
 
