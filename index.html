@@ -1,4 +1,4 @@
-<!-- index.html -->
+<!-- index.html (actualizado) -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beauty Bliss</title>
   <link rel="stylesheet" href="style.css">
-
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -23,9 +22,8 @@
           <a href="index.html" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
         </div>
       </div>
-      <a href="#" id="favortio-icon" title="Favoritos"><i class="fas fa-heart"></i></a>
-      <a href="#" id="carrito-icon" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
-
+      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+      <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
       <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
     </div>
   </header>
@@ -61,35 +59,41 @@
     <section class="destacados">
       <h2>Productos Destacados</h2>
       <div class="grid-productos">
-        <div class="producto" data-nombre="Lipstick" data-precio="18">
+        <div class="producto" data-nombre="Lipstick" data-precio="18" data-marca="Maybelline">
           <img src="labial.png" alt="Lipstick">
           <p>Lipstick - $18.00</p>
-          <button>Agregar al carrito</button>
+          <button class="agregar-carrito">Agregar al carrito</button>
+          <button class="agregar-favorito" title="Agregar a Favoritos"><i class="fas fa-heart"></i></button>
         </div>
-        <div class="producto" data-nombre="Colonia" data-precio="23">
+        <div class="producto" data-nombre="Colonia" data-precio="23" data-marca="Revlon">
           <img src="colonia.png" alt="Colonia">
           <p>Colonia - $23.00</p>
-          <button>Agregar al carrito</button>
+          <button class="agregar-carrito">Agregar al carrito</button>
+          <button class="agregar-favorito" title="Agregar a Favoritos"><i class="fas fa-heart"></i></button>
         </div>
-        <div class="producto" data-nombre="Crema Hidratante" data-precio="11">
+        <div class="producto" data-nombre="Crema Hidratante" data-precio="11" data-marca="Neutrogena">
           <img src="crema hidratante.png" alt="Crema Humectante">
           <p>Crema Hidratante - $11.00</p>
-          <button>Agregar al carrito</button>
+          <button class="agregar-carrito">Agregar al carrito</button>
+          <button class="agregar-favorito" title="Agregar a Favoritos"><i class="fas fa-heart"></i></button>
         </div>
-        <div class="producto" data-nombre="Esmalte" data-precio="5">
+        <div class="producto" data-nombre="Esmalte" data-precio="5" data-marca="Essie">
           <img src="esmalte.png" alt="Esmalte">
           <p>Esmalte - $5.00</p>
-          <button>Agregar al carrito</button>
+          <button class="agregar-carrito">Agregar al carrito</button>
+          <button class="agregar-favorito" title="Agregar a Favoritos"><i class="fas fa-heart"></i></button>
         </div>
-        <div class="producto" data-nombre="Tónico Facial" data-precio="12">
+        <div class="producto" data-nombre="Tónico Facial" data-precio="12" data-marca="CeraVe">
           <img src="toner.jpg" alt="Tónico">
           <p>Tónico Facial - $12.00</p>
-          <button>Agregar al carrito</button>
+          <button class="agregar-carrito">Agregar al carrito</button>
+          <button class="agregar-favorito" title="Agregar a Favoritos"><i class="fas fa-heart"></i></button>
         </div>
-        <div class="producto" data-nombre="Perfume Rosas" data-precio="30">
+        <div class="producto" data-nombre="Perfume Rosas" data-precio="30" data-marca="Victoria's Secret">
           <img src="rosas.jpg" alt="Perfume">
           <p>Perfume Rosas - $30.00</p>
-          <button>Agregar al carrito</button>
+          <button class="agregar-carrito">Agregar al carrito</button>
+          <button class="agregar-favorito" title="Agregar a Favoritos"><i class="fas fa-heart"></i></button>
         </div>
       </div>
     </section>
@@ -102,6 +106,16 @@
     <button onclick="window.location.href='checkout.html'">Finalizar Compra</button>
     <button id="cerrar-carrito">Cerrar</button>
   </div>
+
+  <div id="favoritos" class="carrito oculto">
+    <h3>Mis Favoritos</h3>
+    <ul id="favoritos-lista"></ul>
+    <button id="cerrar-favoritos">Cerrar</button>
+  </div>
+
+  <!-- Notificación (opcional) -->
+  <div id="cart-notification" class="notification">Agregado al carrito</div>
+  <div id="fav-notification" class="notification">Agregado a favoritos</div>
 
   <footer>
     <div class="footer-col">
