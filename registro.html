@@ -91,14 +91,18 @@
       };
 
       usuarios.push(nuevoUsuario);
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      localStorage.setItem('usuarioActual', JSON.stringify({
-        correo,
-        loggedIn: true
-      }));
+localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
-      alert('Registro exitoso. Ahora puedes iniciar sesión.');
-      window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
+// Guardar usuario actual con más datos
+localStorage.setItem('usuarioActual', JSON.stringify({
+  nombre,
+  correo,
+  fechaNacimiento: `${dia}/${mes}/${anio}`,
+  loggedIn: true
+}));
+
+alert('Registro exitoso. Serás redirigido a la página principal.');
+window.location.href = 'index.html';
     });
 
     window.fbAsyncInit = function () {
