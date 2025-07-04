@@ -1,1 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuidado de Labios - Beauty Bliss</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Same styles as the Cabello page */
+    .contenedor-productos {
+      display: flex;
+      padding: 2rem;
+    }
+
+    .filtros {
+      width: 200px;
+      margin-right: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .filtros h3 {
+      margin-bottom: 1rem;
+    }
+
+    .filtros label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .productos {
+      flex: 1;
+    }
+
+    .grid-productos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .producto {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .producto:hover {
+      transform: scale(1.05);
+    }
+
+    .producto img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .producto h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .precio-original {
+      text-decoration: line-through;
+      color: #888;
+      margin-right: 0.5rem;
+    }
+
+    .precio-descuento {
+      color: #e91e63;
+      font-weight: bold;
+    }
+
+    .producto button {
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .producto button:hover {
+      background-color: #c2185b;
+    }
+
+    .header-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header-top {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .header-icons a {
+      color: #333;
+      font-size: 1.2rem;
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+    }
+
+    .main-nav a {
+      padding: 0.5rem 1rem;
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: #e91e63;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links a {
+      text-decoration: none; /* Eliminar subrayado */
+      color: black; /* Color del texto */
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    .carrito {
+      position: fixed;
+      right: 20px;
+      top: 80px;
+      width: 300px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 15px;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .carrito.oculto {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="header-top">
+    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
+    <div class="icons">
+      <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
+      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+      <a href="#" title="Carrito" id="abrir-carrito"><i class="fas fa-shopping-cart"></i></a>
+      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="cuidado de la piel.html">Cuidado Facial</a>
+      <a href="cabello.html">Cabello</a>
+      <a href="Labios.html" class="active">Labios</a>
+      <a href="uñas.html">Uñas</a>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor-productos">
+    <aside class="filtros">
+      <h3>Filtros</h3>
+      <label>
+        <input type="checkbox" name="marca" value="Maybelline"> Maybelline
+      </label>
+      <label>
+        <input type="checkbox" name="marca" value="NYX"> NYX
+      </label>
+      <label>
+        <input type="checkbox" name="marca" value="Loreal"> Loreal
+      </label>
+      <h4>Precio</h4>
+      <label>
+        <input type="checkbox" name="precio" value="menor-20"> Menos de S/ 20
+      </label>
+      <label>
+        <input type="checkbox" name="precio" value="mayor-20"> Más de S/ 20
+      </label>
+    </aside>
+  
+<section class="productos">
+  <h1>Cuidado de Labios</h1>
+  <div class="grid-productos">
+    <div class="producto" data-marca="Maybelline" data-precio="25">
+      <img src="labios/PRO1650.jpg" alt="Labial Rojo Intenso">
+      <h4>Labial Rojo Intenso - Maybelline</h4>
+      <p><span class="precio-original">S/ 30.00</span> <span class="precio-descuento">S/ 25.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Labial Rojo Intenso - Maybelline" data-precio="25.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Maybelline" data-precio="18">
+      <img src="labios/PRO6377.jpg" alt="Labial Rojo Cereza">
+      <h4>Labial Rojo Cereza - Maybelline</h4>
+      <p><span class="precio-descuento">S/ 18.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Labial Rojo Cereza - Maybelline" data-precio="18.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Maybelline" data-precio="19">
+      <img src="labios/PRO9974.jpg" alt="Labial Rojo Oscuro">
+      <h4>Labial Rojo Oscuro - Maybelline</h4>
+      <p><span class="precio-original">S/ 25.00</span> <span class="precio-descuento">S/ 19.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Labial Rojo Oscuro - Maybelline" data-precio="19.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="NYX" data-precio="17">
+      <img src="labios/PRO2354.jpg" alt="Brillo Labial Rosa">
+      <h4>Brillo Labial Rosa - NYX</h4>
+      <p><span class="precio-descuento">S/ 17.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Brillo Labial Rosa - NYX" data-precio="17.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="NYX" data-precio="13">
+      <img src="labios/PRO4567.jpg" alt="Brillo Labial Transparente">
+      <h4>Brillo Labial Transparente - NYX</h4>
+      <p><span class="precio-original">S/ 15.00</span> <span class="precio-descuento">S/ 13.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Brillo Labial Transparente - NYX" data-precio="13.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Loreal" data-precio="21">
+      <img src="labios/PRO9210.jpg" alt="Labial Liquido Mate Rojo">
+      <h4>Labial Liquido Mate Rojo - Loreal</h4>
+      <p><span class="precio-descuento">S/ 21.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Labial Liquido Mate Rojo - Loreal" data-precio="21.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Loreal" data-precio="21">
+      <img src="labios/PRO6823.jpg" alt="Labial Liquido Mate Nude">
+      <h4>Labial Liquido Mate Nude - Loreal</h4>
+      <p><span class="precio-descuento">S/ 21.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Labial Liquido Mate Nude - Loreal" data-precio="21.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="carrito" class="carrito oculto">
+  <h3>Tu carrito</h3>
+  <ul id="carrito-lista"></ul>
+  <p id="total">Total: $0.00</p>
+  <button onclick="window.location.href='checkout.html'">Finalizar Compra</button>
+  <button id="cerrar-carrito">Cerrar</button>
+</div>
+
+<div id="favoritos" class="carrito oculto">
+  <h3>Favoritos</h3>
+  <ul id="favoritos-lista"></ul>
+  <button id="cerrar-favoritos">Cerrar</button>
+</div>
+
+<footer>
+    <div class="footer-col">
+      <h4>Sobre Beauty Bliss</h4>
+      <a href="Sobre-nosotros.html">Quienes somos</a>
+      <a href="compromiso.html">Nuestro compromiso</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="eliminacion_datos.html">Políticas de cookies</a>
+      <a href="politicas.html">Políticas de privacidad</a>
+    </div>
+    <div class="footer-col">
+      <h4>Soporte</h4>
+      <a href="contacto.html">Ayuda y contacto</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+    <div class="copyright">
+      © 2025 Beauty Bliss. Todos los derechos reservados.
+    </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
 
