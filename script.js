@@ -349,6 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function configurarLogin() {
+        function configurarLogin() {
     const loginForm = document.getElementById("login-form");
     if (loginForm) {
         loginForm.addEventListener("submit", function(e) {
@@ -357,7 +358,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const pinContainer = document.getElementById("pin-container");
-            const pin = document.getElementById("admin-pin").value;
+            
+            // Obtener los valores de los cuatro campos de PIN
+            const pinInputs = document.querySelectorAll(".pin-digit");
+            const pin = Array.from(pinInputs).map(input => input.value).join('');
 
             // Verificar credenciales de administrador
             if (email === "luciamoranaragon@gmail.com" && password === "Camila1311BB") {
@@ -384,7 +388,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 }
-
 
     // Hacer funciones accesibles globalmente
     window.cambiarCantidad = cambiarCantidad;
