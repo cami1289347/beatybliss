@@ -13,10 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const buscador = document.getElementById("buscador");
     const filtros = document.querySelectorAll('.filtros input[type="checkbox"]');
 
-    // Elementos que pueden variar entre páginas
-    const productos = document.querySelectorAll(".producto");
-    const btnAgregarCarritos = document.querySelectorAll(".agregar-carrito, .producto > button");
-
     let carritoItems = [];
     let favoritos = [];
 
@@ -27,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cargarDatos();
         configurarEventosProductos();
         configurarEventListenersGlobales();
+        configurarLogin(); // Llama a la función de configuración de inicio de sesión
     }
 
     function cargarDatos() {
@@ -92,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         guardarCarrito();
         actualizarCarrito();
+        mostrarNotificacion('cart-notification'); // Mostrar notificación de carrito
         if (carrito) carrito.classList.remove("oculto");
     }
 
@@ -121,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             favoritos.push({ nombre, precio });
             btn.classList.add("favorito");
+            mostrarNotificacion('fav-notification'); // Mostrar notificación de favorito
         }
 
         guardarFavoritos();
@@ -229,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
         carritoItems.forEach((item, index) => {
             const li = document.createElement("li");
             li.innerHTML = `
-                ${item.nombre} - $${item.precio.toFixed(2)} 
+                ${item.nombre} - S/ ${item.precio.toFixed(2)} 
                 <button class="cantidad-btn" data-index="${index}" data-change="-1">-</button>
                 ${item.cantidad}
                 <button class="cantidad-btn" data-index="${index}" data-change="1">+</button>
@@ -255,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         const total = carritoItems.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
-        if (totalElemento) totalElemento.textContent = `Total: $${total.toFixed(2)}`;
+        if (totalElemento) totalElemento.textContent = `Total: S/ ${total.toFixed(2)}`;
     }
 
     function actualizarFavoritos() {
@@ -270,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
         favoritos.forEach((item, index) => {
             const li = document.createElement("li");
             li.innerHTML = `
-                ${item.nombre} - $${item.precio.toFixed(2)}
+                ${item.nombre} - S/ ${item.precio.toFixed(2)}
                 <button class="agregar-favorito-carrito" data-index="${index}">🛒</button>
                 <button class="eliminar-favorito-btn" data-index="${index}">✕</button>
             `;
@@ -336,6 +335,54 @@ document.addEventListener('DOMContentLoaded', function() {
         guardarFavoritos();
         actualizarFavoritos();
         marcarFavoritosEnProductos();
+    }
+
+    // Función para mostrar notificaciones
+    function mostrarNotificacion(id) {
+        const notification = document.getElementById(id);
+        if (notification) {
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000); // Desaparece después de 3 segundos
+        }
+    }
+
+    // Función de inicio de sesión
+    function configurarLogin() {
+        const loginForm = document.getElementById("login-form");
+        if (loginForm) {
+            loginForm.addEventListener("submit", function(e) {
+                e.preventDefault(); // Evita el envío del formulario
+
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                const pinContainer = document.getElementById("pin-container");
+                const pin = document.getElementById("admin-pin").value;
+
+                // Verificar credenciales de administrador
+                if (email === "luciamoranaragon@gmail.com" && password === "Camila1311BB") {
+                    if (pinContainer.style.display === "none") {
+                        pinContainer.style.display = "block"; // Muestra el campo del PIN
+                        alert("Por favor, ingrese el PIN de administrador");
+                        return;
+                    }
+
+                    // Verificar el PIN
+                    if (pin === "1234") {
+                        window.location.href = "admin.html"; // Redirige a la página del administrador
+                        return;
+                    } else {
+                        alert("PIN incorrecto");
+                        return;
+                    }
+                }
+
+                // Lógica para el inicio de sesión de usuario regular
+                alert("Inicio de sesión exitoso como usuario regular");
+                window.location.href = "index.html"; // Redirige a la página principal
+            });
+        }
     }
 
     // Hacer funciones accesibles globalmente
