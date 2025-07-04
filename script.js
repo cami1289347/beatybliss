@@ -28,27 +28,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function configurarMenuUsuario() {
-        const userIcon = document.getElementById('user-icon');
-        const dropdown = document.getElementById('user-dropdown');
-        const logoutBtn = document.getElementById('logout-btn');
+    const userIcon = document.getElementById('user-icon');
+    const dropdown = document.getElementById('user-dropdown');
+    const logoutBtn = document.getElementById('logout-btn');
 
-        const currentUser  = JSON.parse(localStorage.getItem('usuarioActual'));
+    const currentUser  = JSON.parse(localStorage.getItem('usuarioActual'));
 
+    userIcon.addEventListener('click', function(e) {
+        e.preventDefault();
         if (currentUser  && currentUser .loggedIn) {
-            userIcon.addEventListener('click', function(e) {
-                e.preventDefault();
-                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-            });
-
-            logoutBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                localStorage.removeItem('usuarioActual');
-                window.location.href = 'index.html'; // Redirigir a la página principal
-            });
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         } else {
-            userIcon.href = 'registro.html'; // Redirigir a registro si no hay sesión
+            window.location.href = 'registro.html'; // Redirigir a registro si no hay sesión
         }
+    });
+
+    if (currentUser  && currentUser .loggedIn) {
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'index.html'; // Redirigir a la página principal
+        });
+    } else {
+        userIcon.href = 'registro.html'; // Redirigir a registro si no hay sesión
     }
+}
+
 
     function cargarDatos() {
         const datosGuardados = localStorage.getItem("carrito");
