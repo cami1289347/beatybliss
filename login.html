@@ -23,6 +23,12 @@
       color: #c2185b;
     }
 
+    .login-container img {
+      width: 80px; /* Ajusta el tamaño según sea necesario */
+      height: auto; /* Mantiene la proporción de la imagen */
+      margin-bottom: 1rem; /* Espacio entre la imagen y el título */
+    }
+
     .login-container input {
       width: 100%;
       padding: 0.75rem;
@@ -76,15 +82,22 @@
       text-decoration: none;
       color: #e91e63;
     }
+    #pin-container {
+      margin: 1rem 0;
+    }
   </style>
 </head>
 <body>
 
   <div class="login-container">
+    <img src="inicio.jpg" alt="Icono de inicio" />
     <h2>Iniciar Sesión</h2>
     <form id="login-form">
-      <input type="email" placeholder="Correo electrónico" required>
-      <input type="password" placeholder="Contraseña" required>
+      <input type="email" id="email" placeholder="Correo electrónico" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <div id="pin-container" style="display:none;">
+        <input type="password" id="admin-pin" placeholder="PIN de administrador">
+      </div>
       <button type="submit">Ingresar</button>
     </form>
 
@@ -99,13 +112,7 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById("login-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Inicio de sesión exitoso (simulado)");
-      window.location.href = "index.html";
-    });
-  </script>
+  <script src="login.js"></script>
 
 </body>
 </html>
