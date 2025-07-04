@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Labios - Beauty Bliss</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuidado de Labios - Beauty Bliss</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Same styles as the Cabello page */
+    /* Include any additional styles here if needed */
     .contenedor-productos {
       display: flex;
       padding: 2rem;
@@ -80,7 +81,7 @@
       font-weight: bold;
     }
 
-    .producto button {
+    .acciones-producto button {
       margin-top: 0.5rem;
       padding: 0.5rem 1rem;
       background-color: #e91e63;
@@ -91,104 +92,8 @@
       transition: background-color 0.3s;
     }
 
-    .producto button:hover {
+    .acciones-producto button:hover {
       background-color: #c2185b;
-    }
-
-    .header-container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .header-top {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: #f8f8f8;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .logo {
-      height: 50px;
-      margin-right: 20px;
-    }
-
-    .search-bar {
-      flex: 1;
-      margin: 0 20px;
-    }
-
-    .search-bar input {
-      width: 100%;
-      padding: 8px;
-      border-radius: 20px;
-      border: 1px solid #ccc;
-    }
-
-    .header-icons {
-      display: flex;
-      gap: 15px;
-    }
-
-    .header-icons a {
-      color: #333;
-      font-size: 1.2rem;
-    }
-
-    .main-nav {
-      display: flex;
-      justify-content: center;
-      padding: 1rem;
-      background-color: #fff;
-      border-bottom: 1px solid #eee;
-    }
-
-    .main-nav a {
-      padding: 0.5rem 1rem;
-      margin: 0 10px;
-      color: #333;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .main-nav a:hover {
-      color: #e91e63;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .nav-links a {
-      text-decoration: none; /* Eliminar subrayado */
-      color: black; /* Color del texto */
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-
-    .nav-links a:hover {
-      background-color: #e91e63;
-      color: white;
-    }
-
-    .carrito {
-      position: fixed;
-      right: 20px;
-      top: 80px;
-      width: 300px;
-      background: white;
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 15px;
-      z-index: 999;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    
-    .carrito.oculto {
-      display: none;
     }
   </style>
 </head>
@@ -211,7 +116,7 @@
       <a href="index.html">Inicio</a>
       <a href="cuidado de la piel.html">Cuidado Facial</a>
       <a href="cabello.html">Cabello</a>
-      <a href="Labios.html" class="active">Labios</a>
+      <a href="labios.html" class="active">Labios</a>
       <a href="uñas.html">Uñas</a>
     </div>
   </nav>
@@ -323,12 +228,6 @@
   <button id="cerrar-carrito">Cerrar</button>
 </div>
 
-<div id="favoritos" class="carrito oculto">
-  <h3>Favoritos</h3>
-  <ul id="favoritos-lista"></ul>
-  <button id="cerrar-favoritos">Cerrar</button>
-</div>
-
 <footer>
     <div class="footer-col">
       <h4>Sobre Beauty Bliss</h4>
@@ -350,7 +249,5 @@
       © 2025 Beauty Bliss. Todos los derechos reservados.
     </div>
 </footer>
-<script src="script.js"></script>
 </body>
 </html>
-
