@@ -105,16 +105,6 @@ main {
       margin: 0 auto;
     }
 
-    .producto {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
-
     .producto:hover {
       transform: scale(1.05);
     }
@@ -277,19 +267,6 @@ main {
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-    }
-    
-    .header-top {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .logo {
-      height: 50px;
-      margin-right: 20px;
     }
 
     .search-bar {
