@@ -82,6 +82,7 @@
       text-decoration: none;
       color: #e91e63;
     }
+
     #pin-container {
       margin: 1rem 0;
     }
@@ -95,12 +96,12 @@
     <form id="login-form">
       <input type="email" id="email" placeholder="Correo electrónico" required>
       <input type="password" id="password" placeholder="Contraseña" required>
-    <div id="pin-container" style="display:none;" class="pin-input-group">
-    <input type="number" maxlength="1" class="pin-digit" data-index="1" oninput="moveToNextPin(this)">
-    <input type="number" maxlength="1" class="pin-digit" data-index="2" oninput="moveToNextPin(this)">
-    <input type="number" maxlength="1" class="pin-digit" data-index="3" oninput="moveToNextPin(this)">
-    <input type="number" maxlength="1" class="pin-digit" data-index="4" oninput="moveToNextPin(this)">
-    </div>
+      <div id="pin-container" style="display:none;" class="pin-input-group">
+        <input type="number" maxlength="1" class="pin-digit" data-index="1" oninput="moveToNextPin(this)">
+        <input type="number" maxlength="1" class="pin-digit" data-index="2" oninput="moveToNextPin(this)">
+        <input type="number" maxlength="1" class="pin-digit" data-index="3" oninput="moveToNextPin(this)">
+        <input type="number" maxlength="1" class="pin-digit" data-index="4" oninput="moveToNextPin(this)">
+      </div>
       <button type="submit">Ingresar</button>
     </form>
 
@@ -128,7 +129,7 @@
       // Verificar credenciales
       const usuarioValido = usuarios.find(u => u.correo === email && u.contrasena === password);
       
-      if(usuarioValido) {
+      if (usuarioValido) {
         // Guardar sesión
         localStorage.setItem('usuarioActual', JSON.stringify({
           correo: email,
@@ -138,12 +139,39 @@
         
         // Redirigir a index
         window.location.href = 'index.html';
+      } else if (email === "luciamoranaragon@gmail.com" && password === "Camila1311BB") {
+        // Si es el administrador, mostrar el contenedor del PIN
+        document.getElementById('pin-container').style.display = 'block';
       } else {
         alert('Credenciales incorrectas');
       }
+    });
+
+    // Función para manejar el PIN
+    function moveToNextPin(currentInput) {
+      const nextInput = document.querySelector(`.pin-digit[data-index="${parseInt(currentInput.dataset.index) + 1}"]`);
+      if (nextInput && currentInput.value.length >= 1) {
+        nextInput.focus();
+      }
+    }
+
+    // Verificar el PIN al completar
+    document.querySelectorAll('.pin-digit').forEach(input => {
+      input.addEventListener('input', function() {
+        if (this.value.length >= 1) {
+          const pin = Array.from(document.querySelectorAll('.pin-digit')).map(input => input.value).join('');
+          if (pin.length === 4) {
+            if (pin === "1234") {
+              // Redirigir a la vista de administrador
+              window.location.href = 'admin.html';
+            } else {
+              alert('PIN incorrecto');
+            }
+          }
+        }
+      });
     });
   </script>
 
 </body>
 </html>
-
