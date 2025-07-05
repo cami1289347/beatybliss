@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = 'index.html';
       });
     } else {
-      userIcon.href = 'registro.html';
+      userIcon.href = 'login.html';
     }
   }
 
