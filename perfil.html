@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Perfil de Usuario</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
+    
+<style>
     .perfil-wrapper {
       display: flex;
       max-width: 1000px;
@@ -25,15 +26,16 @@
     }
 
     .perfil-izquierda img {
-      width: 120px;
-      height: 120px;
+      width: 90%;
+      height: auto;
       object-fit: cover;
-      border-radius: 50%;
+      border-radius: 8px;
       border: 3px solid #ccc;
       margin-bottom: 1rem;
     }
 
-    .perfil-izquierda button {
+    .perfil-izquierda button,
+    .perfil-izquierda label[for="imgInput"] {
       display: block;
       width: 100%;
       margin: 0.5rem 0;
@@ -44,10 +46,16 @@
       color: white;
       cursor: pointer;
       transition: background 0.3s;
+      text-align: center;
     }
 
-    .perfil-izquierda button:hover {
+    .perfil-izquierda button:hover,
+    .perfil-izquierda label[for="imgInput"]:hover {
       background-color: #c2185b;
+    }
+
+    .perfil-izquierda input[type="file"] {
+      display: none;
     }
 
     .perfil-derecha {
@@ -63,11 +71,16 @@
     .perfil-derecha form {
       display: grid;
       gap: 1rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-grupo {
+      display: flex;
+      flex-direction: column;
     }
 
     .perfil-derecha label {
       font-weight: bold;
-      display: block;
       margin-bottom: 0.3rem;
     }
 
@@ -79,8 +92,12 @@
       width: 100%;
     }
 
+    .form-full {
+      grid-column: span 2;
+    }
+
     .boton-guardar {
-      margin-top: 1.5rem;
+      grid-column: span 2;
       background-color: #e91e63;
       color: white;
       padding: 10px;
@@ -105,7 +122,6 @@
 </head>
 <body>
 <header class="cabecera">
-  <!-- Parte superior: logo, buscador, íconos -->
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
     <input type="text" id="buscador" placeholder="Buscar productos...">
@@ -124,7 +140,6 @@
     </div>
   </div>
 
-  <!-- Barra de navegación debajo -->
   <nav class="main-nav">
     <div class="nav-links">
       <a href="index.html">Inicio</a>
@@ -132,81 +147,83 @@
       <a href="maquillaje.html">Rostro</a>
       <a href="cabello.html">Cabello</a>
       <a href="labios.html">Labios</a>
-      <a href="uñas.html" class="active">Uñas</a>
+      <a href="uñas.html" >Uñas</a>
     </div>
   </nav>
 </header>
-  <section class="perfil-wrapper">
-    <div class="perfil-izquierda">
-      <img src="logo.png" alt="Imagen de Perfil" id="preview" />
-      <input type="file" accept="image/*" id="imgInput" />
-      <button onclick="habilitarEdicion()">Ajustar perfil</button>
-      <button onclick="eliminarCuenta()">Eliminar cuenta</button>
-    </div>
 
-    <div class="perfil-derecha">
-      <h2>Información de perfil</h2>
-      <form id="formPerfil">
-        <div>
-          <label for="nombre">Nombre completo:</label>
-          <input type="text" id="nombre" disabled />
-        </div>
-        <div>
-          <label for="correo">Correo:</label>
-          <input type="email" id="correo" disabled />
-        </div>
-        <div>
-          <label for="fechaNacimiento">Fecha de nacimiento:</label>
-          <input type="text" id="fechaNacimiento" disabled />
-        </div>
-        <div>
-          <label for="telefono">Teléfono:</label>
-          <input type="text" id="telefono" disabled />
-        </div>
-        <div>
-          <label for="direccion">Dirección:</label>
-          <input type="text" id="direccion" disabled />
-        </div>
-        <div>
-          <label for="codigoPostal">Código Postal:</label>
-          <input type="text" id="codigoPostal" disabled />
-        </div>
-        <div>
-          <label for="pais">País:</label>
-          <select id="pais" disabled>
-            <option value="Perú">Perú</option>
-            <option value="Argentina">Argentina</option>
-            <option value="México">México</option>
-            <option value="Colombia">Colombia</option>
-          </select>
-        </div>
-        <div>
-          <label for="distrito">Distrito (Lima - Perú):</label>
-          <select id="distrito" disabled>
-            <option value="">Seleccionar distrito</option>
-            <option value="Miraflores">Miraflores</option>
-            <option value="San Isidro">San Isidro</option>
-            <option value="Surco">Santiago de Surco</option>
-            <option value="San Borja">San Borja</option>
-            <option value="La Molina">La Molina</option>
-            <option value="Lince">Lince</option>
-            <option value="Jesús María">Jesús María</option>
-          </select>
-        </div>
-        <div>
-          <label for="sexo">Sexo:</label>
-          <select id="sexo" disabled>
-            <option value="">Seleccionar sexo</option>
-            <option value="Femenino">Femenino</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-        <button type="submit" class="boton-guardar">Guardar cambios</button>
-      </form>
-    </div>
-  </section>
+<section class="perfil-wrapper">
+  <div class="perfil-izquierda">
+    <img src="logo.png" alt="Imagen de Perfil" id="preview" />
+    <label for="imgInput">Cambiar foto de perfil</label>
+    <input type="file" accept="image/*" id="imgInput" />
+    <button onclick="habilitarEdicion()">Ajustar perfil</button>
+    <button onclick="eliminarCuenta()">Eliminar cuenta</button>
+  </div>
 
+  <div class="perfil-derecha">
+    <h2>Información de perfil</h2>
+    <form id="formPerfil">
+      <div class="form-grupo">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" disabled>
+          <option value="">Seleccionar sexo</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-grupo">
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="fechaNacimiento">Fecha de nacimiento:</label>
+        <input type="text" id="fechaNacimiento" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="pais">País:</label>
+        <select id="pais" disabled>
+          <option value="Perú">Perú</option>
+          <option value="Argentina">Argentina</option>
+          <option value="México">México</option>
+          <option value="Colombia">Colombia</option>
+        </select>
+      </div>
+      <div class="form-full">
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="distrito">Distrito (Lima - Perú):</label>
+        <select id="distrito" disabled>
+          <option value="">Seleccionar distrito</option>
+          <option value="Miraflores">Miraflores</option>
+          <option value="San Isidro">San Isidro</option>
+          <option value="Surco">Santiago de Surco</option>
+          <option value="San Borja">San Borja</option>
+          <option value="La Molina">La Molina</option>
+          <option value="Lince">Lince</option>
+          <option value="Jesús María">Jesús María</option>
+        </select>
+      </div>
+      <div class="form-grupo">
+        <label for="codigoPostal">Código Postal:</label>
+        <input type="text" id="codigoPostal" disabled />
+      </div>
+      <button type="submit" class="boton-guardar">Guardar cambios</button>
+    </form>
+  </div>
+</section>
+      
   <footer>
     <div class="footer-col">
       <h4>Sobre Beauty Bliss</h4>
