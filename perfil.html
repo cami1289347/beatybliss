@@ -1,135 +1,217 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil de Usuario</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Perfil - Beauty Bliss</title>
+  <link rel="stylesheet" href="style.css"/>
   <style>
     .perfil-container {
-      max-width: 800px;
-      margin: auto;
+      max-width: 900px;
+      margin: 2rem auto;
       padding: 2rem;
-      background: #fff;
+      background-color: #fff;
+      border-radius: 16px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .perfil-section {
+      margin-bottom: 2rem;
+      border: 1px solid #ddd;
       border-radius: 10px;
+      padding: 1.5rem;
     }
 
-    .perfil-container h2 {
+    .perfil-section h3 {
+      margin-bottom: 1rem;
+      color: #e91e63;
+    }
+
+    .perfil-foto {
       text-align: center;
-      margin-bottom: 2rem;
     }
 
-    .imagen-perfil {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      margin-bottom: 2rem;
-    }
-
-    .imagen-perfil img {
+    .perfil-foto img {
       width: 120px;
       height: 120px;
       object-fit: cover;
       border-radius: 50%;
       border: 3px solid #ccc;
+      margin-bottom: 1rem;
     }
 
-    .imagen-perfil input {
+    .perfil-section label {
+      font-weight: bold;
+      display: block;
       margin-top: 1rem;
     }
 
-    .datos-perfil form {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .datos-perfil label {
-      font-weight: bold;
-    }
-
-    .datos-perfil input,
-    .datos-perfil select {
+    .perfil-section input,
+    .perfil-section select {
+      width: 100%;
       padding: 0.6rem;
       border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 100%;
+      border-radius: 6px;
+      margin-top: 0.3rem;
     }
 
-    footer, header {
-      text-align: center;
-      padding: 1rem;
-      background: #eee;
-      margin-top: 2rem;
+    .botones-perfil {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .boton-guardar {
-      background-color: #e91e63;
-      color: #fff;
-      padding: 0.7rem 1.5rem;
+    .botones-perfil button {
+      padding: 0.8rem 1.5rem;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
+      color: white;
       cursor: pointer;
-      margin-top: 1rem;
+      font-size: 1rem;
     }
 
-    .boton-guardar:hover {
+    .ajustar-btn {
+      background-color: #e91e63;
+    }
+
+    .ajustar-btn:hover {
       background-color: #c2185b;
+    }
+
+    .eliminar-btn {
+      background-color: #9e9e9e;
+    }
+
+    .eliminar-btn:hover {
+      background-color: #757575;
+    }
+
+    .guardar-btn {
+      background-color: #4caf50;
+    }
+
+    .guardar-btn:hover {
+      background-color: #388e3c;
     }
   </style>
 </head>
 <body>
 
-  
-  <header>
-    <h1>Beauty Bliss</h1>
-    <p>Contáctanos: contacto@beautybliss.com | +51 987 654 321</p>
-  </header>
+<header class="cabecera">
+  <!-- Parte superior: logo, buscador, íconos -->
+  <div class="header-top">
+    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
+    <div class="icons">
+      <div class="user-menu-wrapper">
+        <a href="login.html" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
+        <div class="user-dropdown" id="user-dropdown" style="display: none;">
+          <a href="perfil.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
+          <a href="compras.html"><i class="fas fa-shopping-bag"></i> Mis Compras</a>
+          <a href="index.html" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
+      </div>
+      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+      <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+
+    </div>
+  </div>
+
+  <!-- Barra de navegación debajo -->
+  <nav class="main-nav">
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="cuidado de la piel.html" class="active">Cuidado de la Piel</a>
+      <a href="maquillaje.html">Rostro</a>
+      <a href="cabello.html">Cabello</a>
+      <a href="labios.html">Labios</a>
+      <a href="uñas.html">Uñas</a>
+    </div>
+  </nav>
+</header>
 
   <section class="perfil-container">
-    <h2>Mi Perfil</h2>
 
-    <div class="imagen-perfil">
-      <img src="logo.png" alt="Imagen de Perfil" id="preview">
-      <input type="file" accept="image/*" onchange="cambiarImagen(event)">
+    <!-- Foto y método de pago -->
+    <div class="perfil-section perfil-foto">
+      <h3>Foto de Perfil</h3>
+      <img src="logo.png" alt="Imagen de Perfil" id="preview" />
+      <input type="file" accept="image/*" onchange="cambiarImagen(event)" />
     </div>
 
-    <div class="datos-perfil">
-      <form>
-        <div>
-          <label for="nombre">Nombre completo:</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Ej. Juana Pérez">
-        </div>
-
-        <div>
-          <label for="direccion">Dirección:</label>
-          <input type="text" id="direccion" name="direccion" placeholder="Av. Siempre Viva 123">
-        </div>
-
-        <div>
-          <label for="pais">País:</label>
-          <select id="pais" name="pais">
-            <option value="peru">Perú</option>
-            <option value="argentina">Argentina</option>
-            <option value="mexico">México</option>
-            <option value="colombia">Colombia</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="codigo">Código Postal:</label>
-          <input type="text" id="codigo" name="codigo" placeholder="Ej. 15001">
-        </div>
-
-        <button type="submit" class="boton-guardar">Guardar Cambios</button>
-      </form>
+    <div class="perfil-section">
+      <h3>Método de Pago</h3>
+      <input type="text" id="metodoPago" placeholder="Ej. Tarjeta VISA, Yape..." disabled />
     </div>
+
+    <!-- Datos personales -->
+    <div class="perfil-section">
+      <h3>Datos Personales</h3>
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" disabled />
+
+      <label for="nacimiento">Fecha de Nacimiento:</label>
+      <input type="date" id="nacimiento" disabled />
+
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" disabled>
+        <option value="">Selecciona</option>
+        <option value="femenino">Femenino</option>
+        <option value="masculino">Masculino</option>
+        <option value="otro">Otro</option>
+      </select>
+
+      <label for="pais">País:</label>
+      <select id="pais" disabled>
+        <option value="peru">Perú</option>
+        <option value="argentina">Argentina</option>
+        <option value="mexico">México</option>
+        <option value="colombia">Colombia</option>
+      </select>
+    </div>
+
+    <!-- Dirección -->
+    <div class="perfil-section">
+      <h3>Dirección</h3>
+      <label for="direccion">Dirección exacta:</label>
+      <input type="text" id="direccion" disabled />
+
+      <label for="codigo">Código Postal:</label>
+      <input type="text" id="codigo" disabled />
+    </div>
+
+    <!-- Botones -->
+    <div class="botones-perfil">
+      <button class="ajustar-btn" onclick="habilitarCampos()">Ajustar Perfil</button>
+      <button class="guardar-btn" onclick="guardarDatos()">Guardar Cambios</button>
+      <button class="eliminar-btn" onclick="eliminarCuenta()">Eliminar Cuenta</button>
+    </div>
+
   </section>
 
-  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Beauty Bliss. Todos los derechos reservados.</p>
+    <div class="footer-col">
+      <h4>Sobre Beauty Bliss</h4>
+      <a href="Sobre-nosotros.html">Quienes somos</a>
+      <a href="compromiso.html">Nuestro compromiso</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="eliminacion_datos.html">Políticas de cookies</a>
+      <a href="politicas.html">Políticas de privacidad</a>
+    </div>
+    <div class="footer-col">
+      <h4>Soporte</h4>
+      <a href="contacto.html">Ayuda y contacto</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+    <div class="copyright">
+      © 2025 Beauty Bliss. Todos los derechos reservados.
+    </div>
   </footer>
 
   <script>
@@ -137,6 +219,41 @@
       const img = document.getElementById("preview");
       img.src = URL.createObjectURL(event.target.files[0]);
     }
+
+    function habilitarCampos() {
+      const campos = document.querySelectorAll("input, select");
+      campos.forEach(campo => {
+        if (campo.type !== "file") campo.disabled = false;
+      });
+    }
+
+    function guardarDatos() {
+      localStorage.setItem("nombre", document.getElementById("nombre").value);
+      localStorage.setItem("nacimiento", document.getElementById("nacimiento").value);
+      localStorage.setItem("sexo", document.getElementById("sexo").value);
+      localStorage.setItem("pais", document.getElementById("pais").value);
+      localStorage.setItem("direccion", document.getElementById("direccion").value);
+      localStorage.setItem("codigo", document.getElementById("codigo").value);
+      localStorage.setItem("metodoPago", document.getElementById("metodoPago").value);
+      alert("¡Datos guardados correctamente!");
+    }
+
+    function eliminarCuenta() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
+
+    // Cargar datos del localStorage
+    window.onload = () => {
+      document.getElementById("nombre").value = localStorage.getItem("nombre") || "";
+      document.getElementById("nacimiento").value = localStorage.getItem("nacimiento") || "";
+      document.getElementById("sexo").value = localStorage.getItem("sexo") || "";
+      document.getElementById("pais").value = localStorage.getItem("pais") || "";
+      document.getElementById("direccion").value = localStorage.getItem("direccion") || "";
+      document.getElementById("codigo").value = localStorage.getItem("codigo") || "";
+      document.getElementById("metodoPago").value = localStorage.getItem("metodoPago") || "";
+    };
   </script>
+
 </body>
 </html>
