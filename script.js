@@ -508,6 +508,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+function guardarUsuarioActualizado() {
+  const index = usuarios.findIndex(u => u.correo === usuario.correo);
+  if (index !== -1) usuarios[index] = usuario;
+  else usuarios.push(usuario);
+
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+}
+
+
   inputs.forEach(input => {
     input.addEventListener("input", verificarCambios);
   });
