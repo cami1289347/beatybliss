@@ -76,14 +76,17 @@
     font-size: 18px;
     cursor: pointer;
   }
-  .buscador-header {
-  flex: 1;
-  margin: 0 2rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  font-size: 1rem;
-}
+  .search-bar {
+      flex: 1;
+      margin: 0 20px;
+    }
+
+   .search-bar input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
 
   .main-nav {
     display: flex;
@@ -134,8 +137,8 @@
   }
 
   .perfil-izquierda img {
-    width: 180px;
-    height: 180px;
+    width: 266.34px;
+    height: 270px;
     object-fit: cover;
     border-radius: 10px;
     border: 3px solid #ccc;
@@ -373,6 +376,9 @@
         <select id="distrito" disabled>
           <option value="">Seleccionar distrito</option>
           <option value="Miraflores">Miraflores</option>
+          
+          <option value="Rimac">Rimac</option>
+          <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
           <option value="San Isidro">San Isidro</option>
           <option value="Surco">Santiago de Surco</option>
           <option value="San Borja">San Borja</option>
