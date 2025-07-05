@@ -3,35 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mi Perfil - Beauty Bliss</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    .perfil-container {
-      max-width: 900px;
+    .perfil-wrapper {
+      display: flex;
+      max-width: 1000px;
       margin: 2rem auto;
-      padding: 2rem;
-      background-color: #fff;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       border-radius: 16px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    .perfil-section {
-      margin-bottom: 2rem;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 1.5rem;
-    }
-
-    .perfil-section h3 {
-      margin-bottom: 1rem;
-      color: #e91e63;
-    }
-
-    .perfil-foto {
+    .perfil-izquierda {
+      width: 35%;
+      background: #fdf0f4;
+      padding: 2rem;
       text-align: center;
     }
 
-    .perfil-foto img {
+    .perfil-izquierda img {
       width: 120px;
       height: 120px;
       object-fit: cover;
@@ -40,70 +33,82 @@
       margin-bottom: 1rem;
     }
 
-    .perfil-section label {
-      font-weight: bold;
+    .perfil-izquierda button {
       display: block;
-      margin-top: 1rem;
-    }
-
-    .perfil-section input,
-    .perfil-section select {
       width: 100%;
-      padding: 0.6rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-top: 0.3rem;
-    }
-
-    .botones-perfil {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .botones-perfil button {
-      padding: 0.8rem 1.5rem;
+      margin: 0.5rem 0;
+      padding: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      background-color: #e91e63;
       color: white;
       cursor: pointer;
-      font-size: 1rem;
+      transition: background 0.3s;
     }
 
-    .ajustar-btn {
-      background-color: #e91e63;
-    }
-
-    .ajustar-btn:hover {
+    .perfil-izquierda button:hover {
       background-color: #c2185b;
     }
 
-    .eliminar-btn {
-      background-color: #9e9e9e;
+    .perfil-derecha {
+      width: 65%;
+      padding: 2rem;
     }
 
-    .eliminar-btn:hover {
-      background-color: #757575;
+    .perfil-derecha h2 {
+      margin-bottom: 1.5rem;
+      color: #e91e63;
     }
 
-    .guardar-btn {
-      background-color: #4caf50;
+    .perfil-derecha form {
+      display: grid;
+      gap: 1rem;
     }
 
-    .guardar-btn:hover {
-      background-color: #388e3c;
+    .perfil-derecha label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .perfil-derecha input,
+    .perfil-derecha select {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    .boton-guardar {
+      margin-top: 1.5rem;
+      background-color: #e91e63;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .boton-guardar:hover {
+      background-color: #c2185b;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f5f5f5;
     }
   </style>
 </head>
 <body>
-
 <header class="cabecera">
   <!-- Parte superior: logo, buscador, íconos -->
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
-    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
+    <input type="text" id="buscador" placeholder="Buscar productos...">
     <div class="icons">
       <div class="user-menu-wrapper">
         <a href="login.html" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
@@ -116,7 +121,6 @@
       <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
       <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
       <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
-
     </div>
   </div>
 
@@ -124,72 +128,83 @@
   <nav class="main-nav">
     <div class="nav-links">
       <a href="index.html">Inicio</a>
-      <a href="cuidado de la piel.html" class="active">Cuidado de la Piel</a>
+      <a href="cuidado de la piel.html">Cuidado de la Piel</a>
       <a href="maquillaje.html">Rostro</a>
       <a href="cabello.html">Cabello</a>
       <a href="labios.html">Labios</a>
-      <a href="uñas.html">Uñas</a>
+      <a href="uñas.html" class="active">Uñas</a>
     </div>
   </nav>
 </header>
-
-  <section class="perfil-container">
-
-    <!-- Foto y método de pago -->
-    <div class="perfil-section perfil-foto">
-      <h3>Foto de Perfil</h3>
+  <section class="perfil-wrapper">
+    <div class="perfil-izquierda">
       <img src="logo.png" alt="Imagen de Perfil" id="preview" />
-      <input type="file" accept="image/*" onchange="cambiarImagen(event)" />
+      <input type="file" accept="image/*" id="imgInput" />
+      <button onclick="habilitarEdicion()">Ajustar perfil</button>
+      <button onclick="eliminarCuenta()">Eliminar cuenta</button>
     </div>
 
-    <div class="perfil-section">
-      <h3>Método de Pago</h3>
-      <input type="text" id="metodoPago" placeholder="Ej. Tarjeta VISA, Yape..." disabled />
+    <div class="perfil-derecha">
+      <h2>Información de perfil</h2>
+      <form id="formPerfil">
+        <div>
+          <label for="nombre">Nombre completo:</label>
+          <input type="text" id="nombre" disabled />
+        </div>
+        <div>
+          <label for="correo">Correo:</label>
+          <input type="email" id="correo" disabled />
+        </div>
+        <div>
+          <label for="fechaNacimiento">Fecha de nacimiento:</label>
+          <input type="text" id="fechaNacimiento" disabled />
+        </div>
+        <div>
+          <label for="telefono">Teléfono:</label>
+          <input type="text" id="telefono" disabled />
+        </div>
+        <div>
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" disabled />
+        </div>
+        <div>
+          <label for="codigoPostal">Código Postal:</label>
+          <input type="text" id="codigoPostal" disabled />
+        </div>
+        <div>
+          <label for="pais">País:</label>
+          <select id="pais" disabled>
+            <option value="Perú">Perú</option>
+            <option value="Argentina">Argentina</option>
+            <option value="México">México</option>
+            <option value="Colombia">Colombia</option>
+          </select>
+        </div>
+        <div>
+          <label for="distrito">Distrito (Lima - Perú):</label>
+          <select id="distrito" disabled>
+            <option value="">Seleccionar distrito</option>
+            <option value="Miraflores">Miraflores</option>
+            <option value="San Isidro">San Isidro</option>
+            <option value="Surco">Santiago de Surco</option>
+            <option value="San Borja">San Borja</option>
+            <option value="La Molina">La Molina</option>
+            <option value="Lince">Lince</option>
+            <option value="Jesús María">Jesús María</option>
+          </select>
+        </div>
+        <div>
+          <label for="sexo">Sexo:</label>
+          <select id="sexo" disabled>
+            <option value="">Seleccionar sexo</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <button type="submit" class="boton-guardar">Guardar cambios</button>
+      </form>
     </div>
-
-    <!-- Datos personales -->
-    <div class="perfil-section">
-      <h3>Datos Personales</h3>
-      <label for="nombre">Nombre completo:</label>
-      <input type="text" id="nombre" disabled />
-
-      <label for="nacimiento">Fecha de Nacimiento:</label>
-      <input type="date" id="nacimiento" disabled />
-
-      <label for="sexo">Sexo:</label>
-      <select id="sexo" disabled>
-        <option value="">Selecciona</option>
-        <option value="femenino">Femenino</option>
-        <option value="masculino">Masculino</option>
-        <option value="otro">Otro</option>
-      </select>
-
-      <label for="pais">País:</label>
-      <select id="pais" disabled>
-        <option value="peru">Perú</option>
-        <option value="argentina">Argentina</option>
-        <option value="mexico">México</option>
-        <option value="colombia">Colombia</option>
-      </select>
-    </div>
-
-    <!-- Dirección -->
-    <div class="perfil-section">
-      <h3>Dirección</h3>
-      <label for="direccion">Dirección exacta:</label>
-      <input type="text" id="direccion" disabled />
-
-      <label for="codigo">Código Postal:</label>
-      <input type="text" id="codigo" disabled />
-    </div>
-
-    <!-- Botones -->
-    <div class="botones-perfil">
-      <button class="ajustar-btn" onclick="habilitarCampos()">Ajustar Perfil</button>
-      <button class="guardar-btn" onclick="guardarDatos()">Guardar Cambios</button>
-      <button class="eliminar-btn" onclick="eliminarCuenta()">Eliminar Cuenta</button>
-    </div>
-
   </section>
 
   <footer>
@@ -212,48 +227,76 @@
     <div class="copyright">
       © 2025 Beauty Bliss. Todos los derechos reservados.
     </div>
-  </footer>
+</footer>
+
 
   <script>
-    function cambiarImagen(event) {
-      const img = document.getElementById("preview");
-      img.src = URL.createObjectURL(event.target.files[0]);
+    const form = document.getElementById("formPerfil");
+    const inputs = form.querySelectorAll("input, select");
+
+    const usuario = JSON.parse(localStorage.getItem("usuarioActual")) || {};
+
+    // Cargar imagen si existe
+    if (usuario.fotoPerfil) {
+      document.getElementById("preview").src = usuario.fotoPerfil;
     }
 
-    function habilitarCampos() {
-      const campos = document.querySelectorAll("input, select");
-      campos.forEach(campo => {
-        if (campo.type !== "file") campo.disabled = false;
-      });
-    }
+    document.getElementById("nombre").value = usuario.nombre || "";
+    document.getElementById("correo").value = usuario.correo || "";
+    document.getElementById("fechaNacimiento").value = usuario.fechaNacimiento || "";
+    document.getElementById("telefono").value = usuario.telefono || "";
+    document.getElementById("direccion").value = usuario.direccion || "";
+    document.getElementById("codigoPostal").value = usuario.codigoPostal || "";
+    document.getElementById("pais").value = usuario.pais || "Perú";
+    document.getElementById("distrito").value = usuario.distrito || "";
+    document.getElementById("sexo").value = usuario.sexo || "";
 
-    function guardarDatos() {
-      localStorage.setItem("nombre", document.getElementById("nombre").value);
-      localStorage.setItem("nacimiento", document.getElementById("nacimiento").value);
-      localStorage.setItem("sexo", document.getElementById("sexo").value);
-      localStorage.setItem("pais", document.getElementById("pais").value);
-      localStorage.setItem("direccion", document.getElementById("direccion").value);
-      localStorage.setItem("codigo", document.getElementById("codigo").value);
-      localStorage.setItem("metodoPago", document.getElementById("metodoPago").value);
-      alert("¡Datos guardados correctamente!");
+    document.getElementById("imgInput").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          document.getElementById("preview").src = reader.result;
+          usuario.fotoPerfil = reader.result;
+          localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function habilitarEdicion() {
+      inputs.forEach(el => el.disabled = false);
     }
 
     function eliminarCuenta() {
-      localStorage.clear();
-      window.location.href = "index.html";
+      if (confirm("¿Seguro que deseas eliminar tu cuenta?")) {
+        localStorage.removeItem("usuarioActual");
+        alert("Cuenta eliminada");
+        window.location.href = "index.html";
+      }
     }
 
-    // Cargar datos del localStorage
-    window.onload = () => {
-      document.getElementById("nombre").value = localStorage.getItem("nombre") || "";
-      document.getElementById("nacimiento").value = localStorage.getItem("nacimiento") || "";
-      document.getElementById("sexo").value = localStorage.getItem("sexo") || "";
-      document.getElementById("pais").value = localStorage.getItem("pais") || "";
-      document.getElementById("direccion").value = localStorage.getItem("direccion") || "";
-      document.getElementById("codigo").value = localStorage.getItem("codigo") || "";
-      document.getElementById("metodoPago").value = localStorage.getItem("metodoPago") || "";
-    };
-  </script>
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
 
+      const actualizado = {
+        ...usuario,
+        nombre: document.getElementById("nombre").value,
+        correo: document.getElementById("correo").value,
+        fechaNacimiento: document.getElementById("fechaNacimiento").value,
+        telefono: document.getElementById("telefono").value,
+        direccion: document.getElementById("direccion").value,
+        codigoPostal: document.getElementById("codigoPostal").value,
+        pais: document.getElementById("pais").value,
+        distrito: document.getElementById("distrito").value,
+        sexo: document.getElementById("sexo").value,
+        loggedIn: true
+      };
+
+      localStorage.setItem("usuarioActual", JSON.stringify(actualizado));
+      mostrarToast("✅ Cambios guardados correctamente.");
+      inputs.forEach(el => el.disabled = true);
+    });
+  </script>
 </body>
 </html>
