@@ -1,1 +1,142 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .perfil-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
 
+    .perfil-container h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .imagen-perfil {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 2rem;
+    }
+
+    .imagen-perfil img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #ccc;
+    }
+
+    .imagen-perfil input {
+      margin-top: 1rem;
+    }
+
+    .datos-perfil form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .datos-perfil label {
+      font-weight: bold;
+    }
+
+    .datos-perfil input,
+    .datos-perfil select {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    footer, header {
+      text-align: center;
+      padding: 1rem;
+      background: #eee;
+      margin-top: 2rem;
+    }
+
+    .boton-guardar {
+      background-color: #e91e63;
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .boton-guardar:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <header>
+    <h1>Beauty Bliss</h1>
+    <p>Contáctanos: contacto@beautybliss.com | +51 987 654 321</p>
+  </header>
+
+  <section class="perfil-container">
+    <h2>Mi Perfil</h2>
+
+    <div class="imagen-perfil">
+      <img src="logo.png" alt="Imagen de Perfil" id="preview">
+      <input type="file" accept="image/*" onchange="cambiarImagen(event)">
+    </div>
+
+    <div class="datos-perfil">
+      <form>
+        <div>
+          <label for="nombre">Nombre completo:</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej. Juana Pérez">
+        </div>
+
+        <div>
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" name="direccion" placeholder="Av. Siempre Viva 123">
+        </div>
+
+        <div>
+          <label for="pais">País:</label>
+          <select id="pais" name="pais">
+            <option value="peru">Perú</option>
+            <option value="argentina">Argentina</option>
+            <option value="mexico">México</option>
+            <option value="colombia">Colombia</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="codigo">Código Postal:</label>
+          <input type="text" id="codigo" name="codigo" placeholder="Ej. 15001">
+        </div>
+
+        <button type="submit" class="boton-guardar">Guardar Cambios</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Beauty Bliss. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function cambiarImagen(event) {
+      const img = document.getElementById("preview");
+      img.src = URL.createObjectURL(event.target.files[0]);
+    }
+  </script>
+</body>
+</html>
