@@ -44,6 +44,53 @@
   .user-menu-wrapper {
   position: relative;
 }
+    .carrito {
+      position: fixed;
+      right: 20px;
+      top: 80px;
+      width: 300px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 15px;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .carrito.oculto {
+      display: none;
+    }
+  #carrito,
+#favoritos {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  width: 300px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 15px;
+  z-index: 999;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#carrito.oculto,
+#favoritos.oculto {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+#carrito-lista,
+#favoritos-lista {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 10px 0;
+  padding-right: 5px;
+}
 
 .user-dropdown {
   position: absolute;
@@ -57,6 +104,41 @@
   display: none;
   min-width: 150px;
 }
+#carrito-lista li,
+#favoritos-lista li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cantidad-btn, .eliminar-btn {
+  background: #f0f0f0;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cantidad-btn:hover {
+  background: #e0e0e0;
+}
+
+.eliminar-btn {
+  background: #ffebee;
+  color: #e91e63;
+}
+
+.eliminar-btn:hover {
+  background: #ffcdd2;
+}
+
+.oculto {
+  display: none;
+}
 
 .user-dropdown a {
   display: block;
@@ -66,6 +148,7 @@
   transition: background 0.2s;
 }
 
+  
 .user-dropdown a:hover {
   background: #f0f0f0;
 }
@@ -87,6 +170,15 @@
       border-radius: 20px;
       border: 1px solid #ccc;
     }
+  .buscador-header {
+  flex: 1;
+  margin: 0 2rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
 
   .main-nav {
     display: flex;
@@ -453,16 +545,6 @@
         reader.readAsDataURL(file);
       }
     });
-    
-  function mostrarToast(mensaje) {
-  const toast = document.getElementById("toast");
-  toast.textContent = mensaje;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3000); // 3 segundos visible
-}
 
 
     function habilitarEdicion() {
@@ -500,5 +582,6 @@
     });
   </script>
   <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
 </body>
 </html>
