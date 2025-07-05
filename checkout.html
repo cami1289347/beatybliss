@@ -117,21 +117,16 @@
 <main class="contenedor-pago">
   <div class="carrito-productos">
     <h2>Productos en el Carrito</h2>
-    <div class="producto-carrito">
-      <img src="uñas/PRO7312.jpg" alt="Esmalte Rojo Brillante">
-      <div>
-        <h4>Esmalte Rojo Brillante - Sally Hansen</h4>
-        <div class="cantidad">
-          <button class="btn-cantidad" onclick="cambiarCantidad('decrementar')">-</button>
-          <input type="number" value="1" min="1" class="input-cantidad">
-          <button class="btn-cantidad" onclick="cambiarCantidad('incrementar')">+</button>
-        </div>
-        <button class="eliminar-producto" onclick="eliminarProducto()">Eliminar</button>
-      </div>
-      <p class="precio">S/ 9.00</p>
-    </div>
-    <!-- Repite el bloque anterior para cada producto en el carrito -->
+    <ul id="carrito-lista"></ul>
+    <p id="total">Total: S/ 0.00</p>
   </div>
+
+  <div class="pago">
+    <h2>Resumen de Pago</h2>
+    <button class="boton-pago" onclick="realizarPago()">Realizar Pago</button>
+  </div>
+</main>
+
 
   <div class="pago">
     <h2>Resumen de Pago</h2>
