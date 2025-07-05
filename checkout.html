@@ -163,6 +163,18 @@
 </footer>
 
 <script>
+  function realizarPago() {
+  if (carritoItems.length === 0) {
+    alert("Tu carrito está vacío. Agrega productos antes de proceder al pago.");
+    return;
+  }
+  // Aquí puedes agregar la lógica para procesar el pago
+  alert("Pago realizado con éxito. ¡Gracias por tu compra!");
+  // Limpiar el carrito después del pago
+  carritoItems = [];
+  guardarCarrito();
+  actualizarCarrito();
+}
   function cambiarCantidad(accion) {
     const inputCantidad = document.querySelector('.input-cantidad');
     let cantidad = parseInt(inputCantidad.value);
