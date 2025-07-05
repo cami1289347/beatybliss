@@ -107,11 +107,11 @@
       <div id="pin-container" style="display:none;">
         <p style="margin-bottom: 1rem; color: #c2185b; font-weight: 500;">Ingresar PIN de administrador</p>
         <div class="pin-input-group" style="display: flex; gap: 10px; justify-content: center;">
-        <input type="number" maxlength="1" class="pin-digit" data-index="1" oninput="moveToNextPin(this)">
-        <input type="number" maxlength="1" class="pin-digit" data-index="2" oninput="moveToNextPin(this)">
-        <input type="number" maxlength="1" class="pin-digit" data-index="3" oninput="moveToNextPin(this)">
-        <input type="number" maxlength="1" class="pin-digit" data-index="4" oninput="moveToNextPin(this)">
-      </div>
+          <input type="number" maxlength="1" class="pin-digit" data-index="1" oninput="moveToNextPin(this)">
+          <input type="number" maxlength="1" class="pin-digit" data-index="2" oninput="moveToNextPin(this)">
+          <input type="number" maxlength="1" class="pin-digit" data-index="3" oninput="moveToNextPin(this)">
+          <input type="number" maxlength="1" class="pin-digit" data-index="4" oninput="moveToNextPin(this)">
+        </div>
       </div>
       <button type="submit">Ingresar</button>
     </form>
@@ -134,9 +134,19 @@
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       
-      // Verificar si el usuario es el administrador
-      if (email === "luciamoranaragon13@gmail.com" && password === "Camila1311BB") {
-        // Si es el administrador, mostrar el contenedor del PIN
+      // Lista de administradores con sus credenciales
+      const admins = [
+        { email: "luciamoranaragon13@gmail.com", password: "Camila1311BB" },
+        { email: "zramirezreque@gmail.com", password: "Zafiro1102" }  // Cambia estos datos
+      ];
+      
+      // Verificar si el usuario es uno de los administradores
+      const esAdmin = admins.some(admin => 
+        admin.email === email && admin.password === password
+      );
+
+      if (esAdmin) {
+        // Si es administrador, mostrar el contenedor del PIN
         document.getElementById('pin-container').style.display = 'block';
       } else {
         // Obtener usuarios registrados
@@ -148,13 +158,12 @@
         if (usuarioValido) {
           // Guardar sesión
           localStorage.setItem('usuarioActual', JSON.stringify({
-          nombre: usuarioValido.nombre,
-          correo: usuarioValido.correo,
-          fechaNacimiento: usuarioValido.fechaNacimiento,
-          loggedIn: true
+            nombre: usuarioValido.nombre,
+            correo: usuarioValido.correo,
+            fechaNacimiento: usuarioValido.fechaNacimiento,
+            loggedIn: true
           }));
 
-          
           // Redirigir a index
           window.location.href = 'index.html';
         } else {
