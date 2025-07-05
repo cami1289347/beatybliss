@@ -7,7 +7,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="form-container">
+  <header class="cabecera">
+    <div class="header-top">
+      <img src="logo.png" alt="Logo" class="logo">
+      <div class="icons">
+        <a href="#carrito">🛒</a>
+        <a href="#favoritos">❤️</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="form-container registro-container">
     <h2>Finalizar Compra</h2>
     
     <!-- Resumen de la compra -->
@@ -22,13 +32,24 @@
     </div>
 
     <form id="checkout-form">
-      <input type="text" placeholder="Nombre completo" required>
-      <input type="email" placeholder="Correo electrónico" required>
-      
-      <input type="text" placeholder="Nombre en la tarjeta" required>
-      <input type="text" placeholder="Número de tarjeta" required pattern="\d{16}" title="Debe tener 16 dígitos">
-      <input type="text" placeholder="MM/AA" required pattern="\d{2}/\d{2}" title="Formato MM/AA">
-      <input type="text" placeholder="CVC" required pattern="\d{3}" title="3 dígitos de seguridad">
+      <div>
+        <input type="text" placeholder="Nombre completo" required>
+      </div>
+      <div>
+        <input type="email" placeholder="Correo electrónico" required>
+      </div>
+      <div>
+        <input type="text" placeholder="Nombre en la tarjeta" required>
+      </div>
+      <div>
+        <input type="text" placeholder="Número de tarjeta" required pattern="\d{16}" title="Debe tener 16 dígitos">
+      </div>
+      <div>
+        <input type="text" placeholder="MM/AA" required pattern="\d{2}/\d{2}" title="Formato MM/AA">
+      </div>
+      <div>
+        <input type="text" placeholder="CVC" required pattern="\d{3}" title="3 dígitos de seguridad">
+      </div>
 
       <p style="margin-top: 1rem;"><strong>Opciones de pago alternativo:</strong></p>
       <label>
@@ -40,7 +61,7 @@
         <span>Plin</span>
       </label><br>
 
-      <button type="submit">Pagar</button>
+      <button type="submit" class="boton-guardar">Pagar</button>
     </form>
   </div>
 
