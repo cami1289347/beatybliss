@@ -1,76 +1,190 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pago - Beauty Bliss</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .contenedor-pago {
+      display: flex;
+      padding: 2rem;
+    }
+
+    .carrito-productos {
+      flex: 2;
+      margin-right: 2rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      background-color: #f9f9f9;
+    }
+
+    .carrito-productos h2 {
+      margin-bottom: 1rem;
+    }
+
+    .producto-carrito {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    .producto-carrito img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      margin-right: 1rem;
+    }
+
+    .cantidad {
+      display: flex;
+      align-items: center;
+    }
+
+    .cantidad input {
+      width: 40px;
+      text-align: center;
+      margin: 0 5px;
+    }
+
+    .pago {
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      background-color: #f9f9f9;
+    }
+
+    .pago h2 {
+      margin-bottom: 1rem;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .boton-pago {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .boton-pago:hover {
+      background-color: #c2185b;
+    }
+  </style>
 </head>
 <body>
-  <header class="cabecera">
-    <div class="header-top">
-      <img src="logo.png" alt="Logo" class="logo">
-      <div class="icons">
-        <a href="#carrito">🛒</a>
-        <a href="#favoritos">❤️</a>
-      </div>
+
+<header class="cabecera">
+  <!-- Parte superior: logo, buscador, íconos -->
+  <div class="header-top">
+    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
+    <div class="icons">
+      <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
+      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+      <a href="#" title="Carrito" id="abrir-carrito"><i class="fas fa-shopping-cart"></i></a>
+      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
     </div>
-  </header>
-
-  <div class="form-container registro-container">
-    <h2>Finalizar Compra</h2>
-    
-    <!-- Resumen de la compra -->
-    <div class="order-summary">
-      <h3>Resumen de la Compra</h3>
-      <ul>
-        <li>Producto 1: $20.00</li>
-        <li>Producto 2: $15.00</li>
-        <li>Producto 3: $30.00</li>
-      </ul>
-      <p><strong>Total a Pagar: $65.00</strong></p>
-    </div>
-
-    <form id="checkout-form">
-      <div>
-        <input type="text" placeholder="Nombre completo" required>
-      </div>
-      <div>
-        <input type="email" placeholder="Correo electrónico" required>
-      </div>
-      <div>
-        <input type="text" placeholder="Nombre en la tarjeta" required>
-      </div>
-      <div>
-        <input type="text" placeholder="Número de tarjeta" required pattern="\d{16}" title="Debe tener 16 dígitos">
-      </div>
-      <div>
-        <input type="text" placeholder="MM/AA" required pattern="\d{2}/\d{2}" title="Formato MM/AA">
-      </div>
-      <div>
-        <input type="text" placeholder="CVC" required pattern="\d{3}" title="3 dígitos de seguridad">
-      </div>
-
-      <p style="margin-top: 1rem;"><strong>Opciones de pago alternativo:</strong></p>
-      <label>
-        <input type="radio" name="pago" value="yape">
-        <span>Yape</span>
-      </label><br>
-      <label>
-        <input type="radio" name="pago" value="plin">
-        <span>Plin</span>
-      </label><br>
-
-      <button type="submit" class="boton-guardar">Pagar</button>
-    </form>
   </div>
 
-  <script>
-    document.getElementById("checkout-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("¡Pago procesado correctamente! Gracias por tu compra.");
-      window.location.href = "index.html";
-    });
-  </script>
+  <!-- Barra de navegación debajo -->
+  <nav class="main-nav">
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="cuidado de la piel.html">Cuidado Facial</a>
+      <a href="cabello.html">Cabello</a>
+      <a href="labios.html">Labios</a>
+      <a href="uñas.html">Uñas</a>
+    </div>
+  </nav>
+</header>
+
+<main class="contenedor-pago">
+  <div class="carrito-productos">
+    <h2>Productos en el Carrito</h2>
+    <div class="producto-carrito">
+      <img src="uñas/PRO7312.jpg" alt="Esmalte Rojo Brillante">
+      <div>
+        <h4>Esmalte Rojo Brillante - Sally Hansen</h4>
+        <div class="cantidad">
+          <button class="btn-cantidad" onclick="cambiarCantidad('decrementar')">-</button>
+          <input type="number" value="1" min="1" class="input-cantidad">
+          <button class="btn-cantidad" onclick="cambiarCantidad('incrementar')">+</button>
+        </div>
+        <button class="eliminar-producto" onclick="eliminarProducto()">Eliminar</button>
+      </div>
+      <p class="precio">S/ 9.00</p>
+    </div>
+    <!-- Repite el bloque anterior para cada producto en el carrito -->
+  </div>
+
+  <div class="pago">
+    <h2>Resumen de Pago</h2>
+    <p class="total">Total: S/ 9.00</p>
+    <button class="boton-pago" onclick="realizarPago()">Realizar Pago</button>
+  </div>
+</main>
+
+<footer>
+    <div class="footer-col">
+      <h4>Sobre Beauty Bliss</h4>
+      <a href="Sobre-nosotros.html">Quienes somos</a>
+      <a href="compromiso.html">Nuestro compromiso</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="eliminacion_datos.html">Políticas de cookies</a>
+      <a href="politicas.html">Políticas de privacidad</a>
+    </div>
+    <div class="footer-col">
+      <h4>Soporte</h4>
+      <a href="contacto.html">Ayuda y contacto</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+    <div class="copyright">
+      © 2025 Beauty Bliss. Todos los derechos reservados.
+    </div>
+</footer>
+
+<script>
+  function cambiarCantidad(accion) {
+    const inputCantidad = document.querySelector('.input-cantidad');
+    let cantidad = parseInt(inputCantidad.value);
+    if (accion === 'incrementar') {
+      cantidad++;
+    } else if (accion === 'decrementar' && cantidad > 1) {
+      cantidad--;
+    }
+    inputCantidad.value = cantidad;
+    // Aquí puedes actualizar el total si es necesario
+  }
+
+  function eliminarProducto() {
+    // Lógica para eliminar el producto del carrito
+    alert('Producto eliminado del carrito');
+  }
+
+  function realizarPago() {
+    // Lógica para realizar el pago
+    alert('Pago realizado con éxito');
+  }
+</script>
+
 </body>
 </html>
