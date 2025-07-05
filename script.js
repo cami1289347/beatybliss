@@ -523,6 +523,6 @@ function guardarUsuarioActualizado() {
   });
 
     verificarCambios();
-
+  }
 
 });
