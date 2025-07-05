@@ -507,6 +507,7 @@ document.addEventListener('DOMContentLoaded', function () {
       botonGuardar.textContent = "Guardar cambios";
     }
   }
+     
 
 function guardarUsuarioActualizado() {
   const index = usuarios.findIndex(u => u.correo === usuario.correo);
@@ -517,12 +518,11 @@ function guardarUsuarioActualizado() {
   localStorage.setItem("usuarioActual", JSON.stringify(usuario));
 }
 
-
-  inputs.forEach(input => {
+    inputs.forEach(input => {
     input.addEventListener("input", verificarCambios);
   });
 
-  verificarCambios();
-}
+    verificarCambios();
+
 
 });
