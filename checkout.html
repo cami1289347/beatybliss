@@ -793,10 +793,7 @@ footer {
 
   // Botón "Ya Pagué"
   document.getElementById('btn-pagado').addEventListener('click', function() {
-    alert('¡Gracias por tu compra! Tu pago está siendo verificado.');
-    carrito = [];
-    actualizarCarrito();
-    window.location.href = 'index.html';
+    completePurchase('yape/plin');
   });
 
   // Validación de formulario de tarjeta en tiempo real
@@ -847,22 +844,9 @@ footer {
       return;
     }
 
-    alert('¡Pago exitoso! Gracias por tu compra.');
-    carrito = [];
-    actualizarCarrito();
-    window.location.href = 'index.html';
+    completePurchase('tarjeta');
   }
 
-// Modificar las funciones de pago para usar completePurchase
-function procesarPagoTarjeta() {
-    // ... validaciones previas ...
-    completePurchase('tarjeta');
-}
-
-// Y en el botón "Ya Pagué"
-document.getElementById('btn-pagado').addEventListener('click', function() {
-    completePurchase('yape/plin');
-});
   function completePurchase(paymentMethod) {
     const user = JSON.parse(localStorage.getItem('usuarioActual'));
     if (!user || !user.loggedIn) {
@@ -880,23 +864,25 @@ document.getElementById('btn-pagado').addEventListener('click', function() {
             month: 'short', 
             year: 'numeric' 
         }),
-        status: 'completado', // Cambiado de 'processing' a 'completado'
+        status: 'completado',
         paymentMethod: paymentMethod,
-        products: [...carrito], // Copia de los productos del carrito
+        products: [...carrito],
         total: carrito.reduce((sum, product) => sum + (product.precio * product.cantidad), 0)
     };
 
     // Guardar en localStorage
     const orders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
-    orders.unshift(order); // Agregar el nuevo pedido al inicio
+    orders.unshift(order);
     localStorage.setItem('beautyBlissOrders', JSON.stringify(orders));
 
     // Limpiar carrito
+    carrito = [];
     localStorage.removeItem('carrito');
+    actualizarCarrito();
     
     // Redirigir a la página de pedidos
     window.location.href = 'pedidos.html';
-}
+  }
      
   // Verificar estado de inicio de sesión al cargar la página
   document.addEventListener('DOMContentLoaded', function() {
