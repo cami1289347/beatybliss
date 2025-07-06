@@ -694,24 +694,6 @@ footer {
 </div>
 
 <script>
-  // Datos del carrito (ejemplo inicial)
-  let carrito = JSON.parse(localStorage.getItem('carrito')) || [
-    { 
-      id: 1, 
-      nombre: "Crema Hidratante Noche", 
-      marca: "L'Oreal", 
-      precio: 22.90,
-      cantidad: 1
-    },
-    { 
-      id: 2, 
-      nombre: "Protector Solar Facial", 
-      marca: "L'Oreal", 
-      precio: 20.00,
-      cantidad: 1
-    }
-  ];
-
   // Función para actualizar el carrito
   function actualizarCarrito() {
     const listaProductos = document.getElementById('lista-productos');
@@ -726,7 +708,7 @@ footer {
         <div class="producto-item">
           <div class="producto-nombre">${producto.nombre}</div>
           <div class="producto-info">
-            <span class="producto-marca">${producto.marca}</span>
+            <span class="data-marca">${producto.marca}</span>
             <div class="producto-acciones">
               <div class="contador-cantidad">
                 <button onclick="disminuirCantidad(${index})">-</button>
