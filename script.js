@@ -61,29 +61,21 @@ document.addEventListener('DOMContentLoaded', function () {
     carritoLista.innerHTML = "";
 
     if (carritoItems.length === 0) {
-        carritoLista.innerHTML = "<li style='text-align: center; padding: 20px; color: #666;'>Tu carrito está vacío</li>";
-        totalElemento.textContent = "Total: S/ 0.00";
-        return;
+      carritoLista.innerHTML = "<li>Carrito vacío</li>";
+      totalElemento.textContent = "Total: S/ 0.00";
+      return;
     }
 
     carritoItems.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <div class="producto-info">
-                <div>
-                    <div class="producto-nombre">${item.nombre}</div>
-                    <div class="producto-marca">${item.marca || 'Beauty Bliss'}</div>
-                </div>
-                <div class="producto-precio">S/ ${item.precio.toFixed(2)}</div>
-            </div>
-            <div class="contador-cantidad">
-                <button class="cantidad-btn" data-index="${index}" data-change="-1">-</button>
-                <span>${item.cantidad}</span>
-                <button class="cantidad-btn" data-index="${index}" data-change="1">+</button>
-            </div>
-            <button class="eliminar-btn" data-index="${index}">✕ Eliminar</button>
-        `;
-        carritoLista.appendChild(li);
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${item.nombre} - S/ ${item.precio.toFixed(2)} 
+        <button class="cantidad-btn" data-index="${index}" data-change="-1">-</button>
+        ${item.cantidad}
+        <button class="cantidad-btn" data-index="${index}" data-change="1">+</button>
+        <button class="eliminar-btn" data-index="${index}">✕</button>
+      `;
+      carritoLista.appendChild(li);
     });
 
     configurarBotonesCantidad();
@@ -91,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const total = carritoItems.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     totalElemento.textContent = `Total: S/ ${total.toFixed(2)}`;
-}
+  }
+
 
   function configurarBotonesCantidad() {
     carritoLista.querySelectorAll(".cantidad-btn").forEach(btn => {
