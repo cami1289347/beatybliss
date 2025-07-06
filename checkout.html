@@ -182,6 +182,32 @@
       font-size: 0.9rem;
     }
 
+    .contador-cantidad {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 10px;
+    }
+
+    .contador-cantidad button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .contador-cantidad span {
+      min-width: 20px;
+      text-align: center;
+    }
+
     .producto-precio {
       font-weight: 600;
       color: var(--primary);
@@ -311,6 +337,11 @@
       background-color: var(--primary-dark);
     }
 
+    .boton-pago:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
     .qr-code {
       text-align: center;
       margin: 1.5rem 0;
@@ -322,6 +353,18 @@
       border-radius: 8px;
       padding: 1rem;
       background: white;
+    }
+
+    .login-required {
+      text-align: center;
+      margin: 1.5rem 0;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .login-required a {
+      color: var(--primary);
+      text-decoration: underline;
     }
 
     @media (max-width: 768px) {
@@ -384,6 +427,10 @@
     <h2>Resumen de Pago</h2>
     <p id="total-pago" class="total-compra">Total: S/ <span id="total-pago-valor">0.00</span></p>
     
+    <div id="mensaje-login" class="login-required" style="display: none;">
+      <p>Para continuar con el pago, por favor <a href="registro.html">inicia sesión</a> o <a href="registro.html">regístrate</a>.</p>
+    </div>
+    
     <button class="boton-pago" id="btn-realizar-pago">Realizar Pago</button>
 
     <div class="metodo-pago">
@@ -402,23 +449,23 @@
       <h4>Formulario de Pago con Tarjeta</h4>
       <div class="input-group">
         <label>Nombre del Titular</label>
-        <input type="text" id="nombre-titular" placeholder="Ej: María López">
+        <input type="text" id="nombre-titular" placeholder="Ej: María López" required>
       </div>
       <div class="input-group">
         <label>Número de Tarjeta</label>
-        <input type="text" id="numero-tarjeta" placeholder="0000 0000 0000 0000">
+        <input type="text" id="numero-tarjeta" placeholder="0000 0000 0000 0000" required>
       </div>
       <div class="fila-inputs">
         <div class="input-group" style="flex: 1;">
           <label>Fecha Expiración (MM/AA)</label>
-          <input type="text" id="fecha-expiracion" placeholder="MM/AA">
+          <input type="text" id="fecha-expiracion" placeholder="MM/AA" required>
         </div>
         <div class="input-group" style="flex: 1;">
           <label>CVV</label>
-          <input type="text" id="cvv" placeholder="123">
+          <input type="text" id="cvv" placeholder="123" required>
         </div>
       </div>
-      <button class="boton-pago" onclick="procesarPagoTarjeta()">Pagar con Tarjeta</button>
+      <button class="boton-pago" id="btn-pagar-tarjeta" onclick="procesarPagoTarjeta()" disabled>Pagar con Tarjeta</button>
     </div>
 
     <div class="qr-container">
@@ -435,8 +482,22 @@
 <script>
   // Datos del carrito (ejemplo inicial)
   let carrito = JSON.parse(localStorage.getItem('carrito')) || [
-    { id: 1, nombre: "Crema Hidratante Noche", marca: "L'Oreal", linea: "Emmen", precio: 22.90 },
-    { id: 2, nombre: "Protector Solar Facial", marca: "L'Oreal", linea: "Emmen", precio: 20.00 }
+    { 
+      id: 1, 
+      nombre: "Crema Hidratante Noche", 
+      marca: "L'Oreal", 
+      linea: "Emmen", 
+      precio: 22.90,
+      cantidad: 1
+    },
+    { 
+      id: 2, 
+      nombre: "Protector Solar Facial", 
+      marca: "L'Oreal", 
+      linea: "Emmen", 
+      precio: 20.00,
+      cantidad: 1
+    }
   ];
 
   // Función para actualizar el carrito
@@ -447,7 +508,7 @@
     let total = 0;
     
     carrito.forEach((producto, index) => {
-      total += producto.precio;
+      total += producto.precio * producto.cantidad;
       
       const productoHTML = `
         <div class="producto-item">
@@ -455,13 +516,15 @@
           <div class="producto-info">
             <span class="producto-marca">${producto.marca} - ${producto.linea}</span>
             <div class="producto-acciones">
-              <span class="estrella">⭐</span>
-              <span class="estrella">⭐</span>
-              <span class="estrella">⭐</span>
+              <div class="contador-cantidad">
+                <button onclick="disminuirCantidad(${index})">-</button>
+                <span>${producto.cantidad}</span>
+                <button onclick="aumentarCantidad(${index})">+</button>
+              </div>
               <button class="eliminar-producto" onclick="eliminarProducto(${index})">
                 Eliminar
               </button>
-              <span class="producto-precio">S/ ${producto.precio.toFixed(2)}</span>
+              <span class="producto-precio">S/ ${(producto.precio * producto.cantidad).toFixed(2)}</span>
             </div>
           </div>
         </div>
@@ -481,16 +544,30 @@
     actualizarCarrito();
   }
 
+  function aumentarCantidad(index) {
+    carrito[index].cantidad += 1;
+    actualizarCarrito();
+  }
+
+  function disminuirCantidad(index) {
+    if (carrito[index].cantidad > 1) {
+      carrito[index].cantidad -= 1;
+      actualizarCarrito();
+    }
+  }
+
   // Mostrar métodos de pago al hacer clic en "Realizar Pago"
   document.getElementById('btn-realizar-pago').addEventListener('click', function() {
     const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
     
     if (usuario && usuario.loggedIn) {
       document.querySelector('.metodo-pago').style.display = 'block';
+      document.getElementById('mensaje-login').style.display = 'none';
       this.style.display = 'none';
+      mostrarFormularioTarjeta();
     } else {
-      alert('Por favor inicia sesión para continuar con el pago');
-      window.location.href = 'registro.html';
+      document.getElementById('mensaje-login').style.display = 'block';
+      this.style.display = 'none';
     }
   });
 
@@ -517,9 +594,31 @@
     alert('¡Gracias por tu compra! Tu pago está siendo verificado.');
     carrito = [];
     actualizarCarrito();
+    window.location.href = 'index.html';
   });
 
-  // Validación de formulario de tarjeta
+  // Validación de formulario de tarjeta en tiempo real
+  document.getElementById('nombre-titular').addEventListener('input', validarFormularioTarjeta);
+  document.getElementById('numero-tarjeta').addEventListener('input', validarFormularioTarjeta);
+  document.getElementById('fecha-expiracion').addEventListener('input', validarFormularioTarjeta);
+  document.getElementById('cvv').addEventListener('input', validarFormularioTarjeta);
+
+  function validarFormularioTarjeta() {
+    const nombre = document.getElementById('nombre-titular').value.trim();
+    const tarjeta = document.getElementById('numero-tarjeta').value.trim();
+    const fecha = document.getElementById('fecha-expiracion').value.trim();
+    const cvv = document.getElementById('cvv').value.trim();
+    
+    // Validación básica
+    const valido = nombre.length > 0 && 
+                  tarjeta.replace(/\s/g, '').length === 16 && 
+                  /^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha) && 
+                  cvv.length === 3;
+    
+    document.getElementById('btn-pagar-tarjeta').disabled = !valido;
+  }
+
+  // Procesar pago con tarjeta
   function procesarPagoTarjeta() {
     const nombre = document.getElementById('nombre-titular').value.trim();
     const tarjeta = document.getElementById('numero-tarjeta').value.trim();
@@ -549,10 +648,17 @@
     alert('¡Pago exitoso! Gracias por tu compra.');
     carrito = [];
     actualizarCarrito();
+    window.location.href = 'index.html';
   }
 
-  // Inicializar el carrito
-  actualizarCarrito();
+  // Verificar estado de inicio de sesión al cargar la página
+  document.addEventListener('DOMContentLoaded', function() {
+    const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (usuario && usuario.loggedIn) {
+      document.getElementById('mensaje-login').style.display = 'none';
+    }
+    actualizarCarrito();
+  });
 </script>
 
 </body>
