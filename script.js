@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const userIcon = document.getElementById('user-icon');
     const dropdown = document.getElementById('user-dropdown');
     const logoutBtn = document.getElementById('logout-btn');
-    const currentUser   = JSON.parse(localStorage.getItem('usuarioActual'));
+    const currentUser = JSON.parse(localStorage.getItem('usuarioActual'));
 
     userIcon.addEventListener('click', function (e) {
       e.preventDefault();
-      if (currentUser  && currentUser .loggedIn) {
+      if (currentUser && currentUser.loggedIn) {
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
       } else {
         window.location.href = 'registro.html';
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    if (currentUser  && currentUser .loggedIn) {
+    if (currentUser && currentUser.loggedIn) {
       logoutBtn.addEventListener('click', function (e) {
         e.preventDefault();
         localStorage.removeItem('usuarioActual');
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     guardarCarrito();
     actualizarCarrito();
     mostrarToast(`${nombre} agregado al carrito`);
-    if (carrito) carrito.classList.remove("oculto"); // Asegúrate de que el carrito se muestre
+    if (carrito) carrito.classList.remove("oculto");
   }
 
   function toggleFavorito(e) {
@@ -195,11 +195,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.addEventListener("click", function (e) {
-      // Cierra el carrito solo si se hace clic fuera de él y del botón del carrito
-      if (!carrito?.contains(e.target) && !botonCarrito?.contains(e.target) && !cerrarCarrito.contains(e.target)) {
+      if (!carrito?.contains(e.target) && !botonCarrito?.contains(e.target)) {
         carrito?.classList.add("oculto");
       }
-      // Cierra los favoritos solo si se hace clic fuera de ellos y del botón de favoritos
       if (!favoritosContenedor?.contains(e.target) && !botonFavoritos?.contains(e.target)) {
         favoritosContenedor?.classList.add("oculto");
       }
@@ -392,75 +390,138 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function configurarPerfil() {
-    const form = document.getElementById("formPerfil");
-    if (!form) return; // ⛔ Salir si no es la página de perfil
+  const form = document.getElementById("formPerfil");
+  if (!form) return; // ⛔ Salir si no es la página de perfil
 
-    const inputs = form.querySelectorAll("input, select");
-    const botonGuardar = document.querySelector(".boton-guardar");
+  const inputs = form.querySelectorAll("input, select");
+  const botonGuardar = document.querySelector(".boton-guardar");
 
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    let usuarioActual = JSON.parse(localStorage.getItem("usuarioActual")) || {};
-    let usuario = usuarios.find(u => u.correo === usuarioActual.correo) || usuarioActual;
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  let usuarioActual = JSON.parse(localStorage.getItem("usuarioActual")) || {};
+  let usuario = usuarios.find(u => u.correo === usuarioActual.correo) || usuarioActual;
 
-    function cargarDatos() {
-      document.getElementById("nombre").value = usuario.nombre || "";
-      document.getElementById("correo").value = usuario.correo || "";
-      document.getElementById("fechaNacimiento").value = usuario.fechaNacimiento || "";
-      document.getElementById("telefono").value = usuario.telefono || "";
-      document.getElementById("direccion").value = usuario.direccion || "";
-      document.getElementById("codigoPostal").value = usuario.codigoPostal || "";
-      document.getElementById("pais").value = usuario.pais || "Perú";
-      document.getElementById("distrito").value = usuario.distrito || "";
-      document.getElementById("sexo").value = usuario.sexo || "";
+  function cargarDatos() {
+    document.getElementById("nombre").value = usuario.nombre || "";
+    document.getElementById("correo").value = usuario.correo || "";
+    document.getElementById("fechaNacimiento").value = usuario.fechaNacimiento || "";
+    document.getElementById("telefono").value = usuario.telefono || "";
+    document.getElementById("direccion").value = usuario.direccion || "";
+    document.getElementById("codigoPostal").value = usuario.codigoPostal || "";
+    document.getElementById("pais").value = usuario.pais || "Perú";
+    document.getElementById("distrito").value = usuario.distrito || "";
+    document.getElementById("sexo").value = usuario.sexo || "";
 
-      if (usuario.fotoPerfil) {
-        document.getElementById("preview").src = usuario.fotoPerfil;
-      }
+    if (usuario.fotoPerfil) {
+      document.getElementById("preview").src = usuario.fotoPerfil;
     }
+  }
 
-    cargarDatos();
+  cargarDatos();
 
-    document.getElementById("imgInput").addEventListener("change", function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = function() {
-          document.getElementById("preview").src = reader.result;
-          usuario.fotoPerfil = reader.result;
-          guardarUsuarioActualizado();
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    function habilitarEdicion() {
-      inputs.forEach(el => el.disabled = false);
+  document.getElementById("imgInput").addEventListener("change", function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = function() {
+        document.getElementById("preview").src = reader.result;
+        usuario.fotoPerfil = reader.result;
+        guardarUsuarioActualizado();
+      };
+      reader.readAsDataURL(file);
     }
+  });
 
-    window.habilitarEdicion = habilitarEdicion;
+  function habilitarEdicion() {
+    inputs.forEach(el => el.disabled = false);
+  }
 
-    window.eliminarCuenta = function() {
-      if (confirm("¿Seguro que deseas eliminar tu cuenta?")) {
-        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-        usuarios = usuarios.filter(u => u.correo !== usuario.correo);
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        localStorage.removeItem("usuarioActual");
-        alert("Cuenta eliminada");
-        window.location.href = "index.html";
-      }
+  window.habilitarEdicion = habilitarEdicion;
+
+  window.eliminarCuenta = function() {
+    if (confirm("¿Seguro que deseas eliminar tu cuenta?")) {
+      let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+      usuarios = usuarios.filter(u => u.correo !== usuario.correo);
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      localStorage.removeItem("usuarioActual");
+      alert("Cuenta eliminada");
+      window.location.href = "index.html";
+    }
+  };
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    botonGuardar.disabled = true;
+    botonGuardar.textContent = "Guardando... ⏳";
+
+    const actualizado = {
+      ...usuario,
+      nombre: document.getElementById("nombre").value,
+      correo: document.getElementById("correo").value,
+      fechaNacimiento: document.getElementById("fechaNacimiento").value,
+      telefono: document.getElementById("telefono").value,
+      direccion: document.getElementById("direccion").value,
+      codigoPostal: document.getElementById("codigoPostal").value,
+      pais: document.getElementById("pais").value,
+      distrito: document.getElementById("distrito").value,
+      sexo: document.getElementById("sexo").value,
+      loggedIn: true
     };
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      botonGuardar.disabled = true;
-      botonGuardar.textContent = "Guardando... ⏳";
+    const index = usuarios.findIndex(u => u.correo === usuario.correo);
+    if (index !== -1) usuarios[index] = actualizado;
+    else usuarios.push(actualizado);
 
-      const actualizado = {
-        ...usuario,
-        nombre: document.getElementById("nombre").value,
-        correo: document.getElementById("correo").value,
-        fechaNacimiento: document.getElementById("fechaNacimiento").value,
-        telefono: document.getElementById("telefono").value,
-        direccion: document.getElementById("direccion").value,
-        codigoPostal: document.getElementById("codigoPostal").value,
-       
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    localStorage.setItem("usuarioActual", JSON.stringify(actualizado));
+
+    mostrarToast("✅ Cambios guardados correctamente.");
+    inputs.forEach(el => el.disabled = true);
+    verificarCambios();
+
+    botonGuardar.textContent = "Guardado ✅";
+    setTimeout(() => {
+      botonGuardar.textContent = "Guardar cambios";
+    }, 2000);
+  });
+
+  function hayCambios() {
+    return (
+      document.getElementById("nombre").value !== (usuario.nombre || "") ||
+      document.getElementById("correo").value !== (usuario.correo || "") ||
+      document.getElementById("fechaNacimiento").value !== (usuario.fechaNacimiento || "") ||
+      document.getElementById("telefono").value !== (usuario.telefono || "") ||
+      document.getElementById("direccion").value !== (usuario.direccion || "") ||
+      document.getElementById("codigoPostal").value !== (usuario.codigoPostal || "") ||
+      document.getElementById("pais").value !== (usuario.pais || "Perú") ||
+      document.getElementById("distrito").value !== (usuario.distrito || "") ||
+      document.getElementById("sexo").value !== (usuario.sexo || "")
+    );
+  }
+
+  function verificarCambios() {
+    if (hayCambios()) {
+      botonGuardar.disabled = false;
+      botonGuardar.textContent = "💾 Guardar cambios";
+    } else {
+      botonGuardar.disabled = true;
+      botonGuardar.textContent = "Guardar cambios";
+    }
+  }
+     
+
+function guardarUsuarioActualizado() {
+  const index = usuarios.findIndex(u => u.correo === usuario.correo);
+  if (index !== -1) usuarios[index] = usuario;
+  else usuarios.push(usuario);
+
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+}
+
+    inputs.forEach(input => {
+    input.addEventListener("input", verificarCambios);
+  });
+
+    verificarCambios();
+  }
+});
