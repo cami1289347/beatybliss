@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <header>
+<header class="cabecera">
+  <!-- Parte superior: logo, buscador, íconos -->
+  <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
-    <input type="text" id="buscador" placeholder="Buscar productos...">
+    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
     <div class="icons">
       <div class="user-menu-wrapper">
-        <a href="#" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
+        <a href="login.html" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
         <div class="user-dropdown" id="user-dropdown" style="display: none;">
           <a href="perfil.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
           <a href="compras.html"><i class="fas fa-shopping-bag"></i> Mis Compras</a>
@@ -26,7 +28,7 @@
       <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
       <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
     </div>
-  </header>
+  </div>
 
   <main>
     <h3 class="descubre">Descubre</h3>
@@ -94,7 +96,47 @@
           <p>Perfume Rosas - $30.00</p>
           <button class="agregar-carrito">Agregar al carrito</button>
           <button class="agregar-favorito" title="Agregar a Favoritos"><i class="fas fa-heart"></i></button>
-        </div>
+        </div
+
+            <div class="producto" data-marca="Pantene" data-precio="22.50">
+      <img src="cabello/PRO7183.jpg" alt="Acondicionador Cabello Rizado">
+      <h4>Acondicionador Cabello Rizado - Pantene</h4>
+      <p><span class="precio-original">S/ 25.00</span> <span class="precio-descuento">S/ 22.50</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Acondicionador Cabello Rizado - Pantene" data-precio="22.50">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div class="producto" data-marca="Herbal Essences" data-precio="25">
+      <img src="cabello/PRO3889.jpg" alt="Crema Para Peinar Rizos">
+      <h4>Crema Para Peinar Rizos - Herbal Essences</h4>
+      <p><span class="precio-original">S/ 28.00</span> <span class="precio-descuento">S/ 25</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Crema Para Peinar Rizos - Herbal Essences" data-precio="25.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+        <div class="producto" data-marca="L'Oreal" data-precio="32.00">
+      <img src="rostro/PRO8873.jpg" alt="Fijador de Maquillaje">
+      <h4>Fijador de Maquillaje - L'Oreal</h4>
+      <p><span class="precio-descuento">S/ 32.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Fijador de Maquillaje - L'Oreal" data-precio="32.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+
+
+    <div class="producto" data-marca="Becca" data-precio="35.00">
+      <img src="rostro/PRO8460.jpg" alt="Iluminador en Polvo">
+      <h4>Iluminador en Polvo - Becca</h4>
+      <p><span class="precio-descuento">S/ 35.00</span></p>
+      <div class="acciones-producto">
+        <button class="agregar-carrito" data-nombre="Iluminador en Polvo - Becca" data-precio="35.00">Agregar al carrito</button>
+        <button class="agregar-favorito" title="Agregar a favoritos"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
       </div>
     </section>
   </main>
