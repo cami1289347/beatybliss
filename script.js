@@ -182,27 +182,31 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function agregarProductoAlCarrito(e) {
-    const btn = e.currentTarget;
-    const producto = btn.closest(".producto");
+  const btn = e.currentTarget;
+  const producto = btn.closest(".producto");
 
-    const nombre = btn.dataset.nombre || producto.dataset.nombre || producto.querySelector("h4, p")?.textContent?.split("-")[0]?.trim();
-    const precioText = btn.dataset.precio || producto.dataset.precio || producto.querySelector("p")?.textContent?.match(/\d+\.?\d*/);
-    const precio = parseFloat(precioText?.[0]);
+  // Prioriza el dataset del botón, luego el del contenedor
+  const nombre = btn.dataset.nombre || producto.dataset.nombre || producto.querySelector("h4")?.textContent?.trim();
+  const precio = parseFloat(btn.dataset.precio || producto.dataset.precio);
 
-    if (!nombre || isNaN(precio)) return;
-
-    const existente = carritoItems.find(item => item.nombre === nombre);
-    if (existente) {
-      existente.cantidad++;
-    } else {
-      carritoItems.push({ nombre, precio, cantidad: 1 });
-    }
-
-    guardarCarrito();
-    actualizarCarrito();
-    mostrarToast(`${nombre} agregado al carrito`);
-    carrito?.classList.remove("oculto");
+  if (!nombre || isNaN(precio)) {
+    console.warn("Producto inválido", { nombre, precio });
+    return;
   }
+
+  const existente = carritoItems.find(item => item.nombre === nombre);
+  if (existente) {
+    existente.cantidad++;
+  } else {
+    carritoItems.push({ nombre, precio, cantidad: 1 });
+  }
+
+  guardarCarrito();
+  actualizarCarrito();
+  mostrarToast(`${nombre} agregado al carrito`);
+  carrito?.classList.remove("oculto");
+}
+
 
   function toggleFavorito(e) {
     const btn = e.currentTarget;
