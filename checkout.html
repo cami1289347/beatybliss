@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pago - Beauty Bliss</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #e91e63;
@@ -17,11 +18,12 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background-color: var(--background);
       color: var(--dark);
       margin: 0;
       padding: 0;
+      line-height: 1.6;
     }
 
     /* Cabecera */
@@ -69,35 +71,37 @@
     .main-nav {
       display: flex;
       justify-content: center;
-      background-color: #f9f9f9;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-      padding: 0.5rem 0;
+      background-color: var(--primary);
+      padding: 0.8rem 0;
     }
 
     .main-nav a {
-      padding: 0.5rem 1rem;
-      margin: 0 10px;
-      color: #333;
+      padding: 0.5rem 1.5rem;
+      margin: 0 5px;
+      color: white;
       text-decoration: none;
-      transition: color 0.3s;
+      font-weight: 500;
+      border-radius: 20px;
+      transition: all 0.3s;
     }
 
     .main-nav a:hover {
-      color: var(--primary);
+      background-color: rgba(255,255,255,0.2);
     }
 
     /* Botón Volver */
     .btn-volver {
-      display: inline-block;
-      margin: 1rem 2rem;
-      padding: 0.5rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      margin: 1.5rem 2rem;
+      padding: 0.6rem 1.2rem;
       background-color: var(--primary);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       text-decoration: none;
       transition: background-color 0.3s;
+      font-weight: 500;
     }
 
     .btn-volver:hover {
@@ -105,7 +109,7 @@
     }
 
     .btn-volver i {
-      margin-right: 5px;
+      margin-right: 8px;
     }
 
     /* Contenedor principal */
@@ -124,55 +128,34 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: var(--shadow);
+      max-width: 400px;
+    }
+
+    .resumen-compra h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      border-bottom: 2px solid var(--gray);
+      padding-bottom: 0.5rem;
     }
 
     .producto-carrito {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      background-color: var(--light);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray);
     }
 
-    .info-producto {
-      flex: 2;
+    .producto-carrito h4 {
+      font-size: 1.1rem;
+      margin: 0 0 0.3rem 0;
+      color: var(--dark);
     }
 
-    .controles-producto {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .controles-producto button {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      border: 1px solid var(--gray);
-      background: white;
-      cursor: pointer;
-    }
-
-    .controles-producto input {
-      width: 40px;
-      text-align: center;
-    }
-
-    .eliminar-producto {
-      background: none;
-      border: none;
-      color: var(--primary);
-      cursor: pointer;
-    }
-
-    .precio-producto {
-      color: var(--primary);
-      font-weight: 600;
-      min-width: 80px;
-      text-align: right;
+    .producto-carrito p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9rem;
     }
 
     .total-compra {
@@ -181,6 +164,7 @@
       text-align: right;
       padding-top: 1rem;
       border-top: 2px solid var(--gray);
+      font-size: 1.2rem;
     }
 
     /* Proceso de Pago */
@@ -190,30 +174,39 @@
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: var(--shadow);
-      max-width: 500px;
+      max-width: 400px;
+    }
+
+    .proceso-pago h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      border-bottom: 2px solid var(--gray);
+      padding-bottom: 0.5rem;
     }
 
     .metodo-pago {
-      text-align: center;
-      margin-bottom: 2rem;
+      margin: 2rem 0;
       display: none;
     }
 
-    .metodo-pago h2 {
+    .metodo-pago h3 {
+      font-family: 'Playfair Display', serif;
       color: var(--primary);
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
     }
 
     .opciones-pago {
       display: flex;
-      justify-content: center;
       gap: 1rem;
       margin-top: 1.5rem;
     }
 
     .opcion-pago {
-      padding: 0.8rem 1.5rem;
+      flex: 1;
+      padding: 0.8rem;
       border: 2px solid var(--primary);
       border-radius: 8px;
       background: white;
@@ -221,10 +214,7 @@
       transition: all 0.3s;
       font-weight: 500;
       color: black;
-    }
-
-    .opcion-pago:hover {
-      background: #f8f8f8;
+      text-align: center;
     }
 
     .opcion-pago.active {
@@ -232,13 +222,20 @@
       color: white;
     }
 
-    .formulario-tarjeta {
-      margin-top: 2rem;
+    .formulario-tarjeta, .qr-container {
+      margin-top: 1.5rem;
       display: none;
     }
 
+    .formulario-tarjeta h4, .qr-container h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
     .input-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .input-group label {
@@ -253,6 +250,11 @@
       border: 1px solid var(--gray);
       border-radius: 8px;
       font-size: 1rem;
+    }
+
+    .fila-inputs {
+      display: flex;
+      gap: 1rem;
     }
 
     .boton-pago {
@@ -273,11 +275,25 @@
       background-color: var(--primary-dark);
     }
 
+    .qr-code {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .qr-code img {
+      max-width: 200px;
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      padding: 1rem;
+      background: white;
+    }
+
     @media (max-width: 768px) {
       .contenedor-pago {
         flex-direction: column;
+        padding: 1rem;
       }
-      .proceso-pago {
+      .resumen-compra, .proceso-pago {
         max-width: 100%;
       }
     }
@@ -285,41 +301,27 @@
 </head>
 <body>
 
-<body>
-
+<!-- Cabecera -->
 <header class="cabecera">
-  <!-- Parte superior: logo, buscador, íconos -->
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
-    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
+    <input type="text" class="buscador-header" placeholder="Buscar productos...">
     <div class="icons">
-      <div class="user-menu-wrapper">
-        <a href="login.html" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
-        <div class="user-dropdown" id="user-dropdown" style="display: none;">
-          <a href="perfil.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
-          <a href="compras.html"><i class="fas fa-shopping-bag"></i> Mis Compras</a>
-          <a href="index.html" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
-        </div>
-      </div>
+      <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
       <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
       <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
       <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
     </div>
   </div>
 
-  <!-- Barra de navegación debajo -->
   <nav class="main-nav">
-    <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="cuidado de la piel.html">Cuidado de la Piel</a>
-      <a href="maquillaje.html">Rostro</a>
-      <a href="cabello.html">Cabello</a>
-      <a href="labios.html">Labios</a>
-      <a href="uñas.html">Uñas</a>
-    </div>
+    <a href="index.html">Inicio</a>
+    <a href="cuidado-de-la-piel.html">Cuidado Facial</a>
+    <a href="cabello.html">Cabello</a>
+    <a href="labios.html">Labios</a>
+    <a href="uñas.html">Uñas</a>
   </nav>
 </header>
-
 
 <!-- Botón Volver -->
 <a href="javascript:history.back()" class="btn-volver">
@@ -331,159 +333,94 @@
   <!-- Resumen de Compra -->
   <div class="resumen-compra">
     <h2>Resumen de Compra</h2>
-    <div id="lista-productos">
-      <!-- Productos se agregarán dinámicamente aquí -->
-      <div class="producto-carrito">
-        <div class="info-producto">
-          <h4>Crema Hidratante Noche</h4>
-          <p>L'Oreal - Emmen</p>
-        </div>
-        <div class="controles-producto">
-          <button onclick="cambiarCantidad(0, -1)">-</button>
-          <input type="number" value="1" min="1" readonly>
-          <button onclick="cambiarCantidad(0, 1)">+</button>
-        </div>
-        <button class="eliminar-producto" onclick="eliminarProducto(0)">Eliminar</button>
-        <div class="precio-producto">S/ 22.90</div>
-      </div>
-      
-      <div class="producto-carrito">
-        <div class="info-producto">
-          <h4>Protector Solar Facial</h4>
-          <p>L'Oreal - Emmen</p>
-        </div>
-        <div class="controles-producto">
-          <button onclick="cambiarCantidad(1, -1)">-</button>
-          <input type="number" value="1" min="1" readonly>
-          <button onclick="cambiarCantidad(1, 1)">+</button>
-        </div>
-        <button class="eliminar-producto" onclick="eliminarProducto(1)">Eliminar</button>
-        <div class="precio-producto">S/ 20.00</div>
-      </div>
+    
+    <div class="producto-carrito">
+      <h4>Crema Hidratante Noche</h4>
+      <p>L'Oreal - Emmen</p>
+      <p>S/ 22.90</p>
+    </div>
+    
+    <div class="producto-carrito">
+      <h4>Protector Solar Facial</h4>
+      <p>L'Oreal - Emmen</p>
+      <p>S/ 20.00</p>
     </div>
     
     <div class="total-compra">
-      <p>Total: <span id="total-carrito">S/ 42.90</span></p>
+      <p>Total: <span>S/ 42.90</span></p>
     </div>
   </div>
 
   <!-- Proceso de Pago -->
   <div class="proceso-pago">
     <h2>Resumen de Pago</h2>
-    <p id="total-pago" class="total-compra">Total: S/ 42.90</p>
+    <p class="total-compra">Total: S/ 42.90</p>
     
     <button class="boton-pago" id="btn-realizar-pago">Realizar Pago</button>
 
     <div class="metodo-pago">
-      <h2>Selecciona el Método de Pago</h2>
+      <h3>Selecciona el Método de Pago</h3>
       <div class="opciones-pago">
-        <div class="opcion-pago active" onclick="mostrarFormularioTarjeta()">Tarjeta</div>
-        <div class="opcion-pago" onclick="mostrarQR()">Yape/Plin</div>
+        <div class="opcion-pago active" onclick="mostrarFormularioTarjeta()">
+          <i class="fas fa-credit-card"></i> Tarjeta
+        </div>
+        <div class="opcion-pago" onclick="mostrarQR()">
+          <i class="fas fa-mobile-alt"></i> Yape/Plin
+        </div>
       </div>
     </div>
 
     <div class="formulario-tarjeta">
-      <h3>Formulario de Pago con Tarjeta</h3>
+      <h4>Formulario de Pago con Tarjeta</h4>
       <div class="input-group">
-        <label for="nombre-titular">Nombre del Titular</label>
-        <input type="text" id="nombre-titular" placeholder="Ej: María López">
+        <label>Nombre del Titular</label>
+        <input type="text" placeholder="Ej: María López">
       </div>
       <div class="input-group">
-        <label for="numero-tarjeta">Número de Tarjeta</label>
-        <input type="text" id="numero-tarjeta" placeholder="0000 0000 0000 0000">
+        <label>Número de Tarjeta</label>
+        <input type="text" placeholder="0000 0000 0000 0000">
       </div>
-      <div style="display: flex; gap: 1rem;">
+      <div class="fila-inputs">
         <div class="input-group" style="flex: 1;">
-          <label for="fecha-expiracion">Fecha Expiración (MM/AA)</label>
-          <input type="text" id="fecha-expiracion" placeholder="MM/AA">
+          <label>Fecha Expiración (MM/AA)</label>
+          <input type="text" placeholder="MM/AA">
         </div>
         <div class="input-group" style="flex: 1;">
-          <label for="cvv">CVV</label>
-          <input type="text" id="cvv" placeholder="123">
+          <label>CVV</label>
+          <input type="text" placeholder="123">
         </div>
       </div>
-      <button class="boton-pago" onclick="procesarPagoTarjeta()">Pagar con Tarjeta</button>
+      <button class="boton-pago">Pagar con Tarjeta</button>
+    </div>
+
+    <div class="qr-container">
+      <h4>Pago con Yape/Plin</h4>
+      <div class="qr-code">
+        <img src="codigoqr.jpg" alt="Código QR">
+        <p>Nombre de la tienda: Beauty Bliss</p>
+      </div>
+      <button class="boton-pago" id="btn-pagado">Ya Pagué</button>
     </div>
   </div>
 </div>
 
 <script>
-  // Datos del carrito
-  let carrito = [
-    { id: 1, nombre: "Crema Hidratante Noche", marca: "L'Oreal", linea: "Emmen", precio: 22.90, cantidad: 1 },
-    { id: 2, nombre: "Protector Solar Facial", marca: "L'Oreal", linea: "Emmen", precio: 20.00, cantidad: 1 }
-  ];
-
-  // Función para actualizar el carrito
-  function actualizarCarrito() {
-    const listaProductos = document.getElementById('lista-productos');
-    listaProductos.innerHTML = '';
-    
-    let total = 0;
-    
-    carrito.forEach((producto, index) => {
-      total += producto.precio * producto.cantidad;
-      
-      const productoHTML = `
-        <div class="producto-carrito">
-          <div class="info-producto">
-            <h4>${producto.nombre}</h4>
-            <p>${producto.marca} - ${producto.linea}</p>
-          </div>
-          <div class="controles-producto">
-            <button onclick="cambiarCantidad(${index}, -1)">-</button>
-            <input type="number" value="${producto.cantidad}" min="1" readonly>
-            <button onclick="cambiarCantidad(${index}, 1)">+</button>
-          </div>
-          <button class="eliminar-producto" onclick="eliminarProducto(${index})">Eliminar</button>
-          <div class="precio-producto">S/ ${(producto.precio * producto.cantidad).toFixed(2)}</div>
-        </div>
-      `;
-      
-      listaProductos.innerHTML += productoHTML;
-    });
-    
-    document.getElementById('total-carrito').textContent = `S/ ${total.toFixed(2)}`;
-    document.getElementById('total-pago').textContent = `Total: S/ ${total.toFixed(2)}`;
-  }
-
-  // Funciones para modificar el carrito
-  function cambiarCantidad(index, cambio) {
-    carrito[index].cantidad += cambio;
-    
-    if (carrito[index].cantidad < 1) {
-      carrito[index].cantidad = 1;
-    }
-    
-    actualizarCarrito();
-  }
-
-  function eliminarProducto(index) {
-    carrito.splice(index, 1);
-    actualizarCarrito();
-  }
-
-  // Verificación de sesión
+  // Mostrar métodos de pago al hacer clic en "Realizar Pago"
   document.getElementById('btn-realizar-pago').addEventListener('click', function() {
-    const usuarioGuardado = localStorage.getItem('usuarioActual');
+    const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
     
-    if (usuarioGuardado) {
-      const usuario = JSON.parse(usuarioGuardado);
-      if (usuario.loggedIn) {
-        document.querySelector('.metodo-pago').style.display = 'block';
-        this.style.display = 'none';
-      } else {
-        alert('Por favor inicia sesión para continuar con el pago');
-        window.location.href = 'registro.html';
-      }
+    if (usuario && usuario.loggedIn) {
+      document.querySelector('.metodo-pago').style.display = 'block';
+      this.style.display = 'none';
     } else {
-      alert('Debes registrarte para realizar pagos');
+      alert('Por favor inicia sesión para continuar con el pago');
       window.location.href = 'registro.html';
     }
   });
 
   function mostrarFormularioTarjeta() {
     document.querySelector('.formulario-tarjeta').style.display = 'block';
+    document.querySelector('.qr-container').style.display = 'none';
     document.querySelectorAll('.opcion-pago').forEach(opcion => {
       opcion.classList.remove('active');
     });
@@ -491,46 +428,33 @@
   }
 
   function mostrarQR() {
-    alert("Mostraría el código QR aquí");
+    document.querySelector('.qr-container').style.display = 'block';
+    document.querySelector('.formulario-tarjeta').style.display = 'none';
     document.querySelectorAll('.opcion-pago').forEach(opcion => {
       opcion.classList.remove('active');
     });
     event.target.classList.add('active');
   }
 
-  function procesarPagoTarjeta() {
-    const nombre = document.getElementById('nombre-titular').value.trim();
-    const tarjeta = document.getElementById('numero-tarjeta').value.trim();
-    const fecha = document.getElementById('fecha-expiracion').value.trim();
-    const cvv = document.getElementById('cvv').value.trim();
+  // Botón "Ya Pagué"
+  document.getElementById('btn-pagado').addEventListener('click', function() {
+    alert('¡Gracias por tu compra! Tu pago está siendo verificado.');
+    // Aquí iría la lógica para vaciar el carrito y redirigir
+  });
 
-    if (!nombre || !tarjeta || !fecha || !cvv) {
-      alert("Por favor complete todos los campos");
+  // Validación de formulario de tarjeta (ejemplo básico)
+  document.querySelector('.formulario-tarjeta .boton-pago').addEventListener('click', function() {
+    const nombre = document.querySelector('#nombre-titular').value.trim();
+    const tarjeta = document.querySelector('#numero-tarjeta').value.trim();
+    
+    if (!nombre || !tarjeta) {
+      alert('Por favor completa todos los campos');
       return;
     }
-
-    if (!/^\d{16}$/.test(tarjeta.replace(/\s/g, ''))) {
-      alert("Número de tarjeta inválido (deben ser 16 dígitos)");
-      return;
-    }
-
-    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha)) {
-      alert("Formato de fecha inválido (MM/AA)");
-      return;
-    }
-
-    if (!/^\d{3}$/.test(cvv)) {
-      alert("CVV inválido (deben ser 3 dígitos)");
-      return;
-    }
-
-    alert(`Pago exitoso!\nGracias por su compra ${nombre}`);
-    carrito = [];
-    actualizarCarrito();
-  }
-
-  // Inicializar el carrito
-  actualizarCarrito();
+    
+    alert('¡Pago exitoso! Gracias por tu compra.');
+    // Aquí iría la lógica para procesar el pago
+  });
 </script>
 
 </body>
