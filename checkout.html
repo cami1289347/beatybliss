@@ -694,23 +694,10 @@ footer {
 </div>
 
 <script>
-  // Datos del carrito (ejemplo inicial)
-  let carrito = JSON.parse(localStorage.getItem('carrito')) || [
-    { 
-      id: 1, 
-      nombre: "Crema Hidratante Noche", 
-      marca: "L'Oreal", 
-      precio: 22.90,
-      cantidad: 1
-    },
-    { 
-      id: 2, 
-      nombre: "Protector Solar Facial", 
-      marca: "L'Oreal", 
-      precio: 20.00,
-      cantidad: 1
-    }
-  ];
+  
+  let carritoGuardado = localStorage.getItem('carrito');
+let carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
+
 
   // Función para actualizar el carrito
   function actualizarCarrito() {
@@ -830,44 +817,37 @@ footer {
     document.getElementById('btn-pagar-tarjeta').disabled = !valido;
   }
 
-  // Procesar pago con tarjeta
-  function procesarPagoTarjeta() {
+ function procesarPagoTarjeta() {
+    // Validaciones
     const nombre = document.getElementById('nombre-titular').value.trim();
     const tarjeta = document.getElementById('numero-tarjeta').value.trim();
     const fecha = document.getElementById('fecha-expiracion').value.trim();
     const cvv = document.getElementById('cvv').value.trim();
 
     if (!nombre || !tarjeta || !fecha || !cvv) {
-      alert('Por favor completa todos los campos');
-      return;
+        alert('Por favor completa todos los campos');
+        return;
     }
 
     if (!/^\d{16}$/.test(tarjeta.replace(/\s/g, ''))) {
-      alert('Número de tarjeta inválido (deben ser 16 dígitos)');
-      return;
+        alert('Número de tarjeta inválido (deben ser 16 dígitos)');
+        return;
     }
 
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha)) {
-      alert('Formato de fecha inválido (MM/AA)');
-      return;
+        alert('Formato de fecha inválido (MM/AA)');
+        return;
     }
 
     if (!/^\d{3}$/.test(cvv)) {
-      alert('CVV inválido (deben ser 3 dígitos)');
-      return;
+        alert('CVV inválido (deben ser 3 dígitos)');
+        return;
     }
 
-    alert('¡Pago exitoso! Gracias por tu compra.');
-    carrito = [];
-    actualizarCarrito();
-    window.location.href = 'index.html';
-  }
-
-// Modificar las funciones de pago para usar completePurchase
-function procesarPagoTarjeta() {
-    // ... validaciones previas ...
+    // Si todo está bien, completar compra
     completePurchase('tarjeta');
 }
+
 
 // Y en el botón "Ya Pagué"
 document.getElementById('btn-pagado').addEventListener('click', function() {
