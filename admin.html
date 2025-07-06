@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administrador</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="header-top">
+      <img src="logo.png" alt="Logo de Beauty Bliss" class="logo">
+      <h2 style="color:#e91e63; font-size: 1.5rem;">Beauty Bliss - Panel de Administración</h2>
+    </div>
+  </header>
+
+  <main style="background-color: #ffe6f0; padding: 4rem 2rem; text-align:center;">
+    <h1 style="color: #e91e63; font-size: 2.5rem; margin-bottom: 3rem;">Hola Administrador</h1>
+
+    <div style="display:flex; justify-content:center; gap:2rem; flex-wrap: wrap;">
+      <a href="agregar.html" class="opcion-admin">
+        <img src="agregar.png" alt="Agregar Producto" class="icon-admin">
+        <h3>Agregar Productos</h3>
+      </a>
+
+      <a href="eliminar.html" class="opcion-admin">
+        <img src="eliminar.png" alt="Eliminar Producto" class="icon-admin">
+        <h3>Eliminar Productos</h3>
+      </a>
+
+      <a href="editar.html" class="opcion-admin">
+        <img src="editar.png" alt="Editar Producto" class="icon-admin">
+        <h3>Editar Productos</h3>
+      </a>
+
+      <a href="ventas.html" class="opcion-admin">
+        <img src="ventas.png" alt="Ver Ventas" class="icon-admin">
+        <h3>Ver Ventas</h3>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-col">
+      <h4>Beauty Bliss</h4>
+      <a href="#">Sobre Nosotros</a>
+      <a href="#">Soporte</a>
+      <a href="#">Términos</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="#">Preguntas Frecuentes</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-col">
+      <h4>Síguenos</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="copyright">
+      &copy; 2025 Beauty Bliss. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <style>
+    .opcion-admin {
+      background: white;
+      border-radius: 16px;
+      width: 200px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #e91e63;
+      font-weight: bold;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .opcion-admin:hover {
+      transform: scale(1.05);
+    }
+
+    .icon-admin {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-around;
+      background: #fff;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 10px;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .footer-col a:hover {
+      color: #e91e63;
+    }
+
+    .copyright {
+      width: 100%;
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</body>
+</html>
+
