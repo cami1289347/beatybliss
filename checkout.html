@@ -121,6 +121,7 @@
 
   <div class="pago">
     <h2>Resumen de Pago</h2>
+    <p id="total-pago" class="total">Total: S/ 0.00</p>
     <button class="boton-pago" onclick="realizarPago()">Realizar Pago</button>
   </div>
 </main>
@@ -161,14 +162,17 @@
     if (carritoItems.length === 0) {
       carritoLista.innerHTML = "<li>Carrito vacío</li>";
       document.getElementById("total").textContent = "Total: S/ 0.00";
+      document.getElementById("total-pago").textContent = "Total: S/ 0.00";
       return;
     }
+
+    let total = 0;
 
     carritoItems.forEach((item, index) => {
       const li = document.createElement("li");
       li.className = "producto-carrito";
       li.innerHTML = `
-        <img src="uñas/PRO7312.jpg" alt="${item.nombre}">
+        <img src="${item.imagen}" alt="${item.nombre}">
         <div>
           <h4>${item.nombre}</h4>
           <div class="cantidad">
@@ -181,10 +185,11 @@
         <p class="precio">S/ ${item.precio.toFixed(2)}</p>
       `;
       carritoLista.appendChild(li);
+      total += item.precio * item.cantidad; // Sumar al total
     });
 
-    const total = carritoItems.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     document.getElementById("total").textContent = `Total: S/ ${total.toFixed(2)}`;
+    document.getElementById("total-pago").textContent = `Total: S/ ${total.toFixed(2)}`;
   }
 
   function cambiarCantidad(index, cambio) {
