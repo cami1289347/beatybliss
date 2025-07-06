@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     configurarLogin();
     configurarMenuUsuario();
     configurarPerfil();
+    
   }
 
   function configurarMenuUsuario() {
@@ -56,7 +57,28 @@ document.addEventListener('DOMContentLoaded', function () {
       userIcon.href = 'login.html';
     }
   }
+function actualizarCarrito() {
+    carritoLista.innerHTML = "";
 
+    if (carritoItems.length === 0) {
+      carritoLista.innerHTML = "<li>Carrito vacío</li>";
+      totalElemento.textContent = "Total: S/ 0.00";
+      return;
+    }
+
+    carritoItems.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${item.nombre} - S/ ${item.precio.toFixed(2)} 
+        <button class="cantidad-btn" data-index="${index}" data-change="-1">-</button>
+        ${item.cantidad}
+        <button class="cantidad-btn" data-index="${index}" data-change="1">+</button>
+        <button class="eliminar-btn" data-index="${index}">✕</button>
+      `;
+      carritoLista.appendChild(li);
+    });
+
+  
   function cargarDatos() {
     const datosGuardados = localStorage.getItem("carrito");
     if (datosGuardados) {
@@ -226,27 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  function actualizarCarrito() {
-    carritoLista.innerHTML = "";
-
-    if (carritoItems.length === 0) {
-      carritoLista.innerHTML = "<li>Carrito vacío</li>";
-      totalElemento.textContent = "Total: S/ 0.00";
-      return;
-    }
-
-    carritoItems.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        ${item.nombre} - S/ ${item.precio.toFixed(2)} 
-        <button class="cantidad-btn" data-index="${index}" data-change="-1">-</button>
-        ${item.cantidad}
-        <button class="cantidad-btn" data-index="${index}" data-change="1">+</button>
-        <button class="eliminar-btn" data-index="${index}">✕</button>
-      `;
-      carritoLista.appendChild(li);
-    });
-
+  
     carritoLista.querySelectorAll(".cantidad-btn").forEach(btn => {
       btn.addEventListener("click", function () {
         const index = parseInt(this.dataset.index);
