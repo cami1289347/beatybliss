@@ -64,11 +64,17 @@
             font-size: 1rem;
         }
         
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+        
         .icons a {
             color: #555;
             font-size: 1.3rem;
             margin-left: 15px;
             transition: color 0.3s;
+            text-decoration: none;
         }
         
         .icons a:hover {
@@ -177,6 +183,9 @@
             align-items: center;
             width: 100%;
             margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
         }
         
         .product-image {
@@ -199,6 +208,11 @@
         
         .product-price {
             color: var(--primary);
+        }
+        
+        .product-quantity {
+            color: #666;
+            font-size: 0.9rem;
         }
         
         .order-summary {
@@ -296,6 +310,7 @@
             padding: 10px;
             z-index: 1000;
             width: 150px;
+            display: none;
         }
 
         .user-menu a {
@@ -355,12 +370,12 @@
             <input type="text" class="buscador-header" placeholder="Buscar productos...">
             <div class="icons">
                 <a href="#" title="Usuario" id="user-icon"><i class="fas fa-user"></i></a>
-                <div id="user-menu" class="user-menu" style="display: none;">
+                <div id="user-menu" class="user-menu">
                     <a href="perfil.html"><i class="fas fa-user-circle"></i> Perfil</a>
                     <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
                 </div>
-                <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
-                <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+                <a href="favoritos.html" title="Favoritos"><i class="fas fa-heart"></i></a>
+                <a href="carrito.html" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
                 <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
             </div>
         </div>
@@ -421,7 +436,7 @@
     </footer>
 
     <script>
-        // Menú de usuario
+        // Función para mostrar/ocultar menú de usuario
         document.getElementById('user-icon').addEventListener('click', function(event) {
             event.preventDefault();
             const userMenu = document.getElementById('user-menu');
@@ -438,9 +453,9 @@
             }
         });
 
+        // Función para cerrar sesión
         document.getElementById('logout').addEventListener('click', function(e) {
             e.preventDefault();
-            // Lógica para cerrar sesión
             localStorage.removeItem('usuarioActual');
             window.location.href = 'index.html';
         });
@@ -472,48 +487,24 @@
             const ordersContainer = document.getElementById('orders-container');
             const emptyOrders = document.getElementById('empty-orders');
             
-            // Obtener pedidos del localStorage o usar datos de ejemplo
+            // Obtener pedidos del localStorage
             let allOrders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
             
-            // Si no hay pedidos, usar datos de ejemplo para demostración
-            if (allOrders.length === 0) {
-                allOrders = [
-                    {
-                        id: "BB-471348",
-                        userId: user.id,
-                        date: "06 jul 2025",
-                        products: [
-                            {
-                                name: "Crema Hidratante Facial",
-                                price: 45.00,
-                                quantity: 1,
-                                image: "producto1.jpg"
-                            },
-                            {
-                                name: "Labial Matte Rojo",
-                                price: 29.00,
-                                quantity: 2,
-                                image: "producto2.jpg"
-                            }
-                        ],
-                        total: 103.00
-                    },
-                    {
-                        id: "BB-229789",
-                        userId: user.id,
-                        date: "06 jul 2025",
-                        products: [
-                            {
-                                name: "Shampoo Reparador",
-                                price: 32.00,
-                                quantity: 1,
-                                image: "producto3.jpg"
-                            }
-                        ],
-                        total: 32.00
-                    }
-                ];
+            // Si no hay pedidos, verificar si hay datos en el carrito completado
+            const completedCheckout = JSON.parse(localStorage.getItem('checkoutCompletado'));
+            if (allOrders.length === 0 && completedCheckout) {
+                // Crear un nuevo pedido desde el checkout
+                const newOrder = {
+                    id: "BB-" + Math.floor(100000 + Math.random() * 900000),
+                    userId: user.id,
+                    date: new Date().toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' }),
+                    products: completedCheckout.productos || [],
+                    total: completedCheckout.total || 0
+                };
+                
+                allOrders.push(newOrder);
                 localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
+                localStorage.removeItem('checkoutCompletado'); // Limpiar el checkout
             }
             
             // Filtrar solo los pedidos del usuario actual
@@ -527,6 +518,9 @@
             
             emptyOrders.style.display = 'none';
             ordersContainer.innerHTML = '';
+            
+            // Ordenar pedidos por fecha (más reciente primero)
+            userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
             
             userOrders.forEach(order => {
                 const orderCard = document.createElement('div');
@@ -545,11 +539,11 @@
                     <div class="order-details">
                         ${order.products.map(product => `
                             <div class="product-item">
-                                <img src="${product.image || 'producto-default.jpg'}" alt="${product.name}" class="product-image">
+                                <img src="${product.imagen || 'img/producto-default.jpg'}" alt="${product.nombre}" class="product-image">
                                 <div class="product-info">
-                                    <div class="product-name">${product.name}</div>
-                                    <div>Cantidad: ${product.quantity || 1}</div>
-                                    <div class="product-price">S/ ${(product.price * (product.quantity || 1)).toFixed(2)}</div>
+                                    <div class="product-name">${product.nombre || 'Producto'}</div>
+                                    <div class="product-quantity">Cantidad: ${product.cantidad || 1}</div>
+                                    <div class="product-price">S/ ${(product.precio * (product.cantidad || 1)).toFixed(2)}</div>
                                 </div>
                             </div>
                         `).join('')}
