@@ -525,4 +525,9 @@ function guardarUsuarioActualizado() {
     verificarCambios();
   }
 
+}
+
+function procederAlPago() {
+    guardarCarrito(); // Asegúrate de que el carrito esté guardado
+    window.location.href = 'pago.html'; // Redirigir a la página de pago
 });
