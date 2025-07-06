@@ -131,16 +131,29 @@
   <h1>Agregar Productos</h1>
 
   <section class="formulario-producto">
-    <input type="text" id="nombre" placeholder="Nombre">
-    <input type="text" id="marca" placeholder="Marca">
-    <input type="text" id="tipo" placeholder="Tipo">
-    <input type="text" id="tono" placeholder="Tono/Color">
-    <input type="text" id="presentacion" placeholder="Presentación">
-    <input type="number" id="precio" placeholder="Precio">
-    <input type="number" id="stock" placeholder="Stock">
-    <input type="text" id="categoria" placeholder="Categoría">
-    <button onclick="agregarProducto()">Agregar producto</button>
-  </section>
+  <input type="text" id="nombre" placeholder="Nombre">
+  <input type="text" id="marca" placeholder="Marca">
+  <input type="text" id="tipo" placeholder="Tipo">
+  <input type="text" id="tono" placeholder="Tono/Color">
+  <input type="text" id="presentacion" placeholder="Presentación">
+  <input type="number" id="precio" placeholder="Precio">
+  <input type="number" id="stock" placeholder="Stock">
+
+  <!-- Selección de categoría limitada -->
+  <select id="categoria">
+    <option value="">Selecciona una categoría</option>
+    <option value="cuidado facial">Cuidado Facial</option>
+    <option value="rostro">Rostro</option>
+    <option value="cabello">Cabello</option>
+    <option value="labios">Labios</option>
+    <option value="uñas">Uñas</option>
+  </select>
+
+  <!-- Subida de imagen -->
+  <input type="file" id="imagen" accept="image/*">
+
+  <button onclick="agregarProducto()">Agregar producto</button>
+</section>
 
   <section class="grid-productos" id="lista-productos">
     <!-- Aquí se mostrarán los productos agregados -->
@@ -151,53 +164,60 @@
   </footer>
 
   <script>
-    const productos = [
-      
-    ];
+    let productos = [];
 
-    const contenedor = document.getElementById('lista-productos');
+const productosPorDefecto = [
+  { img:'labios/PRO9974.jpg', nombre: 'Labial Rojo Oscuro - Maybelline', precioOriginal: 25, precio: 19 },
+    { img: 'labios/PRO2354.jpg', nombre: 'Brillo Labial Rosa - NYX', precio: 17 },
+    { img: 'labios/PRO4567.jpg', nombre: 'Brillo Labial Transparente - NYX', precioOriginal: 15, precio: 13 },
+    { img: 'labios/PRO9210.jpg', nombre: 'Labial Liquido Mate Rojo - Loreal', precio: 21 },
+    { img: 'labios/PRO6823.jpg', nombre: 'Labial Liquido Mate Nude - Loreal', precio: 21 }
+  ];
 
-    function mostrarProductos() {
-      contenedor.innerHTML = '';
-      productos.forEach(p => {
-        const prod = document.createElement('div');
-        prod.className = 'producto';
-        prod.innerHTML = `
-          <img src="${p.img}" alt="${p.nombre}">
-          <h4>${p.nombre}</h4>
-          <p>
-            ${p.precioOriginal ? `<span class='precio-original'>S/ ${p.precioOriginal.toFixed(2)}</span>` : ''}
-            <span class='precio-descuento'>S/ ${p.precio.toFixed(2)}</span>
-          </p>
-        `;
-        contenedor.appendChild(prod);
-      });
+  const contenedor = document.getElementById('lista-productos');
+
+  function mostrarProductos() {
+    contenedor.innerHTML = '';
+    productos.forEach(p => {
+      const prod = document.createElement('div');
+      prod.className = 'producto';
+      prod.innerHTML = `
+        <img src="${p.img}" alt="${p.nombre}">
+        <h4>${p.nombre}</h4>
+        <p>
+          ${p.precioOriginal ? `<span class='precio-original'>S/ ${p.precioOriginal.toFixed(2)}</span>` : ''}
+          <span class='precio-descuento'>S/ ${p.precio.toFixed(2)}</span>
+        </p>
+      `;
+      contenedor.appendChild(prod);
+    });
+  }
+
+  function agregarProducto() {
+    const nuevo = {
+      img: 'default.jpg',
+      nombre: document.getElementById('nombre').value,
+      precio: parseFloat(document.getElementById('precio').value),
+    };
+    productos.push(nuevo);
+    mostrarProductos();
+  }
+
+  function guardarEnLocalStorage() {
+    localStorage.setItem('productos', JSON.stringify(productos));
+    alert("Cambios guardados correctamente.");
+  }
+
+  // Esta función se ejecuta cuando se carga la página
+  window.onload = () => {
+    const guardados = localStorage.getItem('productos');
+    if (guardados) {
+      productos = JSON.parse(guardados);
+    } else {
+      productos = [...productosPorDefecto];
     }
-
-    function agregarProducto() {
-      const nuevo = {
-        img: 'default.jpg',
-        nombre: document.getElementById('nombre').value,
-        precio: parseFloat(document.getElementById('precio').value),
-      };
-      productos.push(nuevo);
-      mostrarProductos();
-    }
-
-    function guardarEnLocalStorage() {
-      localStorage.setItem('productos', JSON.stringify(productos));
-      alert("Cambios guardados correctamente.");
-    }
-
-    function cargarDesdeLocalStorage() {
-      const guardados = localStorage.getItem('productos');
-      if (guardados) {
-        productos.push(...JSON.parse(guardados));
-        mostrarProductos();
-      }
-    }
-
-    cargarDesdeLocalStorage();
-  </script>
+    mostrarProductos();
+  };
+</script>
 </body>
 </html>
