@@ -25,6 +25,44 @@
       margin-bottom: 1rem;
     }
 
+    .producto-carrito {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    .producto-carrito img {
+      width: 40px; /* Disminuir el tamaño de la imagen */
+      height: 40px; /* Disminuir el tamaño de la imagen */
+      object-fit: cover;
+      margin-right: 1rem;
+    }
+
+    .producto-carrito div {
+      flex: 1; /* Permitir que el div ocupe el espacio disponible */
+      text-align: center; /* Centrar el texto dentro del div */
+    }
+
+    .producto-carrito h4 {
+      margin: 0; /* Eliminar margen para mejor alineación */
+    }
+
+    .cantidad {
+      display: flex;
+      align-items: center;
+    }
+
+    .cantidad input {
+      width: 40px;
+      text-align: center;
+      margin: 0 5px;
+    }
+
     .pago {
       flex: 1;
       border: 1px solid #ccc;
@@ -70,6 +108,12 @@
     .qr-code {
       display: none; /* Ocultar inicialmente */
       margin-top: 1rem;
+    }
+
+    .qr-code img {
+      width: 100px; /* Disminuir el tamaño de la imagen del QR */
+      height: 100px; /* Disminuir el tamaño de la imagen del QR */
+      object-fit: cover; /* Mantener la proporción de la imagen */
     }
   </style>
 </head>
@@ -128,7 +172,7 @@
     <div class="qr-code">
       <h3>Código QR para Yape/Plin</h3>
       <p>Nombre de la tienda: Beauty Bliss</p>
-      <img src="codigoqr.jpg" alt="Código QR"> <!-- Cambia esta ruta por la de tu código QR -->
+      <img src="codidoqr.jpg" alt="Código QR"> <!-- Cambia esta ruta por la de tu código QR -->
     </div>
   </div>
 </main>
@@ -219,8 +263,8 @@
   }
 
   function verificarSesion() {
-    const currentUser    = JSON.parse(localStorage.getItem('usuarioActual'));
-    if (!currentUser    || !currentUser   .loggedIn) {
+    const currentUser      = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (!currentUser      || !currentUser     .loggedIn) {
       alert("Por favor, regístrate o inicia sesión para proceder con el pago.");
       window.location.href = 'registro.html'; // Redirigir a la página de registro
     } else {
