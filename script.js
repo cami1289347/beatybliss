@@ -363,6 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
+
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const pinContainer = document.getElementById("pin-container");
@@ -371,41 +372,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const admin = administradores.find(a => a.email === email && a.password === password);
 
-   if (admin) {
-  // Mostrar contenedor del PIN si aún no está visible
-  if (pinContainer.style.display !== "block") {
-    pinContainer.style.display = "block";
-    mostrarToast("Por favor ingrese el PIN de administrador");
-    return; // 👈 Salir para esperar que el usuario ingrese el PIN
-  }
+    if (admin) {
+      // Mostrar PIN si no se ha mostrado aún
+      if (pinContainer.style.display !== "block") {
+        pinContainer.style.display = "block";
+        mostrarToast("Por favor ingrese el PIN de administrador");
+        return;
+      }
 
-  // Validar PIN solo si ya se mostró el campo y el usuario lo ingresó
-  if (pin === admin.pin) {
-    localStorage.setItem("usuarioActual", JSON.stringify({ ...admin, loggedIn: true, admin: true }));
-    window.location.href = "admin.html";
-  } else if (pin.length === 4) {
-    mostrarToast("PIN incorrecto");
-  } else {
-    mostrarToast("Por favor completa el PIN");
-  }
+      // Validar PIN ingresado
+      if (pin.length === 4) {
+        if (pin === admin.pin) {
+          localStorage.setItem("usuarioActual", JSON.stringify({ ...admin, loggedIn: true, admin: true }));
+          mostrarToast("Bienvenido administrador");
+          window.location.href = "admin.html";
+        } else {
+          mostrarToast("PIN incorrecto");
+        }
+      } else {
+        mostrarToast("Por favor completa el PIN");
+      }
 
-  return; // 👈 Evitar que siga con validación de usuario común
-}
-if (pin === admin.pin) {
-    localStorage.setItem("usuarioActual", JSON.stringify({ ...admin, loggedIn: true, admin: true }));
-    mostrarToast("Bienvenido administrador");
-    window.location.href = "admin.html";
-  } else {
-    mostrarToast("PIN incorrecto");
-  }
+      return; // 🛑 Finaliza aquí si es admin
+    }
 
-  return;
-}
-
-
-    // Usuarios normales
+    // Si no es admin, verificar como usuario normal
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    const usuario = usuarios.find(user => user.email === email && user.password === password);
+    const usuario = usuarios.find(user => user.correo === email && user.contrasena === password);
 
     if (usuario) {
       localStorage.setItem("usuarioActual", JSON.stringify({ ...usuario, loggedIn: true }));
@@ -416,6 +409,7 @@ if (pin === admin.pin) {
     }
   });
 }
+
 
 
   function mostrarToast(mensaje) {
