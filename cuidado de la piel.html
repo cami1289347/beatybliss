@@ -99,7 +99,20 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    
+    .header-top-container {
+  background-color: #ffeeeb;
+  width: 100%;                  /* el fondo rosado ocupa todo el ancho */
+}
+ .header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 2rem;
+  max-width: 1200px;            /* contenido limitado a 1200px */
+  margin: 0 auto;
+  background-color: #ffeeeb;
+}
 
     .logo {
       height: 50px;
@@ -128,20 +141,7 @@
       font-size: 1.2rem;
     }
 
-         .header-top-container {
-  background-color: #ffeeeb;
-  width: 100%;                  /* el fondo rosado ocupa todo el ancho */
-}
- .header-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 2rem;
-  gap: 2rem;
-  width: 100%;
-  background-color: #ffeeeb;
-}
-    .main-nav {
+     .main-nav {
       display: flex;
       justify-content: center;
       padding: 0.5rem 0; /* Ajusta el padding según sea necesario */
@@ -151,6 +151,7 @@
       width: 100%; /* Asegura que ocupe todo el ancho */
       margin: 0; /* Elimina el margen */
     }
+
 
     .main-nav a {
       padding: 0.5rem 1rem;
@@ -219,7 +220,7 @@
       border-radius: 5px; /* Bordes redondeados */
     }
 
-.cabecera {
+  .cabecera {
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin: 0; /* Elimina el margen */
@@ -227,7 +228,8 @@
   width: 100%; /* Asegura que ocupe todo el ancho */
   display: block; /* Asegura que los bloques estén uno debajo del otro */
 }
-  
+
+
 
 .logo {
   height: 50px;
@@ -252,7 +254,6 @@
 .icons a:hover {
   color: #e91e63;
 }
-
 
 .nav-links a {
   color: #333;
