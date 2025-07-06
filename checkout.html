@@ -161,25 +161,13 @@
     .producto-marca {
       color: #666;
       font-size: 0.9rem;
+      font-weight: 500;
     }
 
     .producto-acciones {
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-
-    .producto-acciones .estrella {
-      color: #FFD700;
-      font-size: 1rem;
-    }
-
-    .eliminar-producto {
-      background: none;
-      border: none;
-      color: var(--primary);
-      cursor: pointer;
-      font-size: 0.9rem;
     }
 
     .contador-cantidad {
@@ -206,6 +194,14 @@
     .contador-cantidad span {
       min-width: 20px;
       text-align: center;
+    }
+
+    .eliminar-producto {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 0.9rem;
     }
 
     .producto-precio {
@@ -486,7 +482,6 @@
       id: 1, 
       nombre: "Crema Hidratante Noche", 
       marca: "L'Oreal", 
-      linea: "Emmen", 
       precio: 22.90,
       cantidad: 1
     },
@@ -494,7 +489,6 @@
       id: 2, 
       nombre: "Protector Solar Facial", 
       marca: "L'Oreal", 
-      linea: "Emmen", 
       precio: 20.00,
       cantidad: 1
     }
@@ -514,7 +508,7 @@
         <div class="producto-item">
           <div class="producto-nombre">${producto.nombre}</div>
           <div class="producto-info">
-            <span class="producto-marca">${producto.marca} - ${producto.linea}</span>
+            <span class="producto-marca">${producto.marca}</span>
             <div class="producto-acciones">
               <div class="contador-cantidad">
                 <button onclick="disminuirCantidad(${index})">-</button>
