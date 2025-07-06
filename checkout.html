@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pago - Beauty Bliss</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --primary: #e91e63;
@@ -23,6 +24,91 @@
       padding: 0;
     }
 
+    /* Cabecera */
+    .cabecera {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .buscador-header {
+      flex: 1;
+      margin: 0 2rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 1rem;
+    }
+
+    .icons a {
+      color: #555;
+      font-size: 1.3rem;
+      margin-left: 15px;
+      transition: color 0.3s;
+    }
+
+    .icons a:hover {
+      color: var(--primary);
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      padding: 0.5rem 0;
+    }
+
+    .main-nav a {
+      padding: 0.5rem 1rem;
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: var(--primary);
+    }
+
+    /* Botón Volver */
+    .btn-volver {
+      display: inline-block;
+      margin: 1rem 2rem;
+      padding: 0.5rem 1rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-volver:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-volver i {
+      margin-right: 5px;
+    }
+
+    /* Contenedor principal */
     .contenedor-pago {
       display: flex;
       padding: 2rem;
@@ -31,21 +117,13 @@
       gap: 2rem;
     }
 
+    /* Resumen de Compra */
     .resumen-compra {
       flex: 1;
       background-color: var(--light);
       border-radius: 12px;
       padding: 1.5rem;
       box-shadow: var(--shadow);
-    }
-
-    .proceso-pago {
-      flex: 1;
-      background-color: var(--light);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-      max-width: 500px;
     }
 
     .producto-carrito {
@@ -105,7 +183,16 @@
       border-top: 2px solid var(--gray);
     }
 
-    /* Estilos para el proceso de pago (los mismos que antes) */
+    /* Proceso de Pago */
+    .proceso-pago {
+      flex: 1;
+      background-color: var(--light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      max-width: 500px;
+    }
+
     .metodo-pago {
       text-align: center;
       margin-bottom: 2rem;
@@ -198,6 +285,34 @@
 </head>
 <body>
 
+<!-- Cabecera -->
+<header class="cabecera">
+  <div class="header-top">
+    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+    <input type="text" class="buscador-header" placeholder="Buscar productos...">
+    <div class="icons">
+      <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
+      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+      <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <a href="index.html">Inicio</a>
+    <a href="cuidado-de-la-piel.html">Cuidado Facial</a>
+    <a href="cabello.html">Cabello</a>
+    <a href="labios.html">Labios</a>
+    <a href="uñas.html">Uñas</a>
+  </nav>
+</header>
+
+<!-- Botón Volver -->
+<a href="javascript:history.back()" class="btn-volver">
+  <i class="fas fa-arrow-left"></i> Volver
+</a>
+
+<!-- Contenido Principal -->
 <div class="contenedor-pago">
   <!-- Resumen de Compra -->
   <div class="resumen-compra">
