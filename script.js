@@ -537,6 +537,42 @@ function configurarPerfil() {
     );
   }
 
+function completePurchase(paymentMethod) {
+    const user = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (!user || !user.loggedIn) {
+        alert('Por favor inicia sesión para completar tu compra');
+        window.location.href = 'registro.html?action=login';
+        return;
+    }
+
+    // Crear objeto de pedido
+    const order = {
+        id: 'BB-' + Date.now().toString().slice(-6),
+        userId: user.id,
+        date: new Date().toLocaleDateString('es-ES', { 
+            day: '2-digit', 
+            month: 'short', 
+            year: 'numeric' 
+        }),
+        status: 'completado', // Cambiado de 'processing' a 'completado'
+        paymentMethod: paymentMethod,
+        products: [...carrito], // Copia de los productos del carrito
+        total: carrito.reduce((sum, product) => sum + (product.precio * product.cantidad), 0)
+    };
+
+    // Guardar en localStorage
+    const orders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
+    orders.unshift(order); // Agregar el nuevo pedido al inicio
+    localStorage.setItem('beautyBlissOrders', JSON.stringify(orders));
+
+    // Limpiar carrito
+    localStorage.removeItem('carrito');
+    
+    // Redirigir a la página de pedidos
+    window.location.href = 'pedidos.html';
+}
+
+  
   function verificarCambios() {
     if (hayCambios()) {
       botonGuardar.disabled = false;
