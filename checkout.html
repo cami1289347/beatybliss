@@ -898,16 +898,24 @@ document.getElementById('btn-pagado').addEventListener('click', function() {
         total: carrito.reduce((sum, product) => sum + (product.precio * product.cantidad), 0)
     };
 
-    // Guardar en localStorage
-    const orders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
-    orders.unshift(order); // Agregar el nuevo pedido al inicio
-    localStorage.setItem('beautyBlissOrders', JSON.stringify(orders));
+   // Guardar en localStorage
+const orders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
+orders.unshift(order); // Agregar el nuevo pedido al inicio
+localStorage.setItem('beautyBlissOrders', JSON.stringify(orders));
 
-    // Limpiar carrito
-    localStorage.removeItem('carrito');
-    
-    // Redirigir a la página de pedidos
-    window.location.href = 'pedidos.html';
+// GUARDAR checkoutCompletado (ESTO ES LO NUEVO Y NECESARIO)
+localStorage.setItem('checkoutCompletado', JSON.stringify({
+    pagoRealizado: true,
+    productos: order.products,
+    total: order.total
+}));
+
+// Limpiar carrito
+localStorage.removeItem('carrito');
+
+// Redirigir a la página de pedidos
+window.location.href = 'pedidos.html';
+
 }
      
   // Verificar estado de inicio de sesión al cargar la página
