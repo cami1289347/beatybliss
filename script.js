@@ -58,25 +58,84 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 function actualizarCarrito() {
-    carritoLista.innerHTML = "";
+  carritoLista.innerHTML = "";
 
-    if (carritoItems.length === 0) {
-      carritoLista.innerHTML = "<li>Carrito vacío</li>";
-      totalElemento.textContent = "Total: S/ 0.00";
-      return;
-    }
+  if (carritoItems.length === 0) {
+    carritoLista.innerHTML = "<li>Carrito vacío</li>";
+    totalElemento.textContent = "Total: S/ 0.00";
+    return;
+  }
 
-    carritoItems.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        ${item.nombre} - S/ ${item.precio.toFixed(2)} 
-        <button class="cantidad-btn" data-index="${index}" data-change="-1">-</button>
-        ${item.cantidad}
-        <button class="cantidad-btn" data-index="${index}" data-change="1">+</button>
-        <button class="eliminar-btn" data-index="${index}">✕</button>
-      `;
-      carritoLista.appendChild(li);
+  carritoItems.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${item.nombre} - S/ ${item.precio.toFixed(2)} 
+      <button class="cantidad-btn" data-index="${index}" data-change="-1">-</button>
+      ${item.cantidad}
+      <button class="cantidad-btn" data-index="${index}" data-change="1">+</button>
+      <button class="eliminar-btn" data-index="${index}">✕</button>
+    `;
+    carritoLista.appendChild(li);
+  });
+
+  // Botones para cambiar cantidad
+  carritoLista.querySelectorAll(".cantidad-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const index = parseInt(this.dataset.index);
+      const change = parseInt(this.dataset.change);
+      cambiarCantidad(index, change);
     });
+  });
+
+  // Botones para eliminar producto
+  carritoLista.querySelectorAll(".eliminar-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const index = parseInt(this.dataset.index);
+      eliminarItem(index);
+    });
+  });
+
+  // Calcular total
+  const total = carritoItems.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  totalElemento.textContent = `Total: S/ ${total.toFixed(2)}`;
+}
+
+
+  function actualizarFavoritos() {
+  favoritosLista.innerHTML = "";
+
+  if (favoritos.length === 0) {
+    favoritosLista.innerHTML = "<li>No tienes productos favoritos.</li>";
+    return;
+  }
+
+  favoritos.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${item.nombre} - S/ ${item.precio.toFixed(2)}
+      <button class="agregar-favorito-carrito" data-index="${index}">🛒</button>
+      <button class="eliminar-favorito-btn" data-index="${index}">✕</button>
+    `;
+    favoritosLista.appendChild(li);
+  });
+
+  // Botón para agregar a carrito desde favoritos
+  favoritosLista.querySelectorAll(".agregar-favorito-carrito").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const index = parseInt(this.dataset.index);
+      agregarFavoritoAlCarrito(index);
+    });
+  });
+
+  // Botón para eliminar de favoritos
+  favoritosLista.querySelectorAll(".eliminar-favorito-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const index = parseInt(this.dataset.index);
+      eliminarFavorito(index);
+    });
+  });
+}
+
 
   
   function cargarDatos() {
@@ -249,56 +308,8 @@ function actualizarCarrito() {
   }
 
   
-    carritoLista.querySelectorAll(".cantidad-btn").forEach(btn => {
-      btn.addEventListener("click", function () {
-        const index = parseInt(this.dataset.index);
-        const change = parseInt(this.dataset.change);
-        cambiarCantidad(index, change);
-      });
-    });
+   
 
-    carritoLista.querySelectorAll(".eliminar-btn").forEach(btn => {
-      btn.addEventListener("click", function () {
-        const index = parseInt(this.dataset.index);
-        eliminarItem(index);
-      });
-    });
-
-    const total = carritoItems.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
-    totalElemento.textContent = `Total: S/ ${total.toFixed(2)}`;
-  }
-
-  function actualizarFavoritos() {
-    favoritosLista.innerHTML = "";
-    if (favoritos.length === 0) {
-      favoritosLista.innerHTML = "<li>No tienes productos favoritos.</li>";
-      return;
-    }
-
-    favoritos.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-        ${item.nombre} - S/ ${item.precio.toFixed(2)}
-        <button class="agregar-favorito-carrito" data-index="${index}">🛒</button>
-        <button class="eliminar-favorito-btn" data-index="${index}">✕</button>
-      `;
-      favoritosLista.appendChild(li);
-    });
-
-    favoritosLista.querySelectorAll(".agregar-favorito-carrito").forEach(btn => {
-      btn.addEventListener("click", function () {
-        const index = parseInt(this.dataset.index);
-        agregarFavoritoAlCarrito(index);
-      });
-    });
-
-    favoritosLista.querySelectorAll(".eliminar-favorito-btn").forEach(btn => {
-      btn.addEventListener("click", function () {
-        const index = parseInt(this.dataset.index);
-        eliminarFavorito(index);
-      });
-    });
-  }
 
   function guardarCarrito() {
     localStorage.setItem("carrito", JSON.stringify(carritoItems));
