@@ -1,0 +1,153 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agregar Productos</title>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: sans-serif;
+      margin: 0;
+    }
+    header, footer {
+      text-align: center;
+      background: #fff;
+      padding: 1rem;
+    }
+    h1 {
+      color: #e91e63;
+    }
+    .formulario-producto {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .formulario-producto input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .formulario-producto button {
+      background: #e91e63;
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .grid-productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .producto {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .producto img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+    .precio-original {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .precio-descuento {
+      color: #e91e63;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Agregar Productos</h1>
+  </header>
+
+  <section class="formulario-producto">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="marca" placeholder="Marca">
+    <input type="text" id="tipo" placeholder="Tipo">
+    <input type="text" id="tono" placeholder="Tono/Color">
+    <input type="text" id="presentacion" placeholder="Presentación">
+    <input type="number" id="precio" placeholder="Precio">
+    <input type="number" id="stock" placeholder="Stock">
+    <input type="text" id="categoria" placeholder="Categoría">
+    <button onclick="agregarProducto()">Agregar producto</button>
+  </section>
+
+  <section class="grid-productos" id="lista-productos">
+    <!-- Aquí se mostrarán los productos agregados -->
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Beauty Bliss. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const productos = [
+      { img: 'labios/PRO1650.jpg', nombre: 'Labial Rojo Intenso - Maybelline', precioOriginal: 30, precio: 25 },
+      { img: 'labios/PRO6377.jpg', nombre: 'Labial Rojo Cereza - Maybelline', precio: 18 },
+      { img: 'labios/PRO9974.jpg', nombre: 'Labial Rojo Oscuro - Maybelline', precioOriginal: 25, precio: 19 },
+      { img: 'labios/PRO2354.jpg', nombre: 'Brillo Labial Rosa - NYX', precio: 17 },
+      { img: 'labios/PRO4567.jpg', nombre: 'Brillo Labial Transparente - NYX', precioOriginal: 15, precio: 13 },
+      { img: 'labios/PRO9210.jpg', nombre: 'Labial Liquido Mate Rojo - Loreal', precio: 21 },
+      { img: 'labios/PRO6823.jpg', nombre: 'Labial Liquido Mate Nude - Loreal', precio: 21 },
+      { img: 'fragancia1.png', nombre: 'Perfume Rosas del Alba', precioOriginal: 89.90, precio: 74.90 },
+      { img: 'fragancia2.png', nombre: 'Colonia Frescura Cítrica', precioOriginal: 69.00, precio: 55.00 },
+      { img: 'fragancia3.png', nombre: 'Aromas Nocturnos', precioOriginal: 99.00, precio: 81.90 },
+      { img: 'fragancia4.png', nombre: 'Fragancia Vibrante Mujer', precioOriginal: 110.00, precio: 93.00 },
+      { img: 'fragancia5.png', nombre: 'Eau de Parfum Seducción', precioOriginal: 129.00, precio: 109.00 },
+      { img: 'fragancia6.png', nombre: 'Bruma Floral Ligera', precioOriginal: 45.00, precio: 38.00 },
+      { img: 'fragancia7.png', nombre: 'Colonia Fresh Hombre', precioOriginal: 85.00, precio: 70.00 },
+      { img: 'fragancia8.png', nombre: 'Perfume Unisex Brisa', precioOriginal: 92.00, precio: 77.00 },
+      { img: 'fragancia9.png', nombre: 'Spray Aromático Día', precioOriginal: 54.00, precio: 44.90 },
+      { img: 'fragancia10.png', nombre: 'Deluxe Intense', precioOriginal: 112.00, precio: 95.00 },
+      { img: 'fragancia11.png', nombre: 'Fragancia Floral Sunset', precioOriginal: 76.00, precio: 63.00 },
+      { img: 'fragancia12.png', nombre: 'Perfume Místico Encanto', precioOriginal: 108.00, precio: 90.00 }
+    ];
+
+    const contenedor = document.getElementById('lista-productos');
+
+    function mostrarProductos() {
+      contenedor.innerHTML = '';
+      productos.forEach(p => {
+        const prod = document.createElement('div');
+        prod.className = 'producto';
+        prod.innerHTML = `
+          <img src="${p.img}" alt="${p.nombre}">
+          <h4>${p.nombre}</h4>
+          <p>
+            ${p.precioOriginal ? `<span class='precio-original'>S/ ${p.precioOriginal.toFixed(2)}</span>` : ''}
+            <span class='precio-descuento'>S/ ${p.precio.toFixed(2)}</span>
+          </p>
+        `;
+        contenedor.appendChild(prod);
+      });
+    }
+
+    function agregarProducto() {
+      const nuevo = {
+        img: 'default.jpg',
+        nombre: document.getElementById('nombre').value,
+        precio: parseFloat(document.getElementById('precio').value),
+      };
+      productos.push(nuevo);
+      mostrarProductos();
+    }
+
+    mostrarProductos();
+  </script>
+</body>
+</html>

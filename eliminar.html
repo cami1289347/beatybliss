@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eliminar Productos</title>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      text-align: center;
+      background-color: #fff;
+      padding: 1.5rem;
+      color: #e91e63;
+    }
+    .contenedor {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    .producto {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .producto img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .producto h4 {
+      flex: 1;
+      margin-left: 1rem;
+      color: #333;
+    }
+    .producto button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .producto button:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Eliminar Productos</h1>
+  </header>
+  <div class="contenedor" id="lista-productos">
+    <!-- Productos cargados dinámicamente -->
+  </div>
+  <footer>
+    <p>&copy; 2025 Beauty Bliss. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const productos = [
+      { nombre: "Labial Rojo Intenso - Maybelline", imagen: "labios/PRO1650.jpg" },
+      { nombre: "Labial Rojo Cereza - Maybelline", imagen: "labios/PRO6377.jpg" },
+      { nombre: "Labial Rojo Oscuro - Maybelline", imagen: "labios/PRO9974.jpg" },
+      { nombre: "Brillo Labial Rosa - NYX", imagen: "labios/PRO2354.jpg" },
+      { nombre: "Brillo Labial Transparente - NYX", imagen: "labios/PRO4567.jpg" },
+      { nombre: "Labial Liquido Mate Rojo - Loreal", imagen: "labios/PRO9210.jpg" },
+      { nombre: "Labial Liquido Mate Nude - Loreal", imagen: "labios/PRO6823.jpg" },
+      { nombre: "Perfume Rosas del Alba", imagen: "fragancia1.png" },
+      { nombre: "Colonia Frescura Cítrica", imagen: "fragancia2.png" },
+      { nombre: "Aromas Nocturnos", imagen: "fragancia3.png" },
+      { nombre: "Fragancia Vibrante Mujer", imagen: "fragancia4.png" },
+      { nombre: "Eau de Parfum Seducción", imagen: "fragancia5.png" },
+      { nombre: "Bruma Floral Ligera", imagen: "fragancia6.png" },
+      { nombre: "Colonia Fresh Hombre", imagen: "fragancia7.png" },
+      { nombre: "Perfume Unisex Brisa", imagen: "fragancia8.png" },
+      { nombre: "Spray Aromático Día", imagen: "fragancia9.png" },
+      { nombre: "Deluxe Intense", imagen: "fragancia10.png" },
+      { nombre: "Fragancia Floral Sunset", imagen: "fragancia11.png" },
+      { nombre: "Perfume Místico Encanto", imagen: "fragancia12.png" }
+    ];
+
+    const lista = document.getElementById("lista-productos");
+
+    function renderProductos() {
+      lista.innerHTML = "";
+      productos.forEach((prod, index) => {
+        const div = document.createElement("div");
+        div.className = "producto";
+        div.innerHTML = `
+          <img src="${prod.imagen}" alt="${prod.nombre}" />
+          <h4>${prod.nombre}</h4>
+          <button onclick="eliminarProducto(${index})">Eliminar</button>
+        `;
+        lista.appendChild(div);
+      });
+    }
+
+    function eliminarProducto(index) {
+      productos.splice(index, 1);
+      renderProductos();
+    }
+
+    renderProductos();
+  </script>
+</body>
+</html>
+
