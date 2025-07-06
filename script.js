@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const userIcon = document.getElementById('user-icon');
     const dropdown = document.getElementById('user-dropdown');
     const logoutBtn = document.getElementById('logout-btn');
-    const currentUser  = JSON.parse(localStorage.getItem('usuarioActual'));
+    const currentUser   = JSON.parse(localStorage.getItem('usuarioActual'));
 
     userIcon.addEventListener('click', function (e) {
       e.preventDefault();
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     guardarCarrito();
     actualizarCarrito();
     mostrarToast(`${nombre} agregado al carrito`);
-    if (carrito) carrito.classList.remove("oculto");
+    if (carrito) carrito.classList.remove("oculto"); // Asegúrate de que el carrito se muestre
   }
 
   function toggleFavorito(e) {
@@ -463,29 +463,4 @@ document.addEventListener('DOMContentLoaded', function () {
         telefono: document.getElementById("telefono").value,
         direccion: document.getElementById("direccion").value,
         codigoPostal: document.getElementById("codigoPostal").value,
-        pais: document.getElementById("pais").value,
-        distrito: document.getElementById("distrito").value,
-        sexo: document.getElementById("sexo").value,
-        loggedIn: true
-      };
-
-      const index = usuarios.findIndex(u => u.correo === usuario.correo);
-      if (index !== -1) usuarios[index] = actualizado;
-      else usuarios.push(actualizado);
-
-      localStorage.setItem("usuarios", JSON.stringify(usuarios));
-      localStorage.setItem("usuarioActual", JSON.stringify(actualizado));
-
-      mostrarToast("✅ Cambios guardados correctamente.");
-      inputs.forEach(el => el.disabled = true);
-      verificarCambios();
-
-      botonGuardar.textContent = "Guardado ✅";
-      setTimeout(() => {
-        botonGuardar.textContent = "Guardar cambios";
-      }, 2000);
-    });
-
-    function hayCambios() {
-      return (
-        document.getElement
+       
