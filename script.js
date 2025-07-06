@@ -83,7 +83,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const total = carritoItems.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     totalElemento.textContent = `Total: S/ ${total.toFixed(2)}`;
-  }
+    // 🛡️ Evitar cierre al hacer clic en botones dentro del carrito
+  carritoLista.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+  });
+}
 
 
   function configurarBotonesCantidad() {
@@ -124,7 +130,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     configurarBotonesFavoritos();
-  }
+  favoritosLista.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+  });
+}
 
   function configurarBotonesFavoritos() {
     favoritosLista.querySelectorAll(".agregar-favorito-carrito").forEach(btn => {
@@ -249,38 +260,50 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function configurarEventListenersGlobales() {
-    botonCarrito?.addEventListener("click", e => {
-      e.preventDefault();
-      carrito?.classList.toggle("oculto");
+  botonCarrito?.addEventListener("click", e => {
+    e.preventDefault();
+    carrito?.classList.toggle("oculto");
+  });
+
+  cerrarCarrito?.addEventListener("click", () => carrito?.classList.add("oculto"));
+
+  botonFavoritos?.addEventListener("click", e => {
+    e.preventDefault();
+    favoritosContenedor?.classList.toggle("oculto");
+  });
+
+  cerrarFavoritos?.addEventListener("click", () => favoritosContenedor?.classList.add("oculto"));
+
+  buscador?.addEventListener("input", () => {
+    const texto = buscador.value.toLowerCase();
+    document.querySelectorAll(".producto").forEach(producto => {
+      const nombre = producto.dataset.nombre?.toLowerCase() || producto.querySelector("h4, p")?.textContent?.toLowerCase() || "";
+      producto.style.display = nombre.includes(texto) ? "" : "none";
     });
+  });
 
-    cerrarCarrito?.addEventListener("click", () => carrito?.classList.add("oculto"));
-    botonFavoritos?.addEventListener("click", e => {
-      e.preventDefault();
-      favoritosContenedor?.classList.toggle("oculto");
-    });
+  filtros.forEach(filtro => filtro.addEventListener("change", aplicarFiltros));
 
-    cerrarFavoritos?.addEventListener("click", () => favoritosContenedor?.classList.add("oculto"));
+  document.addEventListener("click", function (e) {
+    if (!carrito?.contains(e.target) && !botonCarrito?.contains(e.target)) {
+      carrito?.classList.add("oculto");
+    }
+    if (!favoritosContenedor?.contains(e.target) && !botonFavoritos?.contains(e.target)) {
+      favoritosContenedor?.classList.add("oculto");
+    }
+  });
 
-    buscador?.addEventListener("input", () => {
-      const texto = buscador.value.toLowerCase();
-      document.querySelectorAll(".producto").forEach(producto => {
-        const nombre = producto.dataset.nombre?.toLowerCase() || producto.querySelector("h4, p")?.textContent?.toLowerCase() || "";
-        producto.style.display = nombre.includes(texto) ? "" : "none";
-      });
-    });
+  // 🟨 Cierra carrito cuando el mouse sale del recuadro
+  carrito?.addEventListener("mouseleave", () => {
+    carrito.classList.add("oculto");
+  });
 
-    filtros.forEach(filtro => filtro.addEventListener("change", aplicarFiltros));
+  // 🟨 Cierra favoritos cuando el mouse sale del recuadro
+  favoritosContenedor?.addEventListener("mouseleave", () => {
+    favoritosContenedor.classList.add("oculto");
+  });
+}
 
-    document.addEventListener("click", function (e) {
-      if (!carrito?.contains(e.target) && !botonCarrito?.contains(e.target)) {
-        carrito?.classList.add("oculto");
-      }
-      if (!favoritosContenedor?.contains(e.target) && !botonFavoritos?.contains(e.target)) {
-        favoritosContenedor?.classList.add("oculto");
-      }
-    });
-  }
 
   function aplicarFiltros() {
     const marcas = [...document.querySelectorAll('input[name="marca"]:checked')].map(el => el.value);
