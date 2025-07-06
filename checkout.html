@@ -16,15 +16,12 @@
       --gray: #e0e0e0;
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
-  
-       body {
-          font-family: 'Montserrat', sans-serif;
-          background-color: var(--background);
-          color: var(--dark);
-          margin: 0;
-          padding: 0;
-          line-height: 1.6;
-        }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
 
 
 .container {
@@ -713,12 +710,10 @@ footer {
     </div>
   </div>
 </div>
-
-<script>
   
+<script>
   let carritoGuardado = localStorage.getItem('carrito');
-let carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
-
+  let carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
 
   // Función para actualizar el carrito
   function actualizarCarrito() {
@@ -726,37 +721,34 @@ let carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
     listaProductos.innerHTML = '';
     
     let total = 0;
-    
+
     carrito.forEach((producto, index) => {
       total += producto.precio * producto.cantidad;
-      
-      const productoHTML = `
-  <div class="producto-item producto-con-imagen">
-    <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-producto">
-    <div class="info-producto">
-      <div class="producto-nombre">${producto.nombre}</div>
-      <div class="producto-info">
-        <span class="data-marca">${producto.marca || ''}</span>
-        <div class="producto-acciones">
-          <div class="contador-cantidad">
-            <button onclick="disminuirCantidad(${index})">-</button>
-            <span>${producto.cantidad}</span>
-            <button onclick="aumentarCantidad(${index})">+</button>
-          </div>
-          <button class="eliminar-producto" onclick="eliminarProducto(${index})">
-            Eliminar
-          </button>
-          <span class="producto-precio">S/ ${(producto.precio * producto.cantidad).toFixed(2)}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-`;
 
+      const productoHTML = `
+        <div class="producto-item producto-con-imagen">
+          <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-producto">
+          <div class="info-producto">
+            <div class="producto-nombre">${producto.nombre}</div>
+            <div class="producto-info">
+              <span class="data-marca">${producto.marca || ''}</span>
+              <div class="producto-acciones">
+                <div class="contador-cantidad">
+                  <button onclick="disminuirCantidad(${index})">-</button>
+                  <span>${producto.cantidad}</span>
+                  <button onclick="aumentarCantidad(${index})">+</button>
+                </div>
+                <button class="eliminar-producto" onclick="eliminarProducto(${index})">Eliminar</button>
+                <span class="producto-precio">S/ ${(producto.precio * producto.cantidad).toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
       
       listaProductos.innerHTML += productoHTML;
     });
-    
+
     document.getElementById('total-carrito').textContent = `S/ ${total.toFixed(2)}`;
     document.getElementById('total-pago-valor').textContent = total.toFixed(2);
     localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -813,15 +805,7 @@ let carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
     event.target.classList.add('active');
   }
 
-  // Botón "Ya Pagué"
-  document.getElementById('btn-pagado').addEventListener('click', function() {
-    alert('¡Gracias por tu compra! Tu pago está siendo verificado.');
-    carrito = [];
-    actualizarCarrito();
-    window.location.href = 'index.html';
-  });
-
-  // Validación de formulario de tarjeta en tiempo real
+  // Validación de formulario de tarjeta
   document.getElementById('nombre-titular').addEventListener('input', validarFormularioTarjeta);
   document.getElementById('numero-tarjeta').addEventListener('input', validarFormularioTarjeta);
   document.getElementById('fecha-expiracion').addEventListener('input', validarFormularioTarjeta);
@@ -833,95 +817,106 @@ let carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
     const fecha = document.getElementById('fecha-expiracion').value.trim();
     const cvv = document.getElementById('cvv').value.trim();
     
-    // Validación básica
-    const valido = nombre.length > 0 && 
-                  tarjeta.replace(/\s/g, '').length === 16 && 
-                  /^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha) && 
-                  cvv.length === 3;
+    const valido = nombre.length > 0 &&
+                   tarjeta.replace(/\s/g, '').length === 16 &&
+                   /^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha) &&
+                   cvv.length === 3;
     
     document.getElementById('btn-pagar-tarjeta').disabled = !valido;
   }
 
- function procesarPagoTarjeta() {
-    // Validaciones
+document.getElementById('numero-tarjeta').addEventListener('input', function (e) {
+  let value = e.target.value.replace(/\D/g, ''); // Solo dígitos
+  let formatted = value.replace(/(.{4})/g, '$1 ').trim(); // Agrupar de a 4
+  e.target.value = formatted;
+});
+
+document.getElementById('fecha-expiracion').addEventListener('input', function (e) {
+  let value = e.target.value.replace(/\D/g, ''); // Solo números
+  if (value.length >= 3) {
+    e.target.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+  } else {
+    e.target.value = value;
+  }
+});
+
+  function procesarPagoTarjeta() {
     const nombre = document.getElementById('nombre-titular').value.trim();
     const tarjeta = document.getElementById('numero-tarjeta').value.trim();
     const fecha = document.getElementById('fecha-expiracion').value.trim();
     const cvv = document.getElementById('cvv').value.trim();
 
     if (!nombre || !tarjeta || !fecha || !cvv) {
-        alert('Por favor completa todos los campos');
-        return;
+      alert('Por favor completa todos los campos');
+      return;
     }
 
     if (!/^\d{16}$/.test(tarjeta.replace(/\s/g, ''))) {
-        alert('Número de tarjeta inválido (deben ser 16 dígitos)');
-        return;
+      alert('Número de tarjeta inválido (deben ser 16 dígitos)');
+      return;
     }
 
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha)) {
-        alert('Formato de fecha inválido (MM/AA)');
-        return;
+      alert('Formato de fecha inválido (MM/AA)');
+      return;
     }
 
     if (!/^\d{3}$/.test(cvv)) {
-        alert('CVV inválido (deben ser 3 dígitos)');
-        return;
+      alert('CVV inválido (deben ser 3 dígitos)');
+      return;
     }
 
-    // Si todo está bien, completar compra
     completePurchase('tarjeta');
-}
+  }
 
-
-// Y en el botón "Ya Pagué"
-document.getElementById('btn-pagado').addEventListener('click', function() {
+  // Botón "Ya pagué" (para Yape/Plin)
+  document.getElementById('btn-pagado').addEventListener('click', function() {
     completePurchase('yape/plin');
-});
+  });
+
+  // Función principal de compra
   function completePurchase(paymentMethod) {
     const user = JSON.parse(localStorage.getItem('usuarioActual'));
     if (!user || !user.loggedIn) {
-        alert('Por favor inicia sesión para completar tu compra');
-        window.location.href = 'registro.html?action=login';
-        return;
+      alert('Por favor inicia sesión para completar tu compra');
+      window.location.href = 'registro.html?action=login';
+      return;
     }
 
-    // Crear objeto de pedido
+    if (carrito.length === 0) {
+      alert('Tu carrito está vacío. No puedes realizar el pago.');
+      return;
+    }
+
     const order = {
-        id: 'BB-' + Date.now().toString().slice(-6),
-        userId: user.id,
-        date: new Date().toLocaleDateString('es-ES', { 
-            day: '2-digit', 
-            month: 'short', 
-            year: 'numeric' 
-        }),
-        status: 'completado', // Cambiado de 'processing' a 'completado'
-        paymentMethod: paymentMethod,
-        products: [...carrito], // Copia de los productos del carrito
-        total: carrito.reduce((sum, product) => sum + (product.precio * product.cantidad), 0)
+      id: 'BB-' + Date.now().toString().slice(-6),
+      userId: user.id,
+      date: new Date().toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+      }),
+      status: 'completado',
+      paymentMethod: paymentMethod,
+      products: [...carrito], // Copiamos productos antes de limpiar
+      total: carrito.reduce((sum, product) => sum + (product.precio * product.cantidad), 0)
     };
 
-   // Guardar en localStorage
-const orders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
-orders.unshift(order); // Agregar el nuevo pedido al inicio
-localStorage.setItem('beautyBlissOrders', JSON.stringify(orders));
+    const orders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
+    orders.unshift(order);
+    localStorage.setItem('beautyBlissOrders', JSON.stringify(orders));
 
-// GUARDAR checkoutCompletado (ESTO ES LO NUEVO Y NECESARIO)
-localStorage.setItem('checkoutCompletado', JSON.stringify({
-    pagoRealizado: true,
-    productos: order.products,
-    total: order.total
-}));
+    localStorage.setItem('checkoutCompletado', JSON.stringify({
+      pagoRealizado: true,
+      productos: order.products,
+      total: order.total
+    }));
 
-// Limpiar carrito
-localStorage.removeItem('carrito');
+    localStorage.removeItem('carrito');
+    window.location.href = 'pedidos.html';
+  }
 
-// Redirigir a la página de pedidos
-window.location.href = 'pedidos.html';
-
-}
-     
-  // Verificar estado de inicio de sesión al cargar la página
+  // Al cargar la página
   document.addEventListener('DOMContentLoaded', function() {
     const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
     if (usuario && usuario.loggedIn) {
