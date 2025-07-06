@@ -25,25 +25,91 @@
 
     .contenedor-pago {
       display: flex;
-      justify-content: center;
       padding: 2rem;
       max-width: 1200px;
       margin: 0 auto;
+      gap: 2rem;
     }
 
-    .pago {
-      width: 100%;
-      max-width: 500px;
+    .resumen-compra {
+      flex: 1;
       background-color: var(--light);
       border-radius: 12px;
-      padding: 2rem;
+      padding: 1.5rem;
       box-shadow: var(--shadow);
     }
 
+    .proceso-pago {
+      flex: 1;
+      background-color: var(--light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      max-width: 500px;
+    }
+
+    .producto-carrito {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      background-color: var(--light);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-producto {
+      flex: 2;
+    }
+
+    .controles-producto {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .controles-producto button {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 1px solid var(--gray);
+      background: white;
+      cursor: pointer;
+    }
+
+    .controles-producto input {
+      width: 40px;
+      text-align: center;
+    }
+
+    .eliminar-producto {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    .precio-producto {
+      color: var(--primary);
+      font-weight: 600;
+      min-width: 80px;
+      text-align: right;
+    }
+
+    .total-compra {
+      font-weight: bold;
+      margin-top: 1.5rem;
+      text-align: right;
+      padding-top: 1rem;
+      border-top: 2px solid var(--gray);
+    }
+
+    /* Estilos para el proceso de pago (los mismos que antes) */
     .metodo-pago {
       text-align: center;
       margin-bottom: 2rem;
-      display: none; /* Oculto inicialmente */
+      display: none;
     }
 
     .metodo-pago h2 {
@@ -67,7 +133,7 @@
       cursor: pointer;
       transition: all 0.3s;
       font-weight: 500;
-      color: black; /* Texto negro para mejor contraste */
+      color: black;
     }
 
     .opcion-pago:hover {
@@ -82,13 +148,6 @@
     .formulario-tarjeta {
       margin-top: 2rem;
       display: none;
-    }
-
-    .formulario-tarjeta h3 {
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      text-align: center;
-      font-size: 1.3rem;
     }
 
     .input-group {
@@ -126,14 +185,63 @@
     .boton-pago:hover {
       background-color: var(--primary-dark);
     }
+
+    @media (max-width: 768px) {
+      .contenedor-pago {
+        flex-direction: column;
+      }
+      .proceso-pago {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
 <div class="contenedor-pago">
-  <div class="pago">
+  <!-- Resumen de Compra -->
+  <div class="resumen-compra">
+    <h2>Resumen de Compra</h2>
+    <div id="lista-productos">
+      <!-- Productos se agregarán dinámicamente aquí -->
+      <div class="producto-carrito">
+        <div class="info-producto">
+          <h4>Crema Hidratante Noche</h4>
+          <p>L'Oreal - Emmen</p>
+        </div>
+        <div class="controles-producto">
+          <button onclick="cambiarCantidad(0, -1)">-</button>
+          <input type="number" value="1" min="1" readonly>
+          <button onclick="cambiarCantidad(0, 1)">+</button>
+        </div>
+        <button class="eliminar-producto" onclick="eliminarProducto(0)">Eliminar</button>
+        <div class="precio-producto">S/ 22.90</div>
+      </div>
+      
+      <div class="producto-carrito">
+        <div class="info-producto">
+          <h4>Protector Solar Facial</h4>
+          <p>L'Oreal - Emmen</p>
+        </div>
+        <div class="controles-producto">
+          <button onclick="cambiarCantidad(1, -1)">-</button>
+          <input type="number" value="1" min="1" readonly>
+          <button onclick="cambiarCantidad(1, 1)">+</button>
+        </div>
+        <button class="eliminar-producto" onclick="eliminarProducto(1)">Eliminar</button>
+        <div class="precio-producto">S/ 20.00</div>
+      </div>
+    </div>
+    
+    <div class="total-compra">
+      <p>Total: <span id="total-carrito">S/ 42.90</span></p>
+    </div>
+  </div>
+
+  <!-- Proceso de Pago -->
+  <div class="proceso-pago">
     <h2>Resumen de Pago</h2>
-    <p id="total-pago" class="total">Total: S/ 62.90</p>
+    <p id="total-pago" class="total-compra">Total: S/ 42.90</p>
     
     <button class="boton-pago" id="btn-realizar-pago">Realizar Pago</button>
 
@@ -171,24 +279,75 @@
 </div>
 
 <script>
-  // Función mejorada para verificar sesión
+  // Datos del carrito
+  let carrito = [
+    { id: 1, nombre: "Crema Hidratante Noche", marca: "L'Oreal", linea: "Emmen", precio: 22.90, cantidad: 1 },
+    { id: 2, nombre: "Protector Solar Facial", marca: "L'Oreal", linea: "Emmen", precio: 20.00, cantidad: 1 }
+  ];
+
+  // Función para actualizar el carrito
+  function actualizarCarrito() {
+    const listaProductos = document.getElementById('lista-productos');
+    listaProductos.innerHTML = '';
+    
+    let total = 0;
+    
+    carrito.forEach((producto, index) => {
+      total += producto.precio * producto.cantidad;
+      
+      const productoHTML = `
+        <div class="producto-carrito">
+          <div class="info-producto">
+            <h4>${producto.nombre}</h4>
+            <p>${producto.marca} - ${producto.linea}</p>
+          </div>
+          <div class="controles-producto">
+            <button onclick="cambiarCantidad(${index}, -1)">-</button>
+            <input type="number" value="${producto.cantidad}" min="1" readonly>
+            <button onclick="cambiarCantidad(${index}, 1)">+</button>
+          </div>
+          <button class="eliminar-producto" onclick="eliminarProducto(${index})">Eliminar</button>
+          <div class="precio-producto">S/ ${(producto.precio * producto.cantidad).toFixed(2)}</div>
+        </div>
+      `;
+      
+      listaProductos.innerHTML += productoHTML;
+    });
+    
+    document.getElementById('total-carrito').textContent = `S/ ${total.toFixed(2)}`;
+    document.getElementById('total-pago').textContent = `Total: S/ ${total.toFixed(2)}`;
+  }
+
+  // Funciones para modificar el carrito
+  function cambiarCantidad(index, cambio) {
+    carrito[index].cantidad += cambio;
+    
+    if (carrito[index].cantidad < 1) {
+      carrito[index].cantidad = 1;
+    }
+    
+    actualizarCarrito();
+  }
+
+  function eliminarProducto(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
+  }
+
+  // Verificación de sesión
   document.getElementById('btn-realizar-pago').addEventListener('click', function() {
-    // Verificar si el usuario está en localStorage
     const usuarioGuardado = localStorage.getItem('usuarioActual');
     
     if (usuarioGuardado) {
       const usuario = JSON.parse(usuarioGuardado);
       if (usuario.loggedIn) {
-        // Mostrar métodos de pago si está logueado
         document.querySelector('.metodo-pago').style.display = 'block';
         this.style.display = 'none';
       } else {
-        // Redirigir a registro si no está logueado
         alert('Por favor inicia sesión para continuar con el pago');
         window.location.href = 'registro.html';
       }
     } else {
-      // Redirigir a registro si no existe
       alert('Debes registrarte para realizar pagos');
       window.location.href = 'registro.html';
     }
@@ -237,8 +396,12 @@
     }
 
     alert(`Pago exitoso!\nGracias por su compra ${nombre}`);
-    // Aquí iría la lógica para vaciar el carrito
+    carrito = [];
+    actualizarCarrito();
   }
+
+  // Inicializar el carrito
+  actualizarCarrito();
 </script>
 
 </body>
