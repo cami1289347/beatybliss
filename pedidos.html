@@ -436,162 +436,178 @@
         </div>
     </footer>
 
-    <script>
-    // Mostrar/ocultar menú de usuario
-    document.getElementById('user-icon').addEventListener('click', function(event) {
-        event.preventDefault();
-        const userMenu = document.getElementById('user-menu');
-        userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
-    });
+   <script>
+document.getElementById('user-icon').addEventListener('click', function(event) {
+    event.preventDefault();
+    const userMenu = document.getElementById('user-menu');
+    userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+});
 
-    // Cerrar menú al hacer clic fuera
-    document.addEventListener('click', function(event) {
-        const userMenu = document.getElementById('user-menu');
-        const userIcon = document.getElementById('user-icon');
-        if (!userMenu.contains(event.target) && event.target !== userIcon) {
-            userMenu.style.display = 'none';
-        }
-    });
+document.addEventListener('click', function(event) {
+    const userMenu = document.getElementById('user-menu');
+    const userIcon = document.getElementById('user-icon');
+    if (!userMenu.contains(event.target) && event.target !== userIcon) {
+        userMenu.style.display = 'none';
+    }
+});
 
-    // Cerrar sesión
-    document.getElementById('logout').addEventListener('click', function(e) {
-        e.preventDefault();
-        localStorage.removeItem('usuarioActual');
-        window.location.href = 'index.html';
-    });
+document.getElementById('logout').addEventListener('click', function(e) {
+    e.preventDefault();
+    localStorage.removeItem('usuarioActual');
+    window.location.href = 'index.html';
+});
 
-    // Verificar autenticación
-    function checkAuth() {
-        const user = JSON.parse(localStorage.getItem('usuarioActual'));
-        const authRequired = document.getElementById('auth-required');
-        const ordersContainer = document.getElementById('orders-container');
-        const emptyOrders = document.getElementById('empty-orders');
+function checkAuth() {
+    const user = JSON.parse(localStorage.getItem('usuarioActual'));
+    const authRequired = document.getElementById('auth-required');
+    const ordersContainer = document.getElementById('orders-container');
+    const emptyOrders = document.getElementById('empty-orders');
 
-        if (!user || !user.loggedIn) {
-            authRequired.style.display = 'block';
-            ordersContainer.style.display = 'none';
-            emptyOrders.style.display = 'none';
-            return false;
-        }
-
-        authRequired.style.display = 'none';
-        ordersContainer.style.display = 'block';
-        return true;
+    if (!user || !user.loggedIn) {
+        authRequired.style.display = 'block';
+        ordersContainer.style.display = 'none';
+        emptyOrders.style.display = 'none';
+        return false;
     }
 
-    // Cargar pedidos del usuario
-    function loadUserOrders() {
-        if (!checkAuth()) return;
+    authRequired.style.display = 'none';
+    ordersContainer.style.display = 'block';
+    return true;
+}
 
-        const user = JSON.parse(localStorage.getItem('usuarioActual'));
-        const ordersContainer = document.getElementById('orders-container');
-        const emptyOrders = document.getElementById('empty-orders');
-        let allOrders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
+function loadUserOrders() {
+    if (!checkAuth()) return;
 
-        // Verificar si hay un checkout pendiente de guardar
-        const completedCheckout = JSON.parse(localStorage.getItem('checkoutCompletado'));
-        if (completedCheckout?.pagoRealizado === true) {
-            const fechaPedido = new Date();
-            const fechaEntrega = new Date(fechaPedido);
-            fechaEntrega.setDate(fechaPedido.getDate() + 5);
+    const user = JSON.parse(localStorage.getItem('usuarioActual'));
+    const ordersContainer = document.getElementById('orders-container');
+    const emptyOrders = document.getElementById('empty-orders');
+    let allOrders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
 
-            const newOrder = {
-                id: "BB-" + Math.floor(100000 + Math.random() * 900000),
-                userId: user.id,
-                date: fechaPedido.toISOString(),
-                fechaEntrega: fechaEntrega.toISOString(),
-                estado: "En proceso",
-                products: completedCheckout.productos || [],
-                total: completedCheckout.total || 0
-            };
+    const completedCheckout = JSON.parse(localStorage.getItem('checkoutCompletado'));
+    if (completedCheckout?.pagoRealizado === true) {
+        const fechaPedido = new Date();
+        const fechaEntrega = new Date(fechaPedido);
+        fechaEntrega.setDate(fechaPedido.getDate() + 5);
 
-            allOrders.push(newOrder);
-            localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
-            localStorage.removeItem('checkoutCompletado');
-        }
+        const newOrder = {
+            id: "BB-" + Math.floor(100000 + Math.random() * 900000),
+            userId: user.id,
+            date: fechaPedido.toISOString(),
+            fechaEntrega: fechaEntrega.toISOString(),
+            estado: "En proceso",
+            products: completedCheckout.productos || [],
+            total: completedCheckout.total || 0,
+            editable: true
+        };
 
-        const userOrders = allOrders.filter(order => order.userId === user.id);
-        if (userOrders.length === 0) {
-            emptyOrders.style.display = 'block';
-            ordersContainer.innerHTML = '';
-            return;
-        }
+        allOrders.push(newOrder);
+        localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
+        localStorage.removeItem('checkoutCompletado');
+    }
 
-        emptyOrders.style.display = 'none';
+    const userOrders = allOrders.filter(order => order.userId === user.id);
+    if (userOrders.length === 0) {
+        emptyOrders.style.display = 'block';
         ordersContainer.innerHTML = '';
+        return;
+    }
 
-        userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+    emptyOrders.style.display = 'none';
+    ordersContainer.innerHTML = '';
 
-        userOrders.forEach(order => {
-            const fechaPedido = new Date(order.date);
-            const fechaEntrega = new Date(order.fechaEntrega);
-            const hoy = new Date();
-            const tiempoCumplido = hoy >= fechaEntrega;
+    userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            // Marcar como entregado si ya pasaron 5 días
-            if (tiempoCumplido && order.estado !== "Entregado") {
-                order.estado = "Entregado";
-                localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
-            }
+    userOrders.forEach(order => {
+        const fechaPedido = new Date(order.date);
+        const fechaEntrega = new Date(order.fechaEntrega);
+        const hoy = new Date();
+        const tiempoCumplido = hoy >= fechaEntrega;
 
-            const orderCard = document.createElement('div');
-            orderCard.className = 'order-card';
+        if (tiempoCumplido && order.estado !== "Entregado") {
+            order.estado = "Entregado";
+            order.editable = false;
+            localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
+        }
 
-            const fechaFormateada = fechaPedido.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
-            const fechaEntregaFormateada = fechaEntrega.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-card';
 
-            orderCard.innerHTML = `
-                <div class="order-header">
-                    <div>
-                        <span class="order-id">Pedido #${order.id}</span><br>
-                        <span class="order-date">Fecha: ${fechaFormateada}</span><br>
-                        <span class="order-date">Entrega estimada: ${fechaEntregaFormateada}</span>
-                    </div>
-                    <select class="order-status" data-order-id="${order.id}">
+        const fechaFormateada = fechaPedido.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+        const fechaEntregaFormateada = fechaEntrega.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+
+        const selectDisabled = order.estado === "Entregado" || !order.editable;
+        const selectedEntregado = order.estado === "Entregado" ? "selected" : "";
+
+        orderCard.innerHTML = `
+            <div class="order-header">
+                <div>
+                    <span class="order-id">Pedido #${order.id}</span><br>
+                    <span class="order-date">Fecha: ${fechaFormateada}</span><br>
+                    <span class="order-date">Entrega estimada: ${fechaEntregaFormateada}</span>
+                </div>
+                <div>
+                    <select class="order-status" data-order-id="${order.id}" ${selectDisabled ? 'disabled' : ''}>
                         <option value="En proceso" ${order.estado === "En proceso" ? "selected" : ""}>En proceso</option>
-                        <option value="Entregado" ${order.estado === "Entregado" ? "selected" : ""}>Entregado</option>
-                        <option value="Cancelado" ${order.estado === "Cancelado" ? "selected" : ""}>Cancelado</option>
+                        <option value="Entregado" ${selectedEntregado}>Entregado</option>
                     </select>
+                    ${!selectDisabled ? `<button class="save-btn" data-order-id="${order.id}" style="display:none; margin-top:8px; background: var(--primary); color: white; border: none; padding: 5px 10px; border-radius: 6px; cursor:pointer;">Guardar cambios</button>` : ''}
                 </div>
+            </div>
 
-                <div class="order-details">
-                    ${order.products.map(product => `
-                        <div class="product-item">
-                            <img src="${product.imagen || 'img/producto-default.jpg'}" alt="${product.nombre}" class="product-image">
-                            <div class="product-info">
-                                <div class="product-name">${product.nombre || 'Producto'}</div>
-                                <div class="product-quantity">Cantidad: ${product.cantidad || 1}</div>
-                                <div class="product-price">S/ ${(product.precio * (product.cantidad || 1)).toFixed(2)}</div>
-                            </div>
+            <div class="order-details">
+                ${order.products.map(product => `
+                    <div class="product-item">
+                        <img src="${product.imagen || 'img/producto-default.jpg'}" alt="${product.nombre}" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">${product.nombre}</div>
+                            <div class="product-quantity">Cantidad: ${product.cantidad}</div>
+                            <div class="product-price">S/ ${(product.precio * product.cantidad).toFixed(2)}</div>
                         </div>
-                    `).join('')}
-                </div>
+                    </div>
+                `).join('')}
+            </div>
 
-                <div class="order-summary">
-                    <div class="total-amount">Total: S/ ${order.total.toFixed(2)}</div>
-                </div>
-            `;
+            <div class="order-summary">
+                <div class="total-amount">Total: S/ ${order.total.toFixed(2)}</div>
+            </div>
+        `;
 
-            ordersContainer.appendChild(orderCard);
+        ordersContainer.appendChild(orderCard);
+    });
+
+    document.querySelectorAll('.order-status').forEach(select => {
+        select.addEventListener('change', (e) => {
+            const saveBtn = e.target.parentElement.querySelector('.save-btn');
+            if (e.target.value === 'Entregado' && saveBtn) {
+                saveBtn.style.display = 'inline-block';
+            } else if (saveBtn) {
+                saveBtn.style.display = 'none';
+            }
         });
+    });
 
-        // Cambiar estado manualmente
-        document.querySelectorAll('.order-status').forEach(select => {
-            select.addEventListener('change', (e) => {
-                const orderId = e.target.getAttribute('data-order-id');
-                const newStatus = e.target.value;
+    document.querySelectorAll('.save-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const orderId = e.target.getAttribute('data-order-id');
+            const select = document.querySelector(`.order-status[data-order-id="${orderId}"]`);
+            const newStatus = select.value;
 
+            if (newStatus === "Entregado") {
                 const index = allOrders.findIndex(o => o.id === orderId && o.userId === user.id);
                 if (index !== -1) {
                     allOrders[index].estado = newStatus;
+                    allOrders[index].editable = false;
                     localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
+
+                    select.disabled = true;
+                    e.target.remove(); // Quitar el botón
                 }
-            });
+            }
         });
-    }
+    });
+}
 
-    document.addEventListener('DOMContentLoaded', loadUserOrders);
+document.addEventListener('DOMContentLoaded', loadUserOrders);
 </script>
-
 </body>
 </html>
