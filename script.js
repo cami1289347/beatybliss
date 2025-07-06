@@ -340,6 +340,20 @@ document.addEventListener('DOMContentLoaded', function () {
     actualizarFavoritos();
     marcarFavoritosEnProductos();
   }
+const botonComprar = document.querySelector('.comprar-ahora');
+if (botonComprar) {
+  botonComprar.addEventListener("click", function () {
+    if (carritoItems.length === 0) {
+      mostrarToast("Tu carrito está vacío");
+      return;
+    }
+    mostrarToast("Redirigiendo a la página de pago...");
+    setTimeout(() => {
+      window.location.href = "checkout.html";
+    }, 1500); // Espera 1.5 segundos para que se vea el toast
+  });
+}
+
 
   function configurarLogin() {
     const loginForm = document.getElementById("login-form");
