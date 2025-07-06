@@ -584,6 +584,24 @@ footer {
         max-width: 100%;
       }
     }
+    .producto-con-imagen {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.imagen-producto {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.info-producto {
+  flex: 1;
+}
+
   </style>
 </head>
 <body>
@@ -710,24 +728,28 @@ let carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
       total += producto.precio * producto.cantidad;
       
       const productoHTML = `
-        <div class="producto-item">
-          <div class="producto-nombre">${producto.nombre}</div>
-          <div class="producto-info">
-            <span class="data-marca">${producto.marca}</span>
-            <div class="producto-acciones">
-              <div class="contador-cantidad">
-                <button onclick="disminuirCantidad(${index})">-</button>
-                <span>${producto.cantidad}</span>
-                <button onclick="aumentarCantidad(${index})">+</button>
-              </div>
-              <button class="eliminar-producto" onclick="eliminarProducto(${index})">
-                Eliminar
-              </button>
-              <span class="producto-precio">S/ ${(producto.precio * producto.cantidad).toFixed(2)}</span>
-            </div>
+  <div class="producto-item producto-con-imagen">
+    <img src="${producto.imagen}" alt="${producto.nombre}" class="imagen-producto">
+    <div class="info-producto">
+      <div class="producto-nombre">${producto.nombre}</div>
+      <div class="producto-info">
+        <span class="data-marca">${producto.marca || ''}</span>
+        <div class="producto-acciones">
+          <div class="contador-cantidad">
+            <button onclick="disminuirCantidad(${index})">-</button>
+            <span>${producto.cantidad}</span>
+            <button onclick="aumentarCantidad(${index})">+</button>
           </div>
+          <button class="eliminar-producto" onclick="eliminarProducto(${index})">
+            Eliminar
+          </button>
+          <span class="producto-precio">S/ ${(producto.precio * producto.cantidad).toFixed(2)}</span>
         </div>
-      `;
+      </div>
+    </div>
+  </div>
+`;
+
       
       listaProductos.innerHTML += productoHTML;
     });
