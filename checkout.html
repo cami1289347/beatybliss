@@ -19,6 +19,8 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--background);
       color: var(--dark);
+      margin: 0;
+      padding: 0;
     }
 
     .contenedor-pago {
@@ -41,11 +43,12 @@
     .metodo-pago {
       text-align: center;
       margin-bottom: 2rem;
+      display: none; /* Oculto inicialmente */
     }
 
     .metodo-pago h2 {
       color: var(--primary);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       font-size: 1.5rem;
     }
 
@@ -64,6 +67,11 @@
       cursor: pointer;
       transition: all 0.3s;
       font-weight: 500;
+      color: black; /* Texto negro para mejor contraste */
+    }
+
+    .opcion-pago:hover {
+      background: #f8f8f8;
     }
 
     .opcion-pago.active {
@@ -101,12 +109,6 @@
       font-size: 1rem;
     }
 
-    .input-group input:focus {
-      border-color: var(--primary);
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(233, 29, 99, 0.2);
-    }
-
     .boton-pago {
       width: 100%;
       padding: 1rem;
@@ -124,17 +126,6 @@
     .boton-pago:hover {
       background-color: var(--primary-dark);
     }
-
-    .qr-code {
-      display: none;
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .qr-code img {
-      max-width: 200px;
-      margin: 1rem auto;
-    }
   </style>
 </head>
 <body>
@@ -144,9 +135,9 @@
     <h2>Resumen de Pago</h2>
     <p id="total-pago" class="total">Total: S/ 62.90</p>
     
-    <button class="boton-pago" onclick="verificarSesion()">Realizar Pago</button>
+    <button class="boton-pago" id="btn-realizar-pago">Realizar Pago</button>
 
-    <div class="metodo-pago" style="display: none;">
+    <div class="metodo-pago">
       <h2>Selecciona el Método de Pago</h2>
       <div class="opciones-pago">
         <div class="opcion-pago active" onclick="mostrarFormularioTarjeta()">Tarjeta</div>
@@ -176,50 +167,49 @@
       </div>
       <button class="boton-pago" onclick="procesarPagoTarjeta()">Pagar con Tarjeta</button>
     </div>
-
-    <div class="qr-code">
-      <h3>Código QR para Yape/Plin</h3>
-      <p>Nombre de la tienda: Beauty Bliss</p>
-      <img src="codigoqr.jpg" alt="Código QR">
-    </div>
   </div>
 </div>
 
 <script>
-  // Verificación de sesión
-  function verificarSesion() {
-    const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
+  // Función mejorada para verificar sesión
+  document.getElementById('btn-realizar-pago').addEventListener('click', function() {
+    // Verificar si el usuario está en localStorage
+    const usuarioGuardado = localStorage.getItem('usuarioActual');
     
-    if (!usuario || !usuario.loggedIn) {
-      alert("Debes iniciar sesión para continuar con el pago");
-      window.location.href = "registro.html";
+    if (usuarioGuardado) {
+      const usuario = JSON.parse(usuarioGuardado);
+      if (usuario.loggedIn) {
+        // Mostrar métodos de pago si está logueado
+        document.querySelector('.metodo-pago').style.display = 'block';
+        this.style.display = 'none';
+      } else {
+        // Redirigir a registro si no está logueado
+        alert('Por favor inicia sesión para continuar con el pago');
+        window.location.href = 'registro.html';
+      }
     } else {
-      document.querySelector('.metodo-pago').style.display = 'block';
-      document.querySelector('.boton-pago').style.display = 'none';
+      // Redirigir a registro si no existe
+      alert('Debes registrarte para realizar pagos');
+      window.location.href = 'registro.html';
     }
-  }
+  });
 
-  // Mostrar formulario de tarjeta
   function mostrarFormularioTarjeta() {
     document.querySelector('.formulario-tarjeta').style.display = 'block';
-    document.querySelector('.qr-code').style.display = 'none';
     document.querySelectorAll('.opcion-pago').forEach(opcion => {
       opcion.classList.remove('active');
     });
-    document.querySelectorAll('.opcion-pago')[0].classList.add('active');
+    event.target.classList.add('active');
   }
 
-  // Mostrar QR
   function mostrarQR() {
-    document.querySelector('.qr-code').style.display = 'block';
-    document.querySelector('.formulario-tarjeta').style.display = 'none';
+    alert("Mostraría el código QR aquí");
     document.querySelectorAll('.opcion-pago').forEach(opcion => {
       opcion.classList.remove('active');
     });
-    document.querySelectorAll('.opcion-pago')[1].classList.add('active');
+    event.target.classList.add('active');
   }
 
-  // Procesar pago con tarjeta
   function procesarPagoTarjeta() {
     const nombre = document.getElementById('nombre-titular').value.trim();
     const tarjeta = document.getElementById('numero-tarjeta').value.trim();
@@ -242,7 +232,7 @@
     }
 
     if (!/^\d{3}$/.test(cvv)) {
-      alert("CVV inválido (3 dígitos)");
+      alert("CVV inválido (deben ser 3 dígitos)");
       return;
     }
 
