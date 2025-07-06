@@ -99,7 +99,7 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-      .header-top-container {
+    .header-top-container {
   background-color: #ffeeeb;
   width: 100%;                  /* el fondo rosado ocupa todo el ancho */
 }
@@ -109,21 +109,10 @@
   align-items: center;
   padding: 1rem 2rem;
   gap: 2rem;
-  width: 100%;
+  max-width: 1200px;            /* contenido limitado a 1200px */
+  margin: 0 auto;
   background-color: #ffeeeb;
 }
-    
-     .main-nav {
-      display: flex;
-      justify-content: center;
-      padding: 0.5rem 0; /* Ajusta el padding según sea necesario */
-      background-color: #ffffff;
-      border-top: 1px solid #eee;
-      border-bottom: 1px solid #eee;
-      width: 100%; /* Asegura que ocupe todo el ancho */
-      margin: 0; /* Elimina el margen */
-    }
-
 
     .logo {
       height: 50px;
@@ -152,7 +141,17 @@
       font-size: 1.2rem;
     }
 
-    
+     .main-nav {
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 0; /* Ajusta el padding según sea necesario */
+      background-color: #ffffff;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      width: 100%; /* Asegura que ocupe todo el ancho */
+      margin: 0; /* Elimina el margen */
+    }
+
 
     .main-nav a {
       padding: 0.5rem 1rem;
@@ -229,6 +228,7 @@
   width: 100%; /* Asegura que ocupe todo el ancho */
   display: block; /* Asegura que los bloques estén uno debajo del otro */
 }
+
 
 
 .logo {
