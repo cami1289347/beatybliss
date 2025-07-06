@@ -342,12 +342,54 @@
         <div class="header-top">
             <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
             <input type="text" class="buscador-header" placeholder="Buscar productos...">
-            <div class="icons">
-                <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
-                <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
-                <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
-                <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
-            </div>
+           <div class="icons">
+    <a href="#" title="Usuario" id="user-icon"><i class="fas fa-user"></i></a>
+    <div id="user-menu" class="user-menu" style="display: none;">
+        <a href="perfil.html">Perfil</a>
+        <a href="mispedidos.html">Mis Compras</a>
+        <a href="#" id="logout">Cerrar Sesión</a>
+    </div>
+    <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+    <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+    <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+</div>
+
+<style>
+    .user-menu {
+        position: absolute;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 10px;
+        z-index: 1000;
+    }
+
+    .user-menu a {
+        display: block;
+        padding: 8px 12px;
+        color: var(--dark);
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .user-menu a:hover {
+        background-color: var(--primary-light);
+    }
+</style>
+
+<script>
+    document.getElementById('user-icon').addEventListener('click', function(event) {
+        event.preventDefault();
+        const userMenu = document.getElementById('user-menu');
+        userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.getElementById('logout').addEventListener('click', function() {
+        alert('Has cerrado sesión.');
+        // Lógica para cerrar sesión
+    });
+</script>
+
         </div>
 
         <nav class="main-nav">
