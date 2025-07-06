@@ -6,23 +6,51 @@
   <title>Pago - Beauty Bliss</title>
   <link rel="stylesheet" href="style.pago.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #6a5acd;
+      --primary-dark: #5a4acd;
+      --secondary: #ff7eb9;
+      --dark: #2e2e2e;
+      --light: #f8f9fa;
+      --gray: #e0e0e0;
+      --success: #4caf50;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f5f5f7;
+      color: var(--dark);
+      line-height: 1.6;
+      margin: 0;
+    }
+
     .contenedor-pago {
       display: flex;
       padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 2rem;
     }
 
     .carrito-productos {
       flex: 2;
-      margin-right: 2rem;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 1rem;
-      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      background-color: white;
+      box-shadow: var(--shadow);
     }
 
     .carrito-productos h2 {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 1.8rem;
+      border-bottom: 2px solid var(--gray);
+      padding-bottom: 0.5rem;
     }
 
     .producto-carrito {
@@ -30,95 +58,339 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
     }
 
-    .producto-carrito img {
-      width: 40px; /* Disminuir el tamaño de la imagen */
-      height: 40px; /* Disminuir el tamaño de la imagen */
-      object-fit: cover;
-      margin-right: 1rem;
+    .producto-carrito:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .producto-carrito div {
-      flex: 1; /* Permitir que el div ocupe el espacio disponible */
-      text-align: center; /* Centrar el texto dentro del div */
+      flex: 1;
+      text-align: center;
     }
 
     .producto-carrito h4 {
-      margin: 0; /* Eliminar margen para mejor alineación */
+      margin: 0;
+      font-weight: 600;
+      color: var(--dark);
     }
 
     .cantidad {
       display: flex;
       align-items: center;
+      justify-content: center;
+      margin: 0.5rem 0;
     }
 
-    .cantidad input {
+    .btn-cantidad {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--gray);
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .btn-cantidad:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .input-cantidad {
       width: 40px;
       text-align: center;
       margin: 0 5px;
+      border: 1px solid var(--gray);
+      border-radius: 4px;
+      padding: 0.2rem;
+    }
+
+    .eliminar-producto {
+      background: none;
+      border: none;
+      color: #e91e63;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .eliminar-producto:hover {
+      text-decoration: underline;
+    }
+
+    .precio {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    #total {
+      font-weight: bold;
+      margin-top: 1.5rem;
+      text-align: right;
+      font-size: 1.2rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--gray);
     }
 
     .pago {
       flex: 1;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 1rem;
-      background-color: #f9f9f9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      background-color: white;
+      box-shadow: var(--shadow);
     }
 
     .pago h2 {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 1.8rem;
+      border-bottom: 2px solid var(--gray);
+      padding-bottom: 0.5rem;
     }
 
     .total {
       font-weight: bold;
-      margin-top: 1rem;
+      margin: 1.5rem 0;
+      font-size: 1.2rem;
+      color: var(--dark);
     }
 
     .boton-pago {
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #e91e63;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: var(--transition);
+      font-weight: 600;
+      width: 100%;
+      font-size: 1rem;
     }
 
     .boton-pago:hover {
-      background-color: #c2185b;
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
     }
 
     .metodo-pago {
-      display: none; /* Ocultar inicialmente */
-      margin-top: 1rem;
+      display: none;
+      margin-top: 1.5rem;
+    }
+
+    .metodo-pago h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .metodo-pago button {
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      width: 100%;
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .metodo-pago button:hover {
+      border-color: var(--primary);
+      color: var(--primary);
     }
 
     .formulario-tarjeta {
-      display: none; /* Ocultar inicialmente */
-      margin-top: 1rem;
+      display: none;
+      margin-top: 1.5rem;
+    }
+
+    .formulario-tarjeta h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+
+    .formulario-tarjeta input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .formulario-tarjeta input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
     }
 
     .qr-code {
-      display: none; /* Ocultar inicialmente */
-      margin-top: 1rem;
+      display: none;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .qr-code h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
     }
 
     .qr-code img {
-      width: 100px; /* Disminuir el tamaño de la imagen del QR */
-      height: 100px; /* Disminuir el tamaño de la imagen del QR */
-      object-fit: cover; /* Mantener la proporción de la imagen */
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border: 1px solid var(--gray);
+      border-radius: 8px;
+      padding: 0.5rem;
+      background: white;
+    }
+
+    .cabecera {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .buscador-header {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--gray);
+      border-radius: 20px;
+      width: 300px;
+    }
+
+    .icons a {
+      margin-left: 1rem;
+      color: var(--dark);
+      transition: var(--transition);
+    }
+
+    .icons a:hover {
+      color: var(--primary);
+    }
+
+    .main-nav {
+      background: var(--primary);
+      padding: 0.5rem 0;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      opacity: 0.9;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .footer-col {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #ccc;
+      margin-bottom: 0.5rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+    }
+
+    @media (max-width: 768px) {
+      .contenedor-pago {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .carrito-productos {
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+      }
+      
+      .header-top {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      
+      .buscador-header {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
+<!-- El resto de tu HTML permanece exactamente igual -->
 <header class="cabecera">
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
@@ -172,7 +444,7 @@
     <div class="qr-code">
       <h3>Código QR para Yape/Plin</h3>
       <p>Nombre de la tienda: Beauty Bliss</p>
-      <img src="codigoqr.jpg" alt="Código QR"> <!-- Cambia esta ruta por la de tu código QR -->
+      <img src="codidoqr.jpg" alt="Código QR">
     </div>
   </div>
 </main>
@@ -199,6 +471,7 @@
     </div>
 </footer>
 
+<!-- El JavaScript permanece exactamente igual -->
 <script>
   let carritoItems = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -208,7 +481,7 @@
 
   function actualizarCarrito() {
     const carritoLista = document.getElementById("carrito-lista");
-    carritoLista.innerHTML = ""; // Limpiar la lista
+    carritoLista.innerHTML = "";
 
     if (carritoItems.length === 0) {
         carritoLista.innerHTML = "<li>Carrito vacío</li>";
@@ -235,7 +508,7 @@
             <p class="precio">S/ ${item.precio.toFixed(2)}</p>
         `;
         carritoLista.appendChild(li);
-        total += item.precio * item.cantidad; // Sumar al total
+        total += item.precio * item.cantidad;
     });
 
     document.getElementById("total").textContent = `Total: S/ ${total.toFixed(2)}`;
@@ -263,23 +536,23 @@
   }
 
   function verificarSesion() {
-    const currentUser      = JSON.parse(localStorage.getItem('usuarioActual'));
-    if (!currentUser      || !currentUser     .loggedIn) {
+    const currentUser = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (!currentUser || !currentUser.loggedIn) {
       alert("Por favor, regístrate o inicia sesión para proceder con el pago.");
-      window.location.href = 'registro.html'; // Redirigir a la página de registro
+      window.location.href = 'registro.html';
     } else {
-      document.querySelector('.metodo-pago').style.display = 'block'; // Mostrar opciones de pago
+      document.querySelector('.metodo-pago').style.display = 'block';
     }
   }
 
   function mostrarFormularioTarjeta() {
     document.querySelector('.formulario-tarjeta').style.display = 'block';
-    document.querySelector('.qr-code').style.display = 'none'; // Ocultar QR
+    document.querySelector('.qr-code').style.display = 'none';
   }
 
   function mostrarQR() {
     document.querySelector('.qr-code').style.display = 'block';
-    document.querySelector('.formulario-tarjeta').style.display = 'none'; // Ocultar formulario de tarjeta
+    document.querySelector('.formulario-tarjeta').style.display = 'none';
   }
 
   function procesarPagoTarjeta() {
@@ -288,32 +561,27 @@
     const fechaExpiracion = document.getElementById("fecha-expiracion").value.trim();
     const cvv = document.getElementById("cvv").value.trim();
 
-    // Validar que todos los campos estén completos
     if (!nombreTitular || !numeroTarjeta || !fechaExpiracion || !cvv) {
         alert("Por favor, completa todos los campos del formulario de pago.");
-        return; // No proceder con el pago
+        return;
     }
 
-    // Validar el número de tarjeta (debe tener 16 dígitos)
     if (!/^\d{16}$/.test(numeroTarjeta)) {
         alert("El número de tarjeta debe tener exactamente 16 dígitos.");
-        return; // No proceder con el pago
+        return;
     }
 
-    // Validar el CVV (debe tener 3 dígitos)
     if (!/^\d{3}$/.test(cvv)) {
         alert("El CVV debe tener exactamente 3 dígitos.");
-        return; // No proceder con el pago
+        return;
     }
 
-    // Validar la fecha de expiración (debe estar en formato MM/AA)
     const fechaRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
     if (!fechaRegex.test(fechaExpiracion)) {
         alert("La fecha de expiración debe estar en el formato MM/AA.");
-        return; // No proceder con el pago
+        return;
     }
 
-    // Aquí puedes agregar la lógica para procesar el pago con tarjeta
     alert(`Pago realizado con éxito con tarjeta a nombre de ${nombreTitular}. ¡Gracias por tu compra!`);
     carritoItems = [];
     guardarCarrito();
@@ -321,5 +589,7 @@
   }
 </script>
 
+</body>
+</html>
 </body>
 </html>
