@@ -100,13 +100,6 @@
       margin: 0 auto;
     }
     
-    .header-top {
-      display: flex;
-      align-items: center;
-      padding: 1rem;
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-    }
 
     .logo {
       height: 50px;
@@ -135,12 +128,28 @@
       font-size: 1.2rem;
     }
 
+         .header-top-container {
+  background-color: #ffeeeb;
+  width: 100%;                  /* el fondo rosado ocupa todo el ancho */
+}
+ .header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 2rem;
+  width: 100%;
+  background-color: #ffeeeb;
+}
     .main-nav {
       display: flex;
       justify-content: center;
-      padding: 1rem;
-      background-color: #fff;
+      padding: 0.5rem 0; /* Ajusta el padding según sea necesario */
+      background-color: #ffffff;
+      border-top: 1px solid #eee;
       border-bottom: 1px solid #eee;
+      width: 100%; /* Asegura que ocupe todo el ancho */
+      margin: 0; /* Elimina el margen */
     }
 
     .main-nav a {
@@ -220,15 +229,6 @@
 }
   
 
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
-
 .logo {
   height: 50px;
 }
@@ -253,14 +253,6 @@
   color: #e91e63;
 }
 
-.main-nav {
-  display: flex;
-  justify-content: center;
-  background-color: #f9f9f9;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 0.5rem 0;
-}
 
 .nav-links a {
   color: #333;
@@ -282,6 +274,7 @@
 
 <header class="cabecera">
   <!-- Parte superior: logo, buscador, íconos -->
+ <div class="header-top-container">
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
     <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
@@ -297,7 +290,7 @@
       <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
       <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
       <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
-
+    </div>
     </div>
   </div>
 
