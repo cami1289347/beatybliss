@@ -155,42 +155,42 @@
     actualizarCarrito();
   });
 
-  function actualizarCarrito() {
+ function actualizarCarrito() {
     const carritoLista = document.getElementById("carrito-lista");
     carritoLista.innerHTML = ""; // Limpiar la lista
 
     if (carritoItems.length === 0) {
-      carritoLista.innerHTML = "<li>Carrito vacío</li>";
-      document.getElementById("total").textContent = "Total: S/ 0.00";
-      document.getElementById("total-pago").textContent = "Total: S/ 0.00";
-      return;
+        carritoLista.innerHTML = "<li>Carrito vacío</li>";
+        document.getElementById("total").textContent = "Total: S/ 0.00";
+        document.getElementById("total-pago").textContent = "Total: S/ 0.00";
+        return;
     }
 
     let total = 0;
 
     carritoItems.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.className = "producto-carrito";
-      li.innerHTML = `
-        <img src="${item.imagen}" alt="${item.nombre}">
-        <div>
-          <h4>${item.nombre}</h4>
-          <div class="cantidad">
-            <button class="btn-cantidad" onclick="cambiarCantidad(${index}, -1)">-</button>
-            <input type="number" value="${item.cantidad}" min="1" class="input-cantidad" readonly>
-            <button class="btn-cantidad" onclick="cambiarCantidad(${index}, 1)">+</button>
-          </div>
-          <button class="eliminar-producto" onclick="eliminarProducto(${index})">Eliminar</button>
-        </div>
-        <p class="precio">S/ ${item.precio.toFixed(2)}</p>
-      `;
-      carritoLista.appendChild(li);
-      total += item.precio * item.cantidad; // Sumar al total
+        const li = document.createElement("li");
+        li.className = "producto-carrito";
+        li.innerHTML = `
+            <img src="${item.imagen}" alt="${item.nombre}" onerror="this.onerror=null; this.src='ruta/a/imagen/por/defecto.jpg';">
+            <div>
+                <h4>${item.nombre}</h4>
+                <div class="cantidad">
+                    <button class="btn-cantidad" onclick="cambiarCantidad(${index}, -1)">-</button>
+                    <input type="number" value="${item.cantidad}" min="1" class="input-cantidad" readonly>
+                    <button class="btn-cantidad" onclick="cambiarCantidad(${index}, 1)">+</button>
+                </div>
+                <button class="eliminar-producto" onclick="eliminarProducto(${index})">Eliminar</button>
+            </div>
+            <p class="precio">S/ ${item.precio.toFixed(2)}</p>
+        `;
+        carritoLista.appendChild(li);
+        total += item.precio * item.cantidad; // Sumar al total
     });
 
     document.getElementById("total").textContent = `Total: S/ ${total.toFixed(2)}`;
     document.getElementById("total-pago").textContent = `Total: S/ ${total.toFixed(2)}`;
-  }
+}
 
   function cambiarCantidad(index, cambio) {
     carritoItems[index].cantidad += cambio;
