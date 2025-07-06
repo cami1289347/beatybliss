@@ -432,14 +432,89 @@
   <div class="perfil-derecha">
     <h2>Información de perfil</h2>
     <form id="formPerfil">
-      <!-- ... todos los campos del formulario ... -->
+      <div class="form-grupo">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" disabled>
+          <option value="">Seleccionar sexo</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-grupo">
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="fechaNacimiento">Fecha de nacimiento:</label>
+        <input type="text" id="fechaNacimiento" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="pais">País:</label>
+        <select id="pais" disabled>
+          <option value="Perú">Perú</option>
+          <option value="Argentina">Argentina</option>
+          <option value="México">México</option>
+          <option value="Colombia">Colombia</option>
+        </select>
+      </div>
+      <div class="form-full">
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" disabled />
+      </div>
+      <div class="form-grupo">
+        <label for="distrito">Distrito (Lima - Perú):</label>
+        <select id="distrito" disabled>
+          <option value="">Seleccionar distrito</option>
+          <option value="Miraflores">Miraflores</option>
+          
+          <option value="Rimac">Rimac</option>
+          <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+          <option value="San Isidro">San Isidro</option>
+          <option value="Surco">Santiago de Surco</option>
+          <option value="San Borja">San Borja</option>
+          <option value="La Molina">La Molina</option>
+          <option value="Lince">Lince</option>
+          <option value="Jesús María">Jesús María</option>
+        </select>
+      </div>
+      <div class="form-grupo">
+        <label for="codigoPostal">Código Postal:</label>
+        <input type="text" id="codigoPostal" disabled />
+      </div>
       <button type="submit" class="boton-guardar">Guardar cambios</button>
     </form>
   </div>
 </section>
 
 <footer>
-  <!-- ... contenido del footer ... -->
+ <div class="footer-col">
+      <h4>Sobre Beauty Bliss</h4>
+      <a href="Sobre-nosotros.html">Quienes somos</a>
+      <a href="compromiso.html">Nuestro compromiso</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="eliminacion_datos.html">Políticas de cookies</a>
+      <a href="politicas.html">Políticas de privacidad</a>
+    </div>
+    <div class="footer-col">
+      <h4>Soporte</h4>
+      <a href="contacto.html">Ayuda y contacto</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+    <div class="copyright">
+      © 2025 Beauty Bliss. Todos los derechos reservados.
+    </div>
 </footer>
 
 <script src="script.js"></script>
