@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -10,14 +10,55 @@
       font-family: sans-serif;
       margin: 0;
     }
-    header, footer {
-      text-align: center;
-      background: #fff;
-      padding: 1rem;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    header img {
+      height: 50px;
+      margin-right: 10px;
+    }
+    header .logo-text {
+      font-weight: bold;
+    }
+    header .logo-text span {
+      display: block;
+      font-size: 14px;
+    }
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+    nav a, nav button {
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    nav a {
+      color: white;
+      background-color: #e91e63;
+    }
+    nav button {
+      background: #e91e63;
+      color: white;
+    }
+
     h1 {
       color: #e91e63;
+      text-align: center;
+      margin-top: 1rem;
     }
+
     .formulario-producto {
       max-width: 800px;
       margin: auto;
@@ -71,9 +112,23 @@
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Agregar Productos</h1>
+    <div style="display: flex; align-items: center;">
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">
+        <span>BEAUTY</span>
+        <span>BLISS</span>
+      </div>
+    </div>
+    <nav>
+      <a href="admin.html">Inicio</a>
+      <button onclick="guardarEnLocalStorage()">Guardar cambios</button>
+      <a href="login.html">Cerrar sesión</a>
+    </nav>
   </header>
+
+  <h1>Agregar Productos</h1>
 
   <section class="formulario-producto">
     <input type="text" id="nombre" placeholder="Nombre">
@@ -147,7 +202,20 @@
       mostrarProductos();
     }
 
-    mostrarProductos();
+    function guardarEnLocalStorage() {
+      localStorage.setItem('productos', JSON.stringify(productos));
+      alert("Cambios guardados correctamente.");
+    }
+
+    function cargarDesdeLocalStorage() {
+      const guardados = localStorage.getItem('productos');
+      if (guardados) {
+        productos.push(...JSON.parse(guardados));
+        mostrarProductos();
+      }
+    }
+
+    cargarDesdeLocalStorage();
   </script>
 </body>
 </html>
