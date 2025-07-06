@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Prioriza el dataset del botón, luego el del contenedor
   const nombre = btn.dataset.nombre || producto.dataset.nombre || producto.querySelector("h4")?.textContent?.trim();
   const precio = parseFloat(btn.dataset.precio || producto.dataset.precio);
+  const imagen = producto.querySelector("img")?.src || "";
 
   if (!nombre || isNaN(precio)) {
     console.warn("Producto inválido", { nombre, precio });
@@ -210,7 +211,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (existente) {
     existente.cantidad++;
   } else {
-    carritoItems.push({ nombre, precio, cantidad: 1 });
+    carritoItems.push({ nombre, precio, cantidad: 1, imagen });
+
   }
 
   guardarCarrito();
