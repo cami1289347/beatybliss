@@ -524,5 +524,4 @@ function guardarUsuarioActualizado() {
 
     verificarCambios();
   }
-
 });
