@@ -16,7 +16,7 @@
             --gray: #e0e0e0;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
-        
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--background);
@@ -25,84 +25,13 @@
             padding: 0;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
-        /* Estilos del header */
-        .cabecera {
-            background-color: #ffeeeb;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-        
-        .header-top {
-            background-color: #ffeeeb;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: auto;
-        }
-        
-        .logo {
-            height: 50px;
-        }
-        
-        .buscador-header {
-            flex: 1;
-            margin: 0 2rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 1rem;
-        }
-        
-        .icons {
-            display: flex;
-            align-items: center;
-        }
-        
-        .icons a {
-            color: #555;
-            font-size: 1.3rem;
-            margin-left: 15px;
-            transition: color 0.3s;
-            text-decoration: none;
-        }
-        
-        .icons a:hover {
-            color: var(--primary);
-        }
-        
-        .main-nav {
-            display: flex;
-            justify-content: center;
-            background-color: var(--primary);
-            padding: 0.8rem 0;
-        }
-        
-        .main-nav a {
-            padding: 0.5rem 1.5rem;
-            margin: 0 5px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-        
-        .main-nav a:hover {
-            background-color: var(--primary-dark);
-        }
-        
-        /* Contenido principal */
+
         h1 {
             color: var(--primary);
             text-align: center;
@@ -110,29 +39,7 @@
             margin: 30px 0;
             font-family: 'Playfair Display', serif;
         }
-        
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            padding: 0.6rem 1.2rem;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            font-weight: 500;
-        }
-        
-        .back-btn:hover {
-            background-color: var(--primary-dark);
-        }
-        
-        .back-btn i {
-            margin-right: 8px;
-        }
-        
+
         /* Tarjetas de pedido */
         .order-card {
             background-color: var(--light);
@@ -142,7 +49,7 @@
             margin-bottom: 25px;
             border-left: 4px solid var(--primary);
         }
-        
+
         .order-header {
             display: flex;
             justify-content: space-between;
@@ -151,18 +58,18 @@
             border-bottom: 1px dashed var(--gray);
             padding-bottom: 15px;
         }
-        
+
         .order-id {
             font-weight: bold;
             color: var(--primary);
             font-size: 1.1rem;
         }
-        
+
         .order-date {
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         .order-status {
             padding: 6px 15px;
             border-radius: 20px;
@@ -171,13 +78,13 @@
             background-color: #cce5ff;
             color: #004085;
         }
-        
+
         .order-details {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
         }
-        
+
         .product-item {
             display: flex;
             align-items: center;
@@ -187,7 +94,7 @@
             background-color: #f9f9f9;
             border-radius: 8px;
         }
-        
+
         .product-image {
             width: 80px;
             height: 80px;
@@ -196,38 +103,43 @@
             margin-right: 15px;
             border: 1px solid var(--gray);
         }
-        
+
         .product-info {
             flex-grow: 1;
         }
-        
+
         .product-name {
             font-weight: bold;
             margin-bottom: 5px;
         }
-        
+
         .product-price {
             color: var(--primary);
         }
-        
+
         .product-quantity {
             color: #666;
             font-size: 0.9rem;
         }
-        
+
+        .product-delivery {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
         .order-summary {
             margin-top: 20px;
             padding-top: 15px;
             border-top: 1px dashed var(--gray);
             text-align: right;
         }
-        
+
         .total-amount {
             font-size: 1.2rem;
             font-weight: bold;
             color: var(--primary);
         }
-        
+
         /* Mensaje cuando no hay pedidos */
         .empty-orders {
             text-align: center;
@@ -237,17 +149,17 @@
             border-radius: 12px;
             box-shadow: var(--shadow);
         }
-        
+
         .empty-orders a {
             color: var(--primary);
             text-decoration: none;
             font-weight: bold;
         }
-        
+
         .empty-orders a:hover {
             text-decoration: underline;
         }
-        
+
         /* Mensaje de no autenticado */
         .auth-required {
             text-align: center;
@@ -258,22 +170,22 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .auth-required h2 {
             color: var(--primary);
             margin-bottom: 20px;
         }
-        
+
         .auth-required p {
             margin-bottom: 20px;
         }
-        
+
         .auth-buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
         }
-        
+
         .auth-btn {
             padding: 10px 20px;
             border-radius: 8px;
@@ -281,119 +193,33 @@
             font-weight: 500;
             transition: all 0.3s;
         }
-        
+
         .login-btn {
             background-color: var(--primary);
             color: white;
         }
-        
+
         .login-btn:hover {
             background-color: var(--primary-dark);
         }
-        
+
         .register-btn {
             background-color: white;
             color: var(--primary);
             border: 1px solid var(--primary);
         }
-        
+
         .register-btn:hover {
             background-color: #fff0f5;
         }
 
-        .user-menu {
-            position: absolute;
-            right: 20px;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-            z-index: 1000;
-            width: 150px;
-            display: none;
-        }
-
-        .user-menu a {
-            display: block;
-            padding: 8px 12px;
-            color: var(--dark);
-            text-decoration: none;
-            transition: background-color 0.3s;
-            border-radius: 4px;
-        }
-
-        .user-menu a:hover {
-            background-color: #ffeeeb;
-            color: var(--primary);
-        }
-
-        /* Footer */
-        footer {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            background: #fff;
-            padding: 40px 20px 10px;
-            margin-top: 50px;
-        }
-        
-        .footer-col h4 {
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        .footer-col a {
-            display: block;
-            margin-bottom: 6px;
-            text-decoration: none;
-            color: #333;
-            transition: color 0.2s;
-        }
-        
-        .footer-col a:hover {
-            color: var(--primary);
-        }
-        
-        .copyright {
-            text-align: center;
-            width: 100%;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-        }
     </style>
 </head>
 <body>
-    <header class="cabecera">
-        <div class="header-top">
-            <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
-            <input type="text" class="buscador-header" placeholder="Buscar productos...">
-            <div class="icons">
-                <a href="#" title="Usuario" id="user-icon"><i class="fas fa-user"></i></a>
-                <div id="user-menu" class="user-menu">
-                    <a href="perfil.html"><i class="fas fa-user-circle"></i> Perfil</a>
-                    <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
-                </div>
-                <a href="favoritos.html" title="Favoritos"><i class="fas fa-heart"></i></a>
-                <a href="carrito.html" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
-                <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
-            </div>
-        </div>
-
-        <nav class="main-nav">
-            <a href="index.html">Inicio</a>
-            <a href="cuidado de la piel.html">Cuidado de la Piel</a>
-            <a href="maquillaje.html">Rostro</a>
-            <a href="cabello.html">Cabello</a>
-            <a href="labios.html">Labios</a>
-            <a href="uñas.html">Uñas</a>
-        </nav>
-    </header>
-
     <main class="container">
         <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver a la tienda</a>
         <h1>Mis Compras</h1>
-        
+
         <div id="auth-required" class="auth-required" style="display: none;">
             <h2>Acceso Requerido</h2>
             <p>Para ver tus pedidos, por favor inicia sesión o regístrate en Beauty Bliss.</p>
@@ -402,131 +228,72 @@
                 <a href="registro.html?action=register" class="auth-btn register-btn">Registrarse</a>
             </div>
         </div>
-        
+
         <div id="orders-container">
             <!-- Las órdenes se cargarán aquí dinámicamente -->
         </div>
-        
+
         <div id="empty-orders" class="empty-orders" style="display: none;">
             <p>No tienes pedidos realizados todavía.</p>
             <p><a href="index.html">Explora nuestros productos</a> y descubre la magia de Beauty Bliss.</p>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-col">
-            <h4>Beauty Bliss</h4>
-            <a href="nosotros.html">Sobre nosotros</a>
-            <a href="tiendas.html">Nuestras tiendas</a>
-            <a href="blog.html">Blog</a>
-        </div>
-        <div class="footer-col">
-            <h4>Servicio al cliente</h4>
-            <a href="contacto.html">Contacto</a>
-            <a href="preguntas.html">Preguntas frecuentes</a>
-            <a href="devoluciones.html">Devoluciones</a>
-        </div>
-        <div class="footer-col">
-            <h4>Legal</h4>
-            <a href="privacidad.html">Política de privacidad</a>
-            <a href="terminos.html">Términos y condiciones</a>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2023 Beauty Bliss. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
     <script>
-        // Función para mostrar/ocultar menú de usuario
-        document.getElementById('user-icon').addEventListener('click', function(event) {
-            event.preventDefault();
-            const userMenu = document.getElementById('user-menu');
-            userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Cerrar menú al hacer clic fuera de él
-        document.addEventListener('click', function(event) {
-            const userMenu = document.getElementById('user-menu');
-            const userIcon = document.getElementById('user-icon');
-            
-            if (!userMenu.contains(event.target) && event.target !== userIcon) {
-                userMenu.style.display = 'none';
-            }
-        });
-
-        // Función para cerrar sesión
-        document.getElementById('logout').addEventListener('click', function(e) {
-            e.preventDefault();
-            localStorage.removeItem('usuarioActual');
-            window.location.href = 'index.html';
-        });
-
         // Función para verificar autenticación
         function checkAuth() {
             const user = JSON.parse(localStorage.getItem('usuarioActual'));
             const authRequired = document.getElementById('auth-required');
             const ordersContainer = document.getElementById('orders-container');
             const emptyOrders = document.getElementById('empty-orders');
-            
+
             if (!user || !user.loggedIn) {
                 authRequired.style.display = 'block';
                 ordersContainer.style.display = 'none';
                 emptyOrders.style.display = 'none';
                 return false;
             }
-            
+
             authRequired.style.display = 'none';
             ordersContainer.style.display = 'block';
             return true;
         }
-        
+
         // Función para cargar los pedidos del usuario
         function loadUserOrders() {
             if (!checkAuth()) return;
-            
+
             const user = JSON.parse(localStorage.getItem('usuarioActual'));
             const ordersContainer = document.getElementById('orders-container');
             const emptyOrders = document.getElementById('empty-orders');
-            
+
             // Obtener pedidos del localStorage
             let allOrders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
-            
-            // Si no hay pedidos, verificar si hay datos en el carrito completado
-            const completedCheckout = JSON.parse(localStorage.getItem('checkoutCompletado'));
-            if (allOrders.length === 0 && completedCheckout) {
-                // Crear un nuevo pedido desde el checkout
-                const newOrder = {
-                    id: "BB-" + Math.floor(100000 + Math.random() * 900000),
-                    userId: user.id,
-                    date: new Date().toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' }),
-                    products: completedCheckout.productos || [],
-                    total: completedCheckout.total || 0
-                };
-                
-                allOrders.push(newOrder);
-                localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
-                localStorage.removeItem('checkoutCompletado'); // Limpiar el checkout
-            }
-            
+
             // Filtrar solo los pedidos del usuario actual
             const userOrders = allOrders.filter(order => order.userId === user.id);
-            
+
             if (userOrders.length === 0) {
                 emptyOrders.style.display = 'block';
                 ordersContainer.innerHTML = '';
                 return;
             }
-            
+
             emptyOrders.style.display = 'none';
             ordersContainer.innerHTML = '';
-            
+
             // Ordenar pedidos por fecha (más reciente primero)
             userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
+
             userOrders.forEach(order => {
                 const orderCard = document.createElement('div');
                 orderCard.className = 'order-card';
-                
+
+                // Fecha estimada de entrega
+                const deliveryDate = new Date();
+                deliveryDate.setDate(deliveryDate.getDate() + 5); // 5 días después
+                const estimatedDelivery = deliveryDate.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+
                 // Crear HTML del pedido
                 orderCard.innerHTML = `
                     <div class="order-header">
@@ -536,7 +303,7 @@
                         </div>
                         <span class="order-status">En camino</span>
                     </div>
-                    
+
                     <div class="order-details">
                         ${order.products.map(product => `
                             <div class="product-item">
@@ -545,20 +312,21 @@
                                     <div class="product-name">${product.nombre || 'Producto'}</div>
                                     <div class="product-quantity">Cantidad: ${product.cantidad || 1}</div>
                                     <div class="product-price">S/ ${(product.precio * (product.cantidad || 1)).toFixed(2)}</div>
+                                    <div class="product-delivery">Entrega estimada: ${estimatedDelivery}</div>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
-                    
+
                     <div class="order-summary">
                         <div class="total-amount">Total: S/ ${order.total.toFixed(2)}</div>
                     </div>
                 `;
-                
+
                 ordersContainer.appendChild(orderCard);
             });
         }
-        
+
         // Cargar pedidos cuando la página esté lista
         document.addEventListener('DOMContentLoaded', loadUserOrders);
     </script>
