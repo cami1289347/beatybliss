@@ -11,17 +11,38 @@
       margin: 0;
       padding: 0;
     }
-    header, footer {
-      background-color: #fff;
-      padding: 1rem;
-      text-align: center;
+
+    /* Nuevo HEADER */
+    header {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
     header img {
       height: 50px;
     }
-    h1 {
+
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
       color: #e91e63;
+      font-weight: bold;
     }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e91e63;
+      margin-top: 1rem;
+    }
+
     .container {
       max-width: 1000px;
       margin: 2rem auto;
@@ -30,24 +51,30 @@
       padding: 2rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     .producto {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       margin-bottom: 2rem;
       border-bottom: 1px solid #ccc;
       padding-bottom: 1rem;
+      gap: 10px;
     }
+
     .producto img {
       width: 100px;
-      margin-right: 1rem;
+      height: 100px;
+      object-fit: cover;
     }
-    .producto input {
+
+    .producto input, .producto select {
       margin: 0.3rem;
       padding: 0.4rem;
-      width: 120px;
+      width: 150px;
     }
+
     .producto button {
-      margin-left: 1rem;
       background-color: #e91e63;
       color: white;
       border: none;
@@ -55,27 +82,34 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .producto button:hover {
       background-color: #c2185b;
     }
+
     footer {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
       padding: 2rem;
+      background-color: #fff;
     }
+
     .footer-col h4 {
       margin-bottom: 10px;
     }
+
     .footer-col a {
       display: block;
       margin-bottom: 8px;
       color: #333;
       text-decoration: none;
     }
+
     .footer-col a:hover {
       color: #e91e63;
     }
+
     .copyright {
       width: 100%;
       text-align: center;
@@ -86,10 +120,18 @@
   </style>
 </head>
 <body>
+
+  <!-- HEADER nuevo -->
   <header>
     <img src="logo.png" alt="Logo" />
-    <h1>Editar Productos</h1>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#">Productos</a>
+      <a href="#">Contacto</a>
+    </nav>
   </header>
+
+  <h1>Editar Productos</h1>
 
   <section class="container" id="lista-productos">
     <!-- Los productos serán cargados aquí -->
@@ -119,52 +161,92 @@
   </footer>
 
   <script>
-    const productos = [{ img: 'labios/PRO1650.jpg', nombre: 'Labial Rojo Intenso - Maybelline', precioOriginal: 30, precio: 25 },
-      { img: 'labios/PRO6377.jpg', nombre: 'Labial Rojo Cereza - Maybelline', precio: 18 },
-      { img: 'labios/PRO9974.jpg', nombre: 'Labial Rojo Oscuro - Maybelline', precioOriginal: 25, precio: 19 },
-      { img: 'labios/PRO2354.jpg', nombre: 'Brillo Labial Rosa - NYX', precio: 17 },
-      { img: 'labios/PRO4567.jpg', nombre: 'Brillo Labial Transparente - NYX', precioOriginal: 15, precio: 13 },
-      { img: 'labios/PRO9210.jpg', nombre: 'Labial Liquido Mate Rojo - Loreal', precio: 21 },
-      { img: 'labios/PRO6823.jpg', nombre: 'Labial Liquido Mate Nude - Loreal', precio: 21 },
-      { img: 'fragancia1.png', nombre: 'Perfume Rosas del Alba', precioOriginal: 89.90, precio: 74.90 },
-      { img: 'fragancia2.png', nombre: 'Colonia Frescura Cítrica', precioOriginal: 69.00, precio: 55.00 },
-      { img: 'fragancia3.png', nombre: 'Aromas Nocturnos', precioOriginal: 99.00, precio: 81.90 },
-      { img: 'fragancia4.png', nombre: 'Fragancia Vibrante Mujer', precioOriginal: 110.00, precio: 93.00 },
-      { img: 'fragancia5.png', nombre: 'Eau de Parfum Seducción', precioOriginal: 129.00, precio: 109.00 },
-      { img: 'fragancia6.png', nombre: 'Bruma Floral Ligera', precioOriginal: 45.00, precio: 38.00 },
-      { img: 'fragancia7.png', nombre: 'Colonia Fresh Hombre', precioOriginal: 85.00, precio: 70.00 },
-      { img: 'fragancia8.png', nombre: 'Perfume Unisex Brisa', precioOriginal: 92.00, precio: 77.00 },
-      { img: 'fragancia9.png', nombre: 'Spray Aromático Día', precioOriginal: 54.00, precio: 44.90 },
-      { img: 'fragancia10.png', nombre: 'Deluxe Intense', precioOriginal: 112.00, precio: 95.00 },
-      { img: 'fragancia11.png', nombre: 'Fragancia Floral Sunset', precioOriginal: 76.00, precio: 63.00 },
-      { img: 'fragancia12.png', nombre: 'Perfume Místico Encanto', precioOriginal: 108.00, precio: 90.00 }
-    ];
+  const KEY_STORAGE = 'productos-editados';
 
+  let productos = [
+    { img: 'labios/PRO1650.jpg', nombre: 'Labial Rojo Intenso', precioOriginal: 30, precio: 25, categoria: 'labios', marca: 'Maybelline' },
+    { img: 'labios/PRO6377.jpg', nombre: 'Labial Rojo Cereza', precio: 18, categoria: 'labios', marca: 'Maybelline' },
+    { img: 'labios/PRO9974.jpg', nombre: 'Labial Rojo Oscuro', precioOriginal: 25, precio: 19, categoria: 'labios', marca: 'Maybelline' },
+    { img: 'labios/PRO2354.jpg', nombre: 'Brillo Rosa', precio: 17, categoria: 'labios', marca: 'NYX' },
+  ];
 
+  // Cargar desde localStorage si existe
+  const guardados = localStorage.getItem(KEY_STORAGE);
+  if (guardados) {
+    productos = JSON.parse(guardados);
+  }
 
-    const contenedor = document.getElementById("lista-productos");
+  const contenedor = document.getElementById("lista-productos");
 
-    productos.forEach((producto, index) => {
-      const div = document.createElement("div");
-      div.className = "producto";
-      div.innerHTML = `
-        <img src="${producto.img}" alt="${producto.nombre}">
-        <input type="text" value="${producto.nombre}" id="nombre-${index}">
-        <input type="text" value="${producto.marca}" id="marca-${index}">
-        <input type="number" value="${producto.precio}" id="precio-${index}">
-        <button onclick="guardar(${index})">Guardar</button>
-      `;
-      contenedor.appendChild(div);
+  productos.forEach((producto, index) => {
+    const precioOriginal = producto.precioOriginal || producto.precio;
+    const descuento = producto.precioOriginal ? Math.round((1 - producto.precio / producto.precioOriginal) * 100) : 0;
+
+    const div = document.createElement("div");
+    div.className = "producto";
+    div.innerHTML = `
+      <img src="${producto.img}" id="img-${index}" alt="Producto">
+      <input type="file" id="file-${index}" accept="image/*">
+      <input type="text" value="${producto.nombre}" id="nombre-${index}" placeholder="Nombre">
+      <input type="text" value="${producto.marca || ''}" id="marca-${index}" placeholder="Marca">
+
+      <select id="categoria-${index}">
+        <option value="cuidado facial">Cuidado Facial</option>
+        <option value="rostro">Rostro</option>
+        <option value="cabello">Cabello</option>
+        <option value="labios">Labios</option>
+        <option value="uñas">Uñas</option>
+      </select>
+
+      <input type="number" id="descuento-${index}" value="${descuento}" min="0" max="100" placeholder="% Descuento">
+      <input type="text" id="precio-final-${index}" value="S/ ${(precioOriginal * (1 - descuento / 100)).toFixed(2)}" disabled>
+
+      <button onclick="guardar(${index})">Guardar</button>
+    `;
+
+    contenedor.appendChild(div);
+    document.getElementById(`categoria-${index}`).value = producto.categoria;
+
+    // Listener para actualizar imagen
+    document.getElementById(`file-${index}`).addEventListener('change', function (e) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        document.getElementById(`img-${index}`).src = event.target.result;
+      };
+      reader.readAsDataURL(e.target.files[0]);
     });
 
-    function guardar(index) {
-      const nombre = document.getElementById(`nombre-${index}`).value;
-      const marca = document.getElementById(`marca-${index}`).value;
-      const precio = document.getElementById(`precio-${index}`).value;
-      alert(`Producto actualizado:\nNombre: ${nombre}\nMarca: ${marca}\nPrecio: S/ ${precio}`);
-    }
-  </script>
+    // Listener para recalcular precio
+    document.getElementById(`descuento-${index}`).addEventListener('input', function () {
+      const d = parseFloat(this.value) || 0;
+      const nuevoPrecio = precioOriginal * (1 - d / 100);
+      document.getElementById(`precio-final-${index}`).value = `S/ ${nuevoPrecio.toFixed(2)}`;
+    });
+  });
+
+  function guardar(index) {
+    const nombre = document.getElementById(`nombre-${index}`).value;
+    const marca = document.getElementById(`marca-${index}`).value;
+    const categoria = document.getElementById(`categoria-${index}`).value;
+    const descuento = parseFloat(document.getElementById(`descuento-${index}`).value) || 0;
+    const precioOriginal = productos[index].precioOriginal || productos[index].precio;
+    const precioFinal = precioOriginal * (1 - descuento / 100);
+    const imagen = document.getElementById(`img-${index}`).src;
+
+    // Actualizar producto en el array
+    productos[index] = {
+      img: imagen,
+      nombre: nombre,
+      marca: marca,
+      categoria: categoria,
+      precioOriginal: precioOriginal,
+      precio: parseFloat(precioFinal.toFixed(2))
+    };
+
+    localStorage.setItem(KEY_STORAGE, JSON.stringify(productos));
+
+    alert("Producto guardado en almacenamiento local.");
+  }
+</script>
 </body>
 </html>
-
-
