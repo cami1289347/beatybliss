@@ -542,4 +542,5 @@ function guardarUsuarioActualizado() {
 
     verificarCambios();
   }
+  }
 });
