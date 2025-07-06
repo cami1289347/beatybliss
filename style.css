@@ -385,7 +385,7 @@ main {
       justify-content: center;
       margin-bottom: 1rem;
     }
-  .carrito {
+    .carrito {
       position: fixed;
       right: 20px;
       top: 80px;
@@ -465,13 +465,6 @@ main {
   font-weight: bold;
   font-size: 14px;
 }
-
-.producto button:hover {
-  background-color: #c2185b;
-  transform: scale(1.05);
-}
-
-
 
     .galeria-imagenes img {
       width: 30%; /* Ajusta el tamaño según sea necesario */
