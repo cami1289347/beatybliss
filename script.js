@@ -195,14 +195,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.addEventListener("click", function (e) {
-      if (!carrito?.contains(e.target) && !botonCarrito?.contains(e.target)) {
-        carrito?.classList.add("oculto");
-      }
-      if (!favoritosContenedor?.contains(e.target) && !botonFavoritos?.contains(e.target)) {
-        favoritosContenedor?.classList.add("oculto");
-      }
-    });
+  const clickDentroCarrito = carrito?.contains(e.target) || botonCarrito?.contains(e.target);
+  const clickDentroFavoritos = favoritosContenedor?.contains(e.target) || botonFavoritos?.contains(e.target);
+
+  if (!clickDentroCarrito) {
+    carrito?.classList.add("oculto");
   }
+
+  if (!clickDentroFavoritos) {
+    favoritosContenedor?.classList.add("oculto");
+  }
+});
+
 
   function aplicarFiltros() {
     const marcas = [...document.querySelectorAll('input[name="marca"]:checked')].map(el => el.value);
