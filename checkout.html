@@ -245,6 +245,7 @@
       position: relative;
     }
 
+        /* Estilos específicos para el menú desplegable del usuario */
     .user-dropdown {
       position: absolute;
       right: 0;
@@ -255,25 +256,41 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       z-index: 1000;
       display: none;
-      min-width: 150px;
-    }
-
-    .user-dropdown a {
-      display: block;
-      padding: 10px 15px;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-
-    .user-dropdown a:hover {
-      background: #f0f0f0;
+      min-width: 180px;
+      padding: 10px 0;
     }
 
     .user-dropdown.show {
       display: block;
     }
 
+    .user-dropdown a {
+      display: block;
+      padding: 10px 20px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    .user-dropdown a i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .user-dropdown a:hover {
+      background: #f8f8f8;
+      color: #e91e63;
+    }
+
+    .user-dropdown hr {
+      border: none;
+      border-top: 1px solid #eee;
+      margin: 5px 0;
+    }
     /* Botón Volver a la tienda */
     .btn-volver-tienda {
       display: inline-flex;
@@ -403,7 +420,6 @@
       border-top: 2px solid var(--gray);
       font-size: 1.2rem;
     }
-
     /* Proceso de Pago - Modificado para hacerlo más ancho */
     .proceso-pago {
       flex: 2.5;
@@ -602,7 +618,9 @@
           <a href="login.html" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
           <div class="user-dropdown" id="user-dropdown">
             <a href="perfil.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
+            <hr>
             <a href="pedidos.html"><i class="fas fa-shopping-bag"></i> Mis Compras</a>
+            <hr>
             <a href="index.html" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
           </div>
         </div>
@@ -624,7 +642,6 @@
     </div>
   </nav>
 </header>
-
 <!-- Contenido Principal -->
 <div class="contenedor-pago">
   <!-- Botón Volver a la tienda -->
@@ -914,23 +931,42 @@
     window.location.href = paginaOrigen;
   });
 
-  // Menú desplegable de usuario
+  // Menú desplegable de usuario (actualizado para coincidir con la imagen)
   document.getElementById('user-icon').addEventListener('click', function(e) {
     e.preventDefault();
+    e.stopPropagation();
     const dropdown = document.getElementById('user-dropdown');
     dropdown.classList.toggle('show');
   });
 
   // Cerrar menú desplegable al hacer clic fuera
-  window.addEventListener('click', function(e) {
-    if (!e.target.matches('#user-icon') && !e.target.closest('.user-dropdown')) {
-      const dropdown = document.getElementById('user-dropdown');
-      if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
-      }
+  document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('user-dropdown');
+    if (!e.target.closest('.user-menu-wrapper') && dropdown.classList.contains('show')) {
+      dropdown.classList.remove('show');
     }
   });
 
+  // Cerrar sesión
+  document.getElementById('logout-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual'));
+    
+    if (usuarioActual) {
+      // Actualizar estado de loggedIn en el array de usuarios
+      const usuarioIndex = usuarios.findIndex(u => u.id === usuarioActual.id);
+      if (usuarioIndex !== -1) {
+        usuarios[usuarioIndex].loggedIn = false;
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      }
+      
+      // Eliminar usuario actual
+      localStorage.removeItem('usuarioActual');
+    }
+    
+    window.location.href = 'index.html';
+  });
   // Al cargar la página
   document.addEventListener('DOMContentLoaded', function() {
     const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
