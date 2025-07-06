@@ -342,13 +342,6 @@ main {
       font-size: 1.2rem;
     }
 
-    .main-nav {
-      display: flex;
-      justify-content: center;
-      padding: 1rem;
-      background-color: #fff;
-      border-bottom: 1px solid #eee;
-    }
 
  .main-nav a {
       padding: 0.5rem 1rem;
@@ -511,6 +504,7 @@ main {
   background-color: #ffffff;
   width: 100%;                  /* el fondo rosado ocupa todo el ancho */
 }
+
 .header-top {
   display: flex;
   justify-content: center;
