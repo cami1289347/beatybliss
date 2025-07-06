@@ -219,8 +219,8 @@
   }
 
   function verificarSesion() {
-    const currentUser   = JSON.parse(localStorage.getItem('usuarioActual'));
-    if (!currentUser   || !currentUser  .loggedIn) {
+    const currentUser    = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (!currentUser    || !currentUser   .loggedIn) {
       alert("Por favor, regístrate o inicia sesión para proceder con el pago.");
       window.location.href = 'registro.html'; // Redirigir a la página de registro
     } else {
@@ -247,6 +247,25 @@
     // Validar que todos los campos estén completos
     if (!nombreTitular || !numeroTarjeta || !fechaExpiracion || !cvv) {
         alert("Por favor, completa todos los campos del formulario de pago.");
+        return; // No proceder con el pago
+    }
+
+    // Validar el número de tarjeta (debe tener 16 dígitos)
+    if (!/^\d{16}$/.test(numeroTarjeta)) {
+        alert("El número de tarjeta debe tener exactamente 16 dígitos.");
+        return; // No proceder con el pago
+    }
+
+    // Validar el CVV (debe tener 3 dígitos)
+    if (!/^\d{3}$/.test(cvv)) {
+        alert("El CVV debe tener exactamente 3 dígitos.");
+        return; // No proceder con el pago
+    }
+
+    // Validar la fecha de expiración (debe estar en formato MM/AA)
+    const fechaRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    if (!fechaRegex.test(fechaExpiracion)) {
+        alert("La fecha de expiración debe estar en el formato MM/AA.");
         return; // No proceder con el pago
     }
 
