@@ -99,16 +99,20 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    
-  .header-top {
+    .header-top-container {
   background-color: #ffeeeb;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%; /* Asegura que ocupe todo el ancho */
-  margin: 0; /* Elimina el margen */
- padding: 0.5rem 0;
+  width: 100%;                  /* el fondo rosado ocupa todo el ancho */
 }
+ .header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  gap: 2rem;
+  width: 100%;
+  background-color: #ffeeeb;
+}
+
     .logo {
       height: 50px;
       margin-right: 20px;
@@ -271,6 +275,7 @@
 
 <header class="cabecera">
   <!-- Parte superior: logo, buscador, íconos -->
+  <div class="header-top-container">
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
     <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
@@ -286,6 +291,7 @@
       <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
       <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
       <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+      </div>
     </div>
   </div>
 
