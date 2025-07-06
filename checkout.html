@@ -219,8 +219,8 @@
   }
 
   function verificarSesion() {
-    const currentUser  = JSON.parse(localStorage.getItem('usuarioActual'));
-    if (!currentUser  || !currentUser .loggedIn) {
+    const currentUser   = JSON.parse(localStorage.getItem('usuarioActual'));
+    if (!currentUser   || !currentUser  .loggedIn) {
       alert("Por favor, regístrate o inicia sesión para proceder con el pago.");
       window.location.href = 'registro.html'; // Redirigir a la página de registro
     } else {
@@ -239,10 +239,16 @@
   }
 
   function procesarPagoTarjeta() {
-    const nombreTitular = document.getElementById("nombre-titular").value;
-    const numeroTarjeta = document.getElementById("numero-tarjeta").value;
-    const fechaExpiracion = document.getElementById("fecha-expiracion").value;
-    const cvv = document.getElementById("cvv").value;
+    const nombreTitular = document.getElementById("nombre-titular").value.trim();
+    const numeroTarjeta = document.getElementById("numero-tarjeta").value.trim();
+    const fechaExpiracion = document.getElementById("fecha-expiracion").value.trim();
+    const cvv = document.getElementById("cvv").value.trim();
+
+    // Validar que todos los campos estén completos
+    if (!nombreTitular || !numeroTarjeta || !fechaExpiracion || !cvv) {
+        alert("Por favor, completa todos los campos del formulario de pago.");
+        return; // No proceder con el pago
+    }
 
     // Aquí puedes agregar la lógica para procesar el pago con tarjeta
     alert(`Pago realizado con éxito con tarjeta a nombre de ${nombreTitular}. ¡Gracias por tu compra!`);
