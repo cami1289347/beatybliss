@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
+         :root {
             --primary: #e91e63;
             --primary-dark: #c2185b;
             --background: #fff3f3;
@@ -299,8 +299,144 @@
         .register-btn:hover {
             background-color: #fff0f5;
         }
+
+        .user-menu {
+            position: absolute;
+            right: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 1000;
+            width: 150px;
+        }
+
+        .user-menu a {
+            display: block;
+            padding: 8px 12px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-radius: 4px;
+        }
+
+        .user-menu a:hover {
+            background-color: #ffeeeb;
+            color: var(--primary);
+        }
+
+        /* El resto de tus estilos se mantienen igual */
+    </style>
+</head>
+<body>
+    <!-- Cabecera -->
+    <header class="cabecera">
+        <div class="header-top">
+            <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+            <input type="text" class="buscador-header" placeholder="Buscar productos...">
+            <div class="icons">
+                <a href="#" title="Usuario" id="user-icon"><i class="fas fa-user"></i></a>
+                <div id="user-menu" class="user-menu" style="display: none;">
+                    <a href="perfil.html"><i class="fas fa-user-circle"></i> Perfil</a>
+                    <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </div>
+                <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
+                <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+                <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html">Inicio</a>
+            <a href="cuidado-de-la-piel.html">Cuidado Facial</a>
+            <a href="cabello.html">Cabello</a>
+            <a href="labios.html">Labios</a>
+            <a href="uñas.html">Uñas</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver a la tienda</a>
+        <h1>Mis Compras</h1>
         
-        /* Footer */
+        <div id="auth-required" class="auth-required" style="display: none;">
+            <h2>Acceso Requerido</h2>
+            <p>Para ver tus pedidos, por favor inicia sesión o regístrate en Beauty Bliss.</p>
+            <div class="auth-buttons">
+                <a href="registro.html?action=login" class="auth-btn login-btn">Iniciar Sesión</a>
+                <a href="registro.html?action=register" class="auth-btn register-btn">Registrarse</a>
+            </div>
+        </div>
+        
+        <div id="orders-container">
+            <!-- Ejemplo de cómo se verá un pedido -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div>
+                        <span class="order-id">Pedido #BB-471348</span>
+                        <span class="order-date">06 jul 2025</span>
+                    </div>
+                    <span class="order-status status-processing">En proceso</span>
+                </div>
+                
+                <div class="order-details">
+                    <div class="product-item">
+                        <img src="producto1.jpg" alt="Crema hidratante" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Crema Hidratante Facial</div>
+                            <div>Cantidad: 1</div>
+                            <div class="product-price">S/ 45.00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-item">
+                        <img src="producto2.jpg" alt="Labial" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Labial Matte Rojo</div>
+                            <div>Cantidad: 2</div>
+                            <div class="product-price">S/ 58.00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <div class="total-amount">Total: S/ 103.00</div>
+                </div>
+            </div>
+            
+            <div class="order-card">
+                <div class="order-header">
+                    <div>
+                        <span class="order-id">Pedido #BB-229789</span>
+                        <span class="order-date">06 jul 2025</span>
+                    </div>
+                    <span class="order-status status-delivered">Entregado</span>
+                </div>
+                
+                <div class="order-details">
+                    <div class="product-item">
+                        <img src="producto3.jpg" alt="Shampoo" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Shampoo Reparador</div>
+                            <div>Cantidad: 1</div>
+                            <div class="product-price">S/ 32.00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <div class="total-amount">Total: S/ 32.00</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="empty-orders" class="empty-orders" style="display: none;">
+            <p>No tienes pedidos realizados todavía.</p>
+            <p><a href="index.html">Explora nuestros productos</a> y descubre la magia de Beauty Bliss.</p>
+        </div>
+    </main>
+
+            /* Footer */
         footer {
             display: flex;
             flex-wrap: wrap;
@@ -337,118 +473,33 @@
     </style>
 </head>
 <body>
-    <!-- Cabecera -->
-    <header class="cabecera">
-        <div class="header-top">
-            <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
-            <input type="text" class="buscador-header" placeholder="Buscar productos...">
-           <div class="icons">
-    <a href="#" title="Usuario" id="user-icon"><i class="fas fa-user"></i></a>
-    <div id="user-menu" class="user-menu" style="display: none;">
-        <a href="perfil.html">Perfil</a>
-        <a href="mispedidos.html">Mis Compras</a>
-        <a href="#" id="logout">Cerrar Sesión</a>
-    </div>
-    <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
-    <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
-    <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
-</div>
 
-<style>
-    .user-menu {
-        position: absolute;
-        background-color: white;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        padding: 10px;
-        z-index: 1000;
-    }
-
-    .user-menu a {
-        display: block;
-        padding: 8px 12px;
-        color: var(--dark);
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
-
-    .user-menu a:hover {
-        background-color: var(--primary-light);
-    }
-</style>
-
-<script>
-    document.getElementById('user-icon').addEventListener('click', function(event) {
-        event.preventDefault();
-        const userMenu = document.getElementById('user-menu');
-        userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.getElementById('logout').addEventListener('click', function() {
-        alert('Has cerrado sesión.');
-        // Lógica para cerrar sesión
-    });
-</script>
-
-        </div>
-
-        <nav class="main-nav">
-            <a href="index.html">Inicio</a>
-            <a href="cuidado de la piel.html">Cuidado Facial</a>
-            <a href="cabello.html">Cabello</a>
-            <a href="labios.html">Labios</a>
-            <a href="uñas.html">Uñas</a>
-        </nav>
-    </header>
-
-    <main class="container">
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver a la tienda</a>
-        <h1>Mis Compras</h1>
-        
-        <div id="auth-required" class="auth-required" style="display: none;">
-            <h2>Acceso Requerido</h2>
-            <p>Para ver tus pedidos, por favor inicia sesión o regístrate en Beauty Bliss.</p>
-            <div class="auth-buttons">
-                <a href="registro.html?action=login" class="auth-btn login-btn">Iniciar Sesión</a>
-                <a href="registro.html?action=register" class="auth-btn register-btn">Registrarse</a>
-            </div>
-        </div>
-        
-        <div id="orders-container">
-            <!-- Las órdenes se cargarán aquí dinámicamente -->
-        </div>
-        
-        <div id="empty-orders" class="empty-orders" style="display: none;">
-            <p>No tienes pedidos realizados todavía.</p>
-            <p><a href="index.html">Explora nuestros productos</a> y descubre la magia de Beauty Bliss.</p>
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-col">
-            <h4>Beauty Bliss</h4>
-            <a href="nosotros.html">Sobre nosotros</a>
-            <a href="tiendas.html">Nuestras tiendas</a>
-            <a href="blog.html">Blog</a>
-        </div>
-        <div class="footer-col">
-            <h4>Servicio al cliente</h4>
-            <a href="contacto.html">Contacto</a>
-            <a href="preguntas.html">Preguntas frecuentes</a>
-            <a href="devoluciones.html">Devoluciones</a>
-        </div>
-        <div class="footer-col">
-            <h4>Legal</h4>
-            <a href="privacidad.html">Política de privacidad</a>
-            <a href="terminos.html">Términos y condiciones</a>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2023 Beauty Bliss. Todos los derechos reservados.</p>
-        </div>
-    </footer>
 
     <script>
-          
+        // Menú de usuario
+        document.getElementById('user-icon').addEventListener('click', function(event) {
+            event.preventDefault();
+            const userMenu = document.getElementById('user-menu');
+            userMenu.style.display = userMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('user-menu');
+            const userIcon = document.getElementById('user-icon');
+            
+            if (!userMenu.contains(event.target) && event.target !== userIcon) {
+                userMenu.style.display = 'none';
+            }
+        });
+
+        document.getElementById('logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Lógica para cerrar sesión
+            localStorage.removeItem('usuarioActual');
+            window.location.href = 'index.html';
+        });
+
         // Función para verificar autenticación
         function checkAuth() {
             const user = JSON.parse(localStorage.getItem('usuarioActual'));
@@ -478,6 +529,49 @@
             
             // Obtener pedidos del localStorage o usar datos de ejemplo
             let allOrders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
+            
+            // Si no hay pedidos, usar datos de ejemplo para demostración
+            if (allOrders.length === 0) {
+                allOrders = [
+                    {
+                        id: "BB-471348",
+                        userId: user.id,
+                        date: "06 jul 2025",
+                        status: "processing",
+                        products: [
+                            {
+                                name: "Crema Hidratante Facial",
+                                price: 45.00,
+                                quantity: 1,
+                                image: "producto1.jpg"
+                            },
+                            {
+                                name: "Labial Matte Rojo",
+                                price: 29.00,
+                                quantity: 2,
+                                image: "producto2.jpg"
+                            }
+                        ],
+                        total: 103.00
+                    },
+                    {
+                        id: "BB-229789",
+                        userId: user.id,
+                        date: "06 jul 2025",
+                        status: "delivered",
+                        products: [
+                            {
+                                name: "Shampoo Reparador",
+                                price: 32.00,
+                                quantity: 1,
+                                image: "producto3.jpg"
+                            }
+                        ],
+                        total: 32.00
+                    }
+                ];
+                localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
+            }
             
             // Filtrar solo los pedidos del usuario actual
             const userOrders = allOrders.filter(order => order.userId === user.id);
