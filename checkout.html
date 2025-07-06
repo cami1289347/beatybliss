@@ -90,7 +90,6 @@
 <body>
 
 <header class="cabecera">
-  <!-- Parte superior: logo, buscador, íconos -->
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
     <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
@@ -102,7 +101,6 @@
     </div>
   </div>
 
-  <!-- Barra de navegación debajo -->
   <nav class="main-nav">
     <div class="nav-links">
       <a href="index.html">Inicio</a>
@@ -114,13 +112,6 @@
   </nav>
 </header>
 
-  <div id="carrito" class="carrito oculto">
-    <h3>Tu carrito</h3>
-    <ul id="carrito-lista"></ul>
-    <p id="total">Total: $0.00</p>
-    <button onclick="window.location.href='checkout.html'">Finalizar Compra</button>
-    <button id="cerrar-carrito">Cerrar</button>
-  </div>
 <main class="contenedor-pago">
   <div class="carrito-productos">
     <h2>Productos en el Carrito</h2>
@@ -157,38 +148,74 @@
 </footer>
 
 <script>
-  function realizarPago() {
-  if (carritoItems.length === 0) {
-    alert("Tu carrito está vacío. Agrega productos antes de proceder al pago.");
-    return;
-  }
-  // Aquí puedes agregar la lógica para procesar el pago
-  alert("Pago realizado con éxito. ¡Gracias por tu compra!");
-  // Limpiar el carrito después del pago
-  carritoItems = [];
-  guardarCarrito();
-  actualizarCarrito();
-}
-  function cambiarCantidad(accion) {
-    const inputCantidad = document.querySelector('.input-cantidad');
-    let cantidad = parseInt(inputCantidad.value);
-    if (accion === 'incrementar') {
-      cantidad++;
-    } else if (accion === 'decrementar' && cantidad > 1) {
-      cantidad--;
+  let carritoItems = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  document.addEventListener('DOMContentLoaded', function () {
+    actualizarCarrito();
+  });
+
+  function actualizarCarrito() {
+    const carritoLista = document.getElementById("carrito-lista");
+    carritoLista.innerHTML = ""; // Limpiar la lista
+
+    if (carritoItems.length === 0) {
+      carritoLista.innerHTML = "<li>Carrito vacío</li>";
+      document.getElementById("total").textContent = "Total: S/ 0.00";
+      return;
     }
-    inputCantidad.value = cantidad;
-    // Aquí puedes actualizar el total si es necesario
+
+    carritoItems.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.className = "producto-carrito";
+      li.innerHTML = `
+        <img src="uñas/PRO7312.jpg" alt="${item.nombre}">
+        <div>
+          <h4>${item.nombre}</h4>
+          <div class="cantidad">
+            <button class="btn-cantidad" onclick="cambiarCantidad(${index}, -1)">-</button>
+            <input type="number" value="${item.cantidad}" min="1" class="input-cantidad" readonly>
+            <button class="btn-cantidad" onclick="cambiarCantidad(${index}, 1)">+</button>
+          </div>
+          <button class="eliminar-producto" onclick="eliminarProducto(${index})">Eliminar</button>
+        </div>
+        <p class="precio">S/ ${item.precio.toFixed(2)}</p>
+      `;
+      carritoLista.appendChild(li);
+    });
+
+    const total = carritoItems.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+    document.getElementById("total").textContent = `Total: S/ ${total.toFixed(2)}`;
   }
 
-  function eliminarProducto() {
-    // Lógica para eliminar el producto del carrito
-    alert('Producto eliminado del carrito');
+  function cambiarCantidad(index, cambio) {
+    carritoItems[index].cantidad += cambio;
+    if (carritoItems[index].cantidad <= 0) {
+      eliminarProducto(index);
+    } else {
+      guardarCarrito();
+      actualizarCarrito();
+    }
+  }
+
+  function eliminarProducto(index) {
+    carritoItems.splice(index, 1);
+    guardarCarrito();
+    actualizarCarrito();
+  }
+
+  function guardarCarrito() {
+    localStorage.setItem("carrito", JSON.stringify(carritoItems));
   }
 
   function realizarPago() {
-    // Lógica para realizar el pago
-    alert('Pago realizado con éxito');
+    if (carritoItems.length === 0) {
+      alert("Tu carrito está vacío. Agrega productos antes de proceder al pago.");
+      return;
+    }
+    alert("Pago realizado con éxito. ¡Gracias por tu compra!");
+    carritoItems = [];
+    guardarCarrito();
+    actualizarCarrito();
   }
 </script>
 
