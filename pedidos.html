@@ -436,7 +436,7 @@
         </div>
     </footer>
 
-   <script>
+<script>
 document.getElementById('user-icon').addEventListener('click', function(event) {
     event.preventDefault();
     const userMenu = document.getElementById('user-menu');
@@ -483,25 +483,37 @@ function loadUserOrders() {
     const emptyOrders = document.getElementById('empty-orders');
     let allOrders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
 
+    // Verificar si hay un checkout completado y si ya no existe en las órdenes
     const completedCheckout = JSON.parse(localStorage.getItem('checkoutCompletado'));
     if (completedCheckout?.pagoRealizado === true) {
-        const fechaPedido = new Date();
-        const fechaEntrega = new Date(fechaPedido);
-        fechaEntrega.setDate(fechaPedido.getDate() + 5);
+        // Verificar si esta orden ya existe
+        const orderExists = allOrders.some(order => 
+            order.userId === user.id && 
+            JSON.stringify(order.products) === JSON.stringify(completedCheckout.productos) &&
+            order.total === completedCheckout.total
+        );
 
-        const newOrder = {
-            id: "BB-" + Math.floor(100000 + Math.random() * 900000),
-            userId: user.id,
-            date: fechaPedido.toISOString(),
-            fechaEntrega: fechaEntrega.toISOString(),
-            estado: "En proceso",
-            products: completedCheckout.productos || [],
-            total: completedCheckout.total || 0,
-            editable: true
-        };
+        if (!orderExists) {
+            const fechaPedido = new Date();
+            const fechaEntrega = new Date(fechaPedido);
+            fechaEntrega.setDate(fechaPedido.getDate() + 5);
 
-        allOrders.push(newOrder);
-        localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
+            const newOrder = {
+                id: "BB-" + Math.floor(100000 + Math.random() * 900000),
+                userId: user.id,
+                date: fechaPedido.toISOString(),
+                fechaEntrega: fechaEntrega.toISOString(),
+                estado: "En proceso",
+                products: completedCheckout.productos || [],
+                total: completedCheckout.total || 0,
+                editable: true
+            };
+
+            allOrders.push(newOrder);
+            localStorage.setItem('beautyBlissOrders', JSON.stringify(allOrders));
+        }
+        
+        // Limpiar el checkout completado independientemente de si se creó o no una nueva orden
         localStorage.removeItem('checkoutCompletado');
     }
 
