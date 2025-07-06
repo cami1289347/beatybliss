@@ -9,20 +9,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #6a5acd;
-      --primary-dark: #5a4acd;
-      --secondary: #ff7eb9;
-      --dark: #2e2e2e;
-      --light: #f8f9fa;
+      --primary: #e91d63; /* Rosa fuerte para títulos y acentos */
+      --primary-dark: #c2185b;
+      --secondary: #ff80ab;
+      --background: #fff3f3; /* Fondo rosa claro */
+      --dark: #333333;
+      --light: #ffffff;
       --gray: #e0e0e0;
-      --success: #4caf50;
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       --transition: all 0.3s ease;
     }
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #f5f5f7;
+      background-color: var(--background);
       color: var(--dark);
       line-height: 1.6;
       margin: 0;
@@ -40,7 +40,7 @@
       flex: 2;
       border-radius: 12px;
       padding: 1.5rem;
-      background-color: white;
+      background-color: var(--light);
       box-shadow: var(--shadow);
     }
 
@@ -60,7 +60,7 @@
       margin-bottom: 1rem;
       padding: 1rem;
       border-radius: 8px;
-      background-color: white;
+      background-color: var(--light);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       transition: var(--transition);
     }
@@ -119,7 +119,7 @@
     .eliminar-producto {
       background: none;
       border: none;
-      color: #e91e63;
+      color: var(--primary);
       cursor: pointer;
       font-size: 0.9rem;
       transition: var(--transition);
@@ -147,7 +147,7 @@
       flex: 1;
       border-radius: 12px;
       padding: 1.5rem;
-      background-color: white;
+      background-color: var(--light);
       box-shadow: var(--shadow);
     }
 
@@ -238,7 +238,7 @@
     .formulario-tarjeta input:focus {
       border-color: var(--primary);
       outline: none;
-      box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
+      box-shadow: 0 0 0 2px rgba(233, 29, 99, 0.2);
     }
 
     .qr-code {
@@ -390,7 +390,7 @@
 </head>
 <body>
 
-<!-- El resto de tu HTML permanece exactamente igual -->
+<!-- El resto del HTML permanece exactamente igual -->
 <header class="cabecera">
   <div class="header-top">
     <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
@@ -443,8 +443,8 @@
 
     <div class="qr-code">
       <h3>Código QR para Yape/Plin</h3>
-      <p>Beauty Bliss</p>
-      <img src="codigoqr.jpg" alt="Código QR">
+      <p>Nombre de la tienda: Beauty Bliss</p>
+      <img src="codidoqr.jpg" alt="Código QR">
     </div>
   </div>
 </main>
@@ -589,7 +589,5 @@
   }
 </script>
 
-</body>
-</html>
 </body>
 </html>
