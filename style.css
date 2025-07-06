@@ -409,25 +409,25 @@ main {
   top: 80px;
   width: 350px; /* Aumentado para más espacio */
   background: white;
-  border: 1px solid #ffebee; /* Color más suave */
+  border: 1px solid #ffe0e8; /* Color más suave */
   border-radius: 15px; /* Bordes más redondeados */
   padding: 20px; /* Aumentado para más espacio interno */
   z-index: 999;
-  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.15);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(233, 30, 99, 0.15); /* Sombra más pronunciada */
+  transition: all 0.3s ease; /* Transición suave */
 }
 
 #carrito.oculto {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-10px); /* Efecto al ocultar */
   pointer-events: none;
 }
 
 #carrito-lista {
-  max-height: 300px;
+  max-height: 350px; /* Aumentado para más espacio */
   overflow-y: auto;
-  margin: 10px 0;
-  padding-right: 5px;
+  margin: 15px 0; /* Aumentado para más espacio */
+  padding: 0 10px 0 0; /* Más espacio para scroll */
 }
 
 #carrito-lista li {
@@ -440,7 +440,7 @@ main {
 }
 
 #carrito-lista li:hover {
-  background-color: #f9f9f9; /* Color de fondo al pasar el mouse */
+  background-color: #f9f9f9; /* Efecto hover */
 }
 
 .cantidad-btn,
@@ -468,17 +468,19 @@ main {
 }
 
 #total {
-  font-size: 1.2rem;
+  font-size: 1.25rem; /* Aumentado para mayor visibilidad */
   font-weight: bold;
   color: #e91e63;
   text-align: center;
-  margin: 15px 0; /* Espaciado */
+  margin: 20px 0; /* Aumentado para más espacio */
+  padding-top: 15px;
+  border-top: 1px solid #ffe0e8; /* Línea superior */
 }
 
 .carrito-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 15px; /* Espacio entre botones */
 }
 
 .btn-vaciar,
