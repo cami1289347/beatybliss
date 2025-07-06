@@ -414,6 +414,70 @@ main {
       display: none;
     }
     
+/* Estilo del encabezado del carrito */
+.carrito-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+.carrito-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #e91e63;
+  font-weight: 600;
+}
+
+.boton-cerrar {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #e91e63;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.boton-cerrar:hover {
+  transform: rotate(90deg);
+}
+
+/* Estilo del botón de finalizar compra */
+.boton-finalizar {
+  width: 100%;
+  background-color: #e91e63;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(233, 30, 99, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.boton-finalizar:hover {
+  background-color: #c2185b;
+  transform: scale(1.02);
+}
+
+/* Nombre y precio de producto en el carrito */
+#carrito-lista li span.nombre-producto {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+#carrito-lista li span.precio-producto {
+  color: #e91e63;
+  font-weight: bold;
+  font-size: 14px;
+}
+
     .galeria-imagenes img {
       width: 30%; /* Ajusta el tamaño según sea necesario */
       height: auto; /* Mantiene la proporción de la imagen */
