@@ -167,7 +167,7 @@
     }
 
     /* Cabecera actualizada */
-    .header-top-ner {
+    .header-top-container {
       background-color: #ffffff;
       width: 100%;
     }
@@ -478,7 +478,7 @@
       color: white;
     }
 
-    .formulario-tarjeta, .qr-ner {
+    .formulario-tarjeta, .qr-container {
       margin-top: 1.5rem;
       display: none;
       max-width: 500px;
@@ -486,7 +486,7 @@
       margin-right: auto;
     }
 
-    .formulario-tarjeta h4, .qr-ner h4 {
+    .formulario-tarjeta h4, .qr-container h4 {
       font-family: 'Playfair Display', serif;
       color: var(--primary);
       margin-bottom: 1rem;
@@ -609,7 +609,7 @@
 
 <!-- Cabecera actualizada -->
 <header>
-  <div class="header-top-ner">
+  <div class="header-top-container">
     <div class="header-top">
       <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
       <input type="text" class="buscador-header" placeholder="Buscar productos...">
@@ -645,7 +645,10 @@
 <!-- Contenido Principal -->
 <div class="contenedor-pago">
   <!-- Botón Volver a la tienda -->
-  <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver a la tienda</a> 
+  <button class="btn-volver-tienda" id="btn-volver-tienda">
+    <i class="fas fa-arrow-left"></i> Volver a la tienda
+  </button>
+  
   <!-- Resumen de Compra -->
   <div class="resumen-compra">
     <h2>Resumen de Compra</h2>
