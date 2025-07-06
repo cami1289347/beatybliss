@@ -140,22 +140,51 @@
       padding-bottom: 0.5rem;
     }
 
-    .producto-carrito {
+    .producto-item {
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--gray);
     }
 
-    .producto-carrito h4 {
-      font-size: 1.1rem;
-      margin: 0 0 0.3rem 0;
-      color: var(--dark);
+    .producto-nombre {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
     }
 
-    .producto-carrito p {
-      margin: 0;
+    .producto-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .producto-marca {
       color: #666;
       font-size: 0.9rem;
+    }
+
+    .producto-acciones {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .producto-acciones .estrella {
+      color: #FFD700;
+      font-size: 1rem;
+    }
+
+    .eliminar-producto {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .producto-precio {
+      font-weight: 600;
+      color: var(--primary);
     }
 
     .total-compra {
@@ -196,12 +225,14 @@
       color: var(--primary);
       margin-bottom: 1rem;
       font-size: 1.4rem;
+      text-align: center;
     }
 
     .opciones-pago {
       display: flex;
       gap: 1rem;
       margin-top: 1.5rem;
+      justify-content: center;
     }
 
     .opcion-pago {
@@ -215,6 +246,7 @@
       font-weight: 500;
       color: black;
       text-align: center;
+      max-width: 150px;
     }
 
     .opcion-pago.active {
@@ -225,6 +257,9 @@
     .formulario-tarjeta, .qr-container {
       margin-top: 1.5rem;
       display: none;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .formulario-tarjeta h4, .qr-container h4 {
@@ -232,6 +267,7 @@
       color: var(--primary);
       margin-bottom: 1rem;
       font-size: 1.3rem;
+      text-align: center;
     }
 
     .input-group {
@@ -334,27 +370,19 @@
   <div class="resumen-compra">
     <h2>Resumen de Compra</h2>
     
-    <div class="producto-carrito">
-      <h4>Crema Hidratante Noche</h4>
-      <p>L'Oreal - Emmen</p>
-      <p>S/ 22.90</p>
-    </div>
-    
-    <div class="producto-carrito">
-      <h4>Protector Solar Facial</h4>
-      <p>L'Oreal - Emmen</p>
-      <p>S/ 20.00</p>
+    <div id="lista-productos">
+      <!-- Productos se agregarán dinámicamente aquí -->
     </div>
     
     <div class="total-compra">
-      <p>Total: <span>S/ 42.90</span></p>
+      <p>Total: <span id="total-carrito">S/ 0.00</span></p>
     </div>
   </div>
 
   <!-- Proceso de Pago -->
   <div class="proceso-pago">
     <h2>Resumen de Pago</h2>
-    <p class="total-compra">Total: S/ 42.90</p>
+    <p id="total-pago" class="total-compra">Total: S/ <span id="total-pago-valor">0.00</span></p>
     
     <button class="boton-pago" id="btn-realizar-pago">Realizar Pago</button>
 
@@ -374,23 +402,23 @@
       <h4>Formulario de Pago con Tarjeta</h4>
       <div class="input-group">
         <label>Nombre del Titular</label>
-        <input type="text" placeholder="Ej: María López">
+        <input type="text" id="nombre-titular" placeholder="Ej: María López">
       </div>
       <div class="input-group">
         <label>Número de Tarjeta</label>
-        <input type="text" placeholder="0000 0000 0000 0000">
+        <input type="text" id="numero-tarjeta" placeholder="0000 0000 0000 0000">
       </div>
       <div class="fila-inputs">
         <div class="input-group" style="flex: 1;">
           <label>Fecha Expiración (MM/AA)</label>
-          <input type="text" placeholder="MM/AA">
+          <input type="text" id="fecha-expiracion" placeholder="MM/AA">
         </div>
         <div class="input-group" style="flex: 1;">
           <label>CVV</label>
-          <input type="text" placeholder="123">
+          <input type="text" id="cvv" placeholder="123">
         </div>
       </div>
-      <button class="boton-pago">Pagar con Tarjeta</button>
+      <button class="boton-pago" onclick="procesarPagoTarjeta()">Pagar con Tarjeta</button>
     </div>
 
     <div class="qr-container">
@@ -405,6 +433,54 @@
 </div>
 
 <script>
+  // Datos del carrito (ejemplo inicial)
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [
+    { id: 1, nombre: "Crema Hidratante Noche", marca: "L'Oreal", linea: "Emmen", precio: 22.90 },
+    { id: 2, nombre: "Protector Solar Facial", marca: "L'Oreal", linea: "Emmen", precio: 20.00 }
+  ];
+
+  // Función para actualizar el carrito
+  function actualizarCarrito() {
+    const listaProductos = document.getElementById('lista-productos');
+    listaProductos.innerHTML = '';
+    
+    let total = 0;
+    
+    carrito.forEach((producto, index) => {
+      total += producto.precio;
+      
+      const productoHTML = `
+        <div class="producto-item">
+          <div class="producto-nombre">${producto.nombre}</div>
+          <div class="producto-info">
+            <span class="producto-marca">${producto.marca} - ${producto.linea}</span>
+            <div class="producto-acciones">
+              <span class="estrella">⭐</span>
+              <span class="estrella">⭐</span>
+              <span class="estrella">⭐</span>
+              <button class="eliminar-producto" onclick="eliminarProducto(${index})">
+                Eliminar
+              </button>
+              <span class="producto-precio">S/ ${producto.precio.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      listaProductos.innerHTML += productoHTML;
+    });
+    
+    document.getElementById('total-carrito').textContent = `S/ ${total.toFixed(2)}`;
+    document.getElementById('total-pago-valor').textContent = total.toFixed(2);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  }
+
+  // Funciones para modificar el carrito
+  function eliminarProducto(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
+  }
+
   // Mostrar métodos de pago al hacer clic en "Realizar Pago"
   document.getElementById('btn-realizar-pago').addEventListener('click', function() {
     const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
@@ -439,22 +515,44 @@
   // Botón "Ya Pagué"
   document.getElementById('btn-pagado').addEventListener('click', function() {
     alert('¡Gracias por tu compra! Tu pago está siendo verificado.');
-    // Aquí iría la lógica para vaciar el carrito y redirigir
+    carrito = [];
+    actualizarCarrito();
   });
 
-  // Validación de formulario de tarjeta (ejemplo básico)
-  document.querySelector('.formulario-tarjeta .boton-pago').addEventListener('click', function() {
-    const nombre = document.querySelector('#nombre-titular').value.trim();
-    const tarjeta = document.querySelector('#numero-tarjeta').value.trim();
-    
-    if (!nombre || !tarjeta) {
+  // Validación de formulario de tarjeta
+  function procesarPagoTarjeta() {
+    const nombre = document.getElementById('nombre-titular').value.trim();
+    const tarjeta = document.getElementById('numero-tarjeta').value.trim();
+    const fecha = document.getElementById('fecha-expiracion').value.trim();
+    const cvv = document.getElementById('cvv').value.trim();
+
+    if (!nombre || !tarjeta || !fecha || !cvv) {
       alert('Por favor completa todos los campos');
       return;
     }
-    
+
+    if (!/^\d{16}$/.test(tarjeta.replace(/\s/g, ''))) {
+      alert('Número de tarjeta inválido (deben ser 16 dígitos)');
+      return;
+    }
+
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha)) {
+      alert('Formato de fecha inválido (MM/AA)');
+      return;
+    }
+
+    if (!/^\d{3}$/.test(cvv)) {
+      alert('CVV inválido (deben ser 3 dígitos)');
+      return;
+    }
+
     alert('¡Pago exitoso! Gracias por tu compra.');
-    // Aquí iría la lógica para procesar el pago
-  });
+    carrito = [];
+    actualizarCarrito();
+  }
+
+  // Inicializar el carrito
+  actualizarCarrito();
 </script>
 
 </body>
