@@ -168,6 +168,7 @@ main {
 .h1 {
   font-size: 28px;
   margin: 10px 0 20px;
+  background-color: #ffffff;
 }
 
 .comprar-ahora {
@@ -496,7 +497,7 @@ main {
   
 
 .header-top {
-  background-color: #ffeeec;
+  background-color: #ffeeeb;
   display: flex;
   align-items: center;
   justify-content: space-between;
