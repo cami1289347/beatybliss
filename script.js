@@ -545,4 +545,4 @@ function configurarPerfil() {
   inputs.forEach(input => input.addEventListener("input", verificarCambios));
   verificarCambios(); // verificación inicial
 }
-
+});
