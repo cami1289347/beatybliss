@@ -1,591 +1,253 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pago - Beauty Bliss</title>
-  <link rel="stylesheet" href="style.pago.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #e91d63; /* Rosa fuerte para títulos y acentos */
+      --primary: #e91e63;
       --primary-dark: #c2185b;
-      --secondary: #ff80ab;
-      --background: #fff3f3; /* Fondo rosa claro */
-      --dark: #333333;
+      --background: #fff3f3;
       --light: #ffffff;
+      --dark: #333333;
       --gray: #e0e0e0;
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      --transition: all 0.3s ease;
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: var(--background);
       color: var(--dark);
-      line-height: 1.6;
-      margin: 0;
     }
 
     .contenedor-pago {
       display: flex;
+      justify-content: center;
       padding: 2rem;
       max-width: 1200px;
       margin: 0 auto;
-      gap: 2rem;
-    }
-
-    .carrito-productos {
-      flex: 2;
-      border-radius: 12px;
-      padding: 1.5rem;
-      background-color: var(--light);
-      box-shadow: var(--shadow);
-    }
-
-    .carrito-productos h2 {
-      margin-bottom: 1.5rem;
-      font-family: 'Playfair Display', serif;
-      color: var(--primary);
-      font-size: 1.8rem;
-      border-bottom: 2px solid var(--gray);
-      padding-bottom: 0.5rem;
-    }
-
-    .producto-carrito {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      border-radius: 8px;
-      background-color: var(--light);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: var(--transition);
-    }
-
-    .producto-carrito:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .producto-carrito div {
-      flex: 1;
-      text-align: center;
-    }
-
-    .producto-carrito h4 {
-      margin: 0;
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    .cantidad {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0.5rem 0;
-    }
-
-    .btn-cantidad {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1px solid var(--gray);
-      background: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-
-    .btn-cantidad:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .input-cantidad {
-      width: 40px;
-      text-align: center;
-      margin: 0 5px;
-      border: 1px solid var(--gray);
-      border-radius: 4px;
-      padding: 0.2rem;
-    }
-
-    .eliminar-producto {
-      background: none;
-      border: none;
-      color: var(--primary);
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    .eliminar-producto:hover {
-      text-decoration: underline;
-    }
-
-    .precio {
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    #total {
-      font-weight: bold;
-      margin-top: 1.5rem;
-      text-align: right;
-      font-size: 1.2rem;
-      padding-top: 1rem;
-      border-top: 2px solid var(--gray);
     }
 
     .pago {
-      flex: 1;
-      border-radius: 12px;
-      padding: 1.5rem;
+      width: 100%;
+      max-width: 500px;
       background-color: var(--light);
+      border-radius: 12px;
+      padding: 2rem;
       box-shadow: var(--shadow);
     }
 
-    .pago h2 {
-      margin-bottom: 1.5rem;
-      font-family: 'Playfair Display', serif;
-      color: var(--primary);
-      font-size: 1.8rem;
-      border-bottom: 2px solid var(--gray);
-      padding-bottom: 0.5rem;
-    }
-
-    .total {
-      font-weight: bold;
-      margin: 1.5rem 0;
-      font-size: 1.2rem;
-      color: var(--dark);
-    }
-
-    .boton-pago {
-      margin-top: 1rem;
-      padding: 0.8rem 1.5rem;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: var(--transition);
-      font-weight: 600;
-      width: 100%;
-      font-size: 1rem;
-    }
-
-    .boton-pago:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-
     .metodo-pago {
-      display: none;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .metodo-pago h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .opciones-pago {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
       margin-top: 1.5rem;
     }
 
-    .metodo-pago h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: var(--dark);
-    }
-
-    .metodo-pago button {
-      padding: 0.8rem;
-      margin: 0.5rem 0;
-      width: 100%;
-      border: 1px solid var(--gray);
+    .opcion-pago {
+      padding: 0.8rem 1.5rem;
+      border: 2px solid var(--primary);
       border-radius: 8px;
       background: white;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s;
       font-weight: 500;
     }
 
-    .metodo-pago button:hover {
-      border-color: var(--primary);
-      color: var(--primary);
+    .opcion-pago.active {
+      background: var(--primary);
+      color: white;
     }
 
     .formulario-tarjeta {
+      margin-top: 2rem;
       display: none;
-      margin-top: 1.5rem;
     }
 
     .formulario-tarjeta h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: var(--dark);
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 1.3rem;
     }
 
-    .formulario-tarjeta input {
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .input-group input {
       width: 100%;
       padding: 0.8rem;
-      margin-bottom: 1rem;
       border: 1px solid var(--gray);
       border-radius: 8px;
       font-size: 1rem;
-      transition: var(--transition);
     }
 
-    .formulario-tarjeta input:focus {
+    .input-group input:focus {
       border-color: var(--primary);
       outline: none;
       box-shadow: 0 0 0 2px rgba(233, 29, 99, 0.2);
     }
 
-    .qr-code {
-      display: none;
-      margin-top: 1.5rem;
-      text-align: center;
+    .boton-pago {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 1rem;
     }
 
-    .qr-code h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: var(--dark);
+    .boton-pago:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .qr-code {
+      display: none;
+      text-align: center;
+      margin-top: 2rem;
     }
 
     .qr-code img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border: 1px solid var(--gray);
-      border-radius: 8px;
-      padding: 0.5rem;
-      background: white;
-    }
-
-    .cabecera {
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo {
-      height: 50px;
-    }
-
-    .buscador-header {
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--gray);
-      border-radius: 20px;
-      width: 300px;
-    }
-
-    .icons a {
-      margin-left: 1rem;
-      color: var(--dark);
-      transition: var(--transition);
-    }
-
-    .icons a:hover {
-      color: var(--primary);
-    }
-
-    .main-nav {
-      background: var(--primary);
-      padding: 0.5rem 0;
-    }
-
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-
-    .nav-links a:hover {
-      opacity: 0.9;
-    }
-
-    footer {
-      background: var(--dark);
-      color: white;
-      padding: 2rem;
-      margin-top: 2rem;
-    }
-
-    .footer-col {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-    }
-
-    .footer-col h4 {
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-
-    .footer-col a {
-      display: block;
-      color: #ccc;
-      margin-bottom: 0.5rem;
-      transition: var(--transition);
-      text-decoration: none;
-    }
-
-    .footer-col a:hover {
-      color: white;
-    }
-
-    .copyright {
-      text-align: center;
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid #444;
-    }
-
-    @media (max-width: 768px) {
-      .contenedor-pago {
-        flex-direction: column;
-        padding: 1rem;
-      }
-      
-      .carrito-productos {
-        margin-right: 0;
-        margin-bottom: 1.5rem;
-      }
-      
-      .header-top {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-      }
-      
-      .buscador-header {
-        width: 100%;
-      }
+      max-width: 200px;
+      margin: 1rem auto;
     }
   </style>
 </head>
 <body>
 
-<!-- El resto del HTML permanece exactamente igual -->
-<header class="cabecera">
-  <div class="header-top">
-    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
-    <input type="text" id="buscador" class="buscador-header" placeholder="Buscar productos...">
-    <div class="icons">
-      <a href="registro.html" title="Usuario"><i class="fas fa-user"></i></a>
-      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
-      <a href="#" title="Carrito" id="abrir-carrito"><i class="fas fa-shopping-cart"></i></a>
-      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
-    </div>
-  </div>
-
-  <nav class="main-nav">
-    <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="cuidado de la piel.html">Cuidado Facial</a>
-      <a href="cabello.html">Cabello</a>
-      <a href="labios.html">Labios</a>
-      <a href="uñas.html">Uñas</a>
-    </div>
-  </nav>
-</header>
-
-<main class="contenedor-pago">
-  <div class="carrito-productos">
-    <h2>Productos en el Carrito</h2>
-    <ul id="carrito-lista"></ul>
-    <p id="total">Total: S/ 0.00</p>
-  </div>
-
+<div class="contenedor-pago">
   <div class="pago">
     <h2>Resumen de Pago</h2>
-    <p id="total-pago" class="total">Total: S/ 0.00</p>
+    <p id="total-pago" class="total">Total: S/ 62.90</p>
+    
     <button class="boton-pago" onclick="verificarSesion()">Realizar Pago</button>
 
-    <div class="metodo-pago">
-      <h3>Selecciona el Método de Pago</h3>
-      <button onclick="mostrarFormularioTarjeta()">Tarjeta</button>
-      <button onclick="mostrarQR()">Yape/Plin</button>
+    <div class="metodo-pago" style="display: none;">
+      <h2>Selecciona el Método de Pago</h2>
+      <div class="opciones-pago">
+        <div class="opcion-pago active" onclick="mostrarFormularioTarjeta()">Tarjeta</div>
+        <div class="opcion-pago" onclick="mostrarQR()">Yape/Plin</div>
+      </div>
     </div>
 
     <div class="formulario-tarjeta">
       <h3>Formulario de Pago con Tarjeta</h3>
-      <input type="text" id="nombre-titular" placeholder="Nombre del Titular" required>
-      <input type="text" id="numero-tarjeta" placeholder="Número de Tarjeta" required>
-      <input type="text" id="fecha-expiracion" placeholder="MM/AA" required>
-      <input type="text" id="cvv" placeholder="CVV" required>
+      <div class="input-group">
+        <label for="nombre-titular">Nombre del Titular</label>
+        <input type="text" id="nombre-titular" placeholder="Ej: María López">
+      </div>
+      <div class="input-group">
+        <label for="numero-tarjeta">Número de Tarjeta</label>
+        <input type="text" id="numero-tarjeta" placeholder="0000 0000 0000 0000">
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <div class="input-group" style="flex: 1;">
+          <label for="fecha-expiracion">Fecha Expiración (MM/AA)</label>
+          <input type="text" id="fecha-expiracion" placeholder="MM/AA">
+        </div>
+        <div class="input-group" style="flex: 1;">
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" placeholder="123">
+        </div>
+      </div>
       <button class="boton-pago" onclick="procesarPagoTarjeta()">Pagar con Tarjeta</button>
     </div>
 
     <div class="qr-code">
       <h3>Código QR para Yape/Plin</h3>
       <p>Nombre de la tienda: Beauty Bliss</p>
-      <img src="codidoqr.jpg" alt="Código QR">
+      <img src="codigoqr.jpg" alt="Código QR">
     </div>
   </div>
-</main>
+</div>
 
-<footer>
-    <div class="footer-col">
-      <h4>Sobre Beauty Bliss</h4>
-      <a href="Sobre-nosotros.html">Quienes somos</a>
-      <a href="compromiso.html">Nuestro compromiso</a>
-    </div>
-    <div class="footer-col">
-      <h4>Ayuda</h4>
-      <a href="terminos.html">Términos y condiciones</a>
-      <a href="eliminacion_datos.html">Políticas de cookies</a>
-      <a href="politicas.html">Políticas de privacidad</a>
-    </div>
-    <div class="footer-col">
-      <h4>Soporte</h4>
-      <a href="contacto.html">Ayuda y contacto</a>
-      <a href="reclamaciones.html">Libro de reclamaciones</a>
-    </div>
-    <div class="copyright">
-      © 2025 Beauty Bliss. Todos los derechos reservados.
-    </div>
-</footer>
-
-<!-- El JavaScript permanece exactamente igual -->
 <script>
-  let carritoItems = JSON.parse(localStorage.getItem("carrito")) || [];
-
-  document.addEventListener('DOMContentLoaded', function () {
-    actualizarCarrito();
-  });
-
-  function actualizarCarrito() {
-    const carritoLista = document.getElementById("carrito-lista");
-    carritoLista.innerHTML = "";
-
-    if (carritoItems.length === 0) {
-        carritoLista.innerHTML = "<li>Carrito vacío</li>";
-        document.getElementById("total").textContent = "Total: S/ 0.00";
-        document.getElementById("total-pago").textContent = "Total: S/ 0.00";
-        return;
-    }
-
-    let total = 0;
-
-    carritoItems.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.className = "producto-carrito";
-        li.innerHTML = `
-            <div>
-                <h4>${item.nombre}</h4>
-                <div class="cantidad">
-                    <button class="btn-cantidad" onclick="cambiarCantidad(${index}, -1)">-</button>
-                    <input type="number" value="${item.cantidad}" min="1" class="input-cantidad" readonly>
-                    <button class="btn-cantidad" onclick="cambiarCantidad(${index}, 1)">+</button>
-                </div>
-                <button class="eliminar-producto" onclick="eliminarProducto(${index})">Eliminar</button>
-            </div>
-            <p class="precio">S/ ${item.precio.toFixed(2)}</p>
-        `;
-        carritoLista.appendChild(li);
-        total += item.precio * item.cantidad;
-    });
-
-    document.getElementById("total").textContent = `Total: S/ ${total.toFixed(2)}`;
-    document.getElementById("total-pago").textContent = `Total: S/ ${total.toFixed(2)}`;
-  }
-
-  function cambiarCantidad(index, cambio) {
-    carritoItems[index].cantidad += cambio;
-    if (carritoItems[index].cantidad <= 0) {
-      eliminarProducto(index);
-    } else {
-      guardarCarrito();
-      actualizarCarrito();
-    }
-  }
-
-  function eliminarProducto(index) {
-    carritoItems.splice(index, 1);
-    guardarCarrito();
-    actualizarCarrito();
-  }
-
-  function guardarCarrito() {
-    localStorage.setItem("carrito", JSON.stringify(carritoItems));
-  }
-
+  // Verificación de sesión
   function verificarSesion() {
-    const currentUser = JSON.parse(localStorage.getItem('usuarioActual'));
-    if (!currentUser || !currentUser.loggedIn) {
-      alert("Por favor, regístrate o inicia sesión para proceder con el pago.");
-      window.location.href = 'registro.html';
+    const usuario = JSON.parse(localStorage.getItem('usuarioActual'));
+    
+    if (!usuario || !usuario.loggedIn) {
+      alert("Debes iniciar sesión para continuar con el pago");
+      window.location.href = "registro.html";
     } else {
       document.querySelector('.metodo-pago').style.display = 'block';
+      document.querySelector('.boton-pago').style.display = 'none';
     }
   }
 
+  // Mostrar formulario de tarjeta
   function mostrarFormularioTarjeta() {
     document.querySelector('.formulario-tarjeta').style.display = 'block';
     document.querySelector('.qr-code').style.display = 'none';
+    document.querySelectorAll('.opcion-pago').forEach(opcion => {
+      opcion.classList.remove('active');
+    });
+    document.querySelectorAll('.opcion-pago')[0].classList.add('active');
   }
 
+  // Mostrar QR
   function mostrarQR() {
     document.querySelector('.qr-code').style.display = 'block';
     document.querySelector('.formulario-tarjeta').style.display = 'none';
+    document.querySelectorAll('.opcion-pago').forEach(opcion => {
+      opcion.classList.remove('active');
+    });
+    document.querySelectorAll('.opcion-pago')[1].classList.add('active');
   }
 
+  // Procesar pago con tarjeta
   function procesarPagoTarjeta() {
-    const nombreTitular = document.getElementById("nombre-titular").value.trim();
-    const numeroTarjeta = document.getElementById("numero-tarjeta").value.trim();
-    const fechaExpiracion = document.getElementById("fecha-expiracion").value.trim();
-    const cvv = document.getElementById("cvv").value.trim();
+    const nombre = document.getElementById('nombre-titular').value.trim();
+    const tarjeta = document.getElementById('numero-tarjeta').value.trim();
+    const fecha = document.getElementById('fecha-expiracion').value.trim();
+    const cvv = document.getElementById('cvv').value.trim();
 
-    if (!nombreTitular || !numeroTarjeta || !fechaExpiracion || !cvv) {
-        alert("Por favor, completa todos los campos del formulario de pago.");
-        return;
+    if (!nombre || !tarjeta || !fecha || !cvv) {
+      alert("Por favor complete todos los campos");
+      return;
     }
 
-    if (!/^\d{16}$/.test(numeroTarjeta)) {
-        alert("El número de tarjeta debe tener exactamente 16 dígitos.");
-        return;
+    if (!/^\d{16}$/.test(tarjeta.replace(/\s/g, ''))) {
+      alert("Número de tarjeta inválido (deben ser 16 dígitos)");
+      return;
+    }
+
+    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fecha)) {
+      alert("Formato de fecha inválido (MM/AA)");
+      return;
     }
 
     if (!/^\d{3}$/.test(cvv)) {
-        alert("El CVV debe tener exactamente 3 dígitos.");
-        return;
+      alert("CVV inválido (3 dígitos)");
+      return;
     }
 
-    const fechaRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-    if (!fechaRegex.test(fechaExpiracion)) {
-        alert("La fecha de expiración debe estar en el formato MM/AA.");
-        return;
-    }
-
-    alert(`Pago realizado con éxito con tarjeta a nombre de ${nombreTitular}. ¡Gracias por tu compra!`);
-    carritoItems = [];
-    guardarCarrito();
-    actualizarCarrito();
+    alert(`Pago exitoso!\nGracias por su compra ${nombre}`);
+    // Aquí iría la lógica para vaciar el carrito
   }
 </script>
 
