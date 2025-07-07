@@ -16,10 +16,6 @@
             --gray: #e0e0e0;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
-        .header-top-container {
-  background-color: #ffffff;
-  width: 100%;                  /* el fondo rosado ocupa todo el ancho */
-}
         
         body {
             font-family: 'Montserrat', sans-serif;
@@ -368,27 +364,21 @@
     </style>
 </head>
 <body>
-   <header class="cabecera">
-  <!-- Parte superior: logo, buscador, íconos -->
-  <div class="header-top-container">
-  <div class="header-top">
-    <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
-    <input type="text" id="buscador" class="buscador-header" placeholder="  Buscar productos...">
-    <div class="icons">
-      <div class="user-menu-wrapper">
-        <a href="login.html" id="user-icon" title="Usuario"><i class="fas fa-user"></i></a>
-        <div class="user-dropdown" id="user-dropdown" style="display: none;">
-          <a href="perfil.html"><i class="fas fa-user-circle"></i> Mi Perfil</a>
-          <a href="pedidos.html"><i class="fas fa-shopping-bag"></i> Mis Compras</a>
-          <a href="index.html" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+    <header class="cabecera">
+        <div class="header-top">
+            <img src="logo.png" alt="Beauty Bliss Logo" class="logo">
+            <input type="text" class="buscador-header" placeholder="Buscar productos...">
+            <div class="icons">
+                <a href="#" title="Usuario" id="user-icon"><i class="fas fa-user"></i></a>
+                <div id="user-menu" class="user-menu">
+                    <a href="perfil.html"><i class="fas fa-user-circle"></i> Perfil</a>
+                    <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </div>
+                <a href="favoritos.html" title="Favoritos"><i class="fas fa-heart"></i></a>
+                <a href="carrito.html" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
+                <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
+            </div>
         </div>
-      </div>
-      <a href="#" title="Favoritos"><i class="fas fa-heart"></i></a>
-      <a href="#" title="Carrito"><i class="fas fa-shopping-cart"></i></a>
-      <a href="contacto.html" title="Contacto"><i class="fas fa-phone"></i></a>
-      </div>
-    </div>
-  </div>
 
     </header>
 
@@ -608,6 +598,11 @@ function loadUserOrders() {
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', loadUserOrders);
+</script>
+</body>
+</html>
 
 document.addEventListener('DOMContentLoaded', loadUserOrders);
 </script>
