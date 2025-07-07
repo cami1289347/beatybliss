@@ -114,6 +114,14 @@ input[type="text"] {
   color: #e91e63;
   text-decoration: none;
 }
+
+.terminos-condiciones label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
 .icons {
   display: flex;
   align-items: center;
@@ -704,13 +712,6 @@ main {
 
 .eliminar-btn:hover {
   background: #ffcdd2;
-}
-.terminos-condiciones label {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* espacio entre checkbox y texto */
-  font-size: 14px;
-  text-align: left;
 }
 
 .oculto {
