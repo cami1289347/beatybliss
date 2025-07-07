@@ -41,21 +41,6 @@ header {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem 2rem;
 }
-.terminos-condiciones {
-  margin: 15px 0;
-  font-size: 14px;
-  text-align: left;
-  max-width: 100%;
-}
-
-.terminos-condiciones input[type="checkbox"] {
-  margin-right: 8px;
-}
-
-.terminos-condiciones a {
-  color: #e91e63;
-  text-decoration: none;
-}
 
 
 .perfil-derecha form > div {
@@ -112,7 +97,23 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
+.terminos-condiciones {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 10px;
+}
 
+.terminos-condiciones input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.terminos-condiciones a {
+  color: #e91e63;
+  text-decoration: none;
+}
 .icons {
   display: flex;
   align-items: center;
@@ -744,11 +745,34 @@ footer {
 }
 
 .registro-container {
- max-width: 400px;
+  max-width: 400px;
   margin: 50px auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.registro-container form input,
+.registro-container form button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.fecha-nacimiento {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fecha-nacimiento input {
+  flex: 1;
   text-align: center;
 }
 
