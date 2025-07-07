@@ -41,6 +41,22 @@ header {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem 2rem;
 }
+.terminos-condiciones {
+  margin: 15px 0;
+  font-size: 14px;
+  text-align: left;
+  max-width: 100%;
+}
+
+.terminos-condiciones input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.terminos-condiciones a {
+  color: #e91e63;
+  text-decoration: none;
+}
+
 
 .perfil-derecha form > div {
   display: flex;
@@ -88,12 +104,14 @@ header {
 
 
 input[type="text"] {
-  flex: 1;
-  margin: 0 20px;
+  width: 100%;
   padding: 8px;
   border-radius: 20px;
   border: 1px solid #ccc;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
+
 
 .icons {
   display: flex;
@@ -726,14 +744,12 @@ footer {
 }
 
 .registro-container {
-  max-width: 400px;
-  margin: 4rem auto;
-  padding: 2rem;
+ max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
   background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 10px;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
 }
 
 .registro-icon {
@@ -755,6 +771,7 @@ footer {
   border-radius: 10px;
   box-sizing: border-box;
   display: block;
+
 }
 
 .registro-container button {
