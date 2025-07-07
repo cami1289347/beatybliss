@@ -1,0 +1,101 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Productos</title>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: sans-serif;
+      margin: 0;
+    }
+    header, footer {
+      text-align: center;
+      background: #fff;
+      padding: 1rem;
+    }
+    h1 {
+      color: #e91e63;
+    }
+    .botones-superiores {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .boton {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .boton.regresar {
+      background-color: #ccc;
+    }
+    .boton.guardar {
+      background-color: #e91e63;
+      color: white;
+    }
+    .formulario-editar {
+      max-width: 800px;
+      margin: auto;
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .formulario-editar input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .formulario-editar button {
+      background: #e91e63;
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="botones-superiores">
+    <button class="boton regresar" onclick="history.back()">⬅ Regresar</button>
+    <button class="boton guardar" onclick="guardarCambios()">💾 Guardar Cambios</button>
+  </div>
+
+  <header>
+    <h1>Editar Productos</h1>
+  </header>
+
+  <section class="formulario-editar">
+    <input type="text" placeholder="Nombre del producto">
+    <input type="text" placeholder="Marca">
+    <input type="text" placeholder="Tipo">
+    <input type="text" placeholder="Tono/Color">
+    <input type="text" placeholder="Presentación">
+    <input type="number" placeholder="Precio">
+    <input type="number" placeholder="Stock">
+    <input type="text" placeholder="Categoría">
+    <button>Guardar Edición</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Beauty Bliss. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function guardarCambios() {
+      alert("Cambios guardados correctamente.");
+    }
+  </script>
+
+</body>
+</html>
