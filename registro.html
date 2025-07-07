@@ -14,22 +14,32 @@
     <img src="registro.jpg" alt="Icono de registro" class="registro-icon">
     <h2>Crear una cuenta</h2>
     <form id="registro-form" style="margin:0; padding:0; width:100%">
-      <input type="text" id="nombre" placeholder="Nombre completo (mín. 3 caracteres)" 
-             pattern=".{3,}" title="Mínimo 3 caracteres" required>
-      
-      <input type="email" id="correo" placeholder="Correo electrónico (ejemplo@gmail.com)" 
-             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ingrese un correo válido" required>
-      
-      <input type="password" id="contrasena" placeholder="Contraseña (mín. 6 caracteres)"
-             minlength="6" required>
-             
-      <div class="fecha-nacimiento">
-        <input type="number" id="dia" placeholder="DD" min="1" max="31" required>
-        <input type="number" id="mes" placeholder="MM" min="1" max="12" required>
-        <input type="number" id="anio" placeholder="AAAA" min="1900" max="2023" required>
-      </div>
-      <button type="submit">Registrarse</button>
-    </form>
+  <input type="text" id="nombre" placeholder="Nombre completo (mín. 3 caracteres)" 
+         pattern=".{3,}" title="Mínimo 3 caracteres" required>
+  
+  <input type="email" id="correo" placeholder="Correo electrónico (ejemplo@gmail.com)" 
+         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ingrese un correo válido" required>
+  
+  <input type="password" id="contrasena" placeholder="Contraseña (mín. 6 caracteres)"
+         minlength="6" required>
+         
+  <div class="fecha-nacimiento">
+    <input type="number" id="dia" placeholder="DD" min="1" max="31" required>
+    <input type="number" id="mes" placeholder="MM" min="1" max="12" required>
+    <input type="number" id="anio" placeholder="AAAA" min="1900" max="2023" required>
+  </div>
+
+  <!-- ACEPTAR TÉRMINOS DENTRO DEL FORM -->
+  <div class="terminos-condiciones">
+    <label>
+      <input type="checkbox" id="acepta-terminos" required>
+      Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+    </label>
+  </div>
+
+  <button type="submit">Registrarse</button>
+</form>
+
 
     <div class="social-login">
       <button class="facebook-btn" onclick="loginWithFacebook()">Continuar con Facebook</button>
