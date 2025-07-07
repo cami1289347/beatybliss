@@ -17,11 +17,13 @@
   <input type="text" id="nombre" placeholder="Nombre completo (mín. 3 caracteres)" 
          pattern=".{3,}" title="Mínimo 3 caracteres" required>
   
-  <input type="email" id="correo" placeholder="Correo electrónico (ejemplo@gmail.com)" 
-         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ingrese un correo válido" required>
-  
-  <input type="password" id="contrasena" placeholder="Contraseña (mín. 6 caracteres)"
-         minlength="6" required>
+<input type="email" id="correo" placeholder="Correo electrónico (ejemplo@gmail.com)" 
+       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+       title="Ingrese un correo válido" required autocomplete="email">
+
+<input type="password" id="contrasena" placeholder="Contraseña (mín. 6 caracteres)"
+       minlength="6" required autocomplete="new-password">
+
          
   <div class="fecha-nacimiento">
     <input type="number" id="dia" placeholder="DD" min="1" max="31" required>
@@ -29,7 +31,13 @@
     <input type="number" id="anio" placeholder="AAAA" min="1900" max="2023" required>
   </div>
 
-  
+  <div class="terminos-condiciones" style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+  <input type="checkbox" id="acepta-terminos" required>
+  <label for="acepta-terminos" style="margin: 0;">
+    Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a>
+  </label>
+</div>
+      
   <button type="submit">Registrarse</button>
 </form>
 
@@ -39,13 +47,6 @@
       <button class="google-btn">Continuar con Google</button>
     </div>
     
-<div class="terminos-condiciones">
-  <label for="acepta-terminos">
-    <input type="checkbox" id="acepta-terminos" required>
-    <span>Acepto los <a href="terminos.html" target="_blank">términos y condiciones</a></span>
-  </label>
-</div>
-
 
     <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a></p>
   </div>
