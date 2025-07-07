@@ -476,7 +476,12 @@ function loadUserOrders() {
     let allOrders = JSON.parse(localStorage.getItem('beautyBlissOrders')) || [];
 
     const completedCheckout = JSON.parse(localStorage.getItem('checkoutCompletado'));
-    if (completedCheckout?.pagoRealizado === true) {
+    const alreadyExists = allOrders.some(order =>
+    order.userId === user.id &&
+    JSON.stringify(order.products) === JSON.stringify(completedCheckout?.productos) &&
+    order.total === completedCheckout?.total
+);
+    if (completedCheckout?.pagoRealizado === true && !alreadyExists) {
         const fechaPedido = new Date();
         const fechaEntrega = new Date(fechaPedido);
         fechaEntrega.setDate(fechaPedido.getDate() + 5);
