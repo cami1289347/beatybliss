@@ -508,5 +508,37 @@
     </div>
   </footer>
   <script src="script.js"></script>
+  <script>
+  // Escuchamos los cambios en los filtros
+  const checkboxes = document.querySelectorAll('.filtros input[type="checkbox"]');
+  const productos = document.querySelectorAll('.producto');
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', filtrarProductos);
+  });
+
+  function filtrarProductos() {
+    const marcasSeleccionadas = Array.from(document.querySelectorAll('input[name="marca"]:checked')).map(cb => cb.value);
+    const preciosSeleccionados = Array.from(document.querySelectorAll('input[name="precio"]:checked')).map(cb => cb.value);
+
+    productos.forEach(producto => {
+      const marca = producto.getAttribute('data-marca');
+      const precio = parseFloat(producto.getAttribute('data-precio'));
+
+      const coincideMarca = marcasSeleccionadas.length === 0 || marcasSeleccionadas.includes(marca);
+      const coincidePrecio =
+        preciosSeleccionados.length === 0 ||
+        (preciosSeleccionados.includes("menor-20") && precio < 20) ||
+        (preciosSeleccionados.includes("mayor-20") && precio >= 20);
+
+      if (coincideMarca && coincidePrecio) {
+        producto.style.display = "block";
+      } else {
+        producto.style.display = "none";
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
